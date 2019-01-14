@@ -1,0 +1,72 @@
+{
+	"label": [
+		"terraform-provider-qubole"
+	],
+	"presto_version": "0.193",
+	"ec2_settings": {
+		"aws_region": "ap-southeast-1",
+		"aws_preferred_availability_zone": "Any",
+		"vpc_id": "vpc-0e2be045e5fe137cd",
+		"subnet_id": "subnet-05cf662ed46f9cde8",
+		"master_elastic_ip": null,
+		"bastion_node_public_dns": "13.229.7.25",
+		"bastion_node_port": 22,
+		"bastion_node_user": "ec2-user",
+		"role_instance_profile": null,
+		"use_account_compute_creds": false
+	},
+	"node_configuration": {
+		"master_instance_type": "m4.xlarge",
+		"slave_instance_type": "m4.xlarge",
+		"heterogeneous_instance_config": {
+		},
+		"initial_nodes": 2,
+		"max_nodes": 2,
+		"slave_request_type": "spot",
+		"spot_instance_settings": {
+			"maximum_bid_price_percentage": 100,
+			"timeout_for_request": 10,
+			"maximum_spot_instance_percentage": 50
+		},
+		"fallback_to_ondemand": true,
+		"ebs_volume_type": "standard",
+		"ebs_volume_size": 100,
+		"ebs_volume_count": 1,
+		"ebs_upscaling_config": null,
+		"custom_ec2_tags": {
+			"project": "terraform-provider-qubole",
+			"owner": "vihagg@qubole.com"
+		},
+		"idle_cluster_timeout_in_secs": 2700,
+		"node_base_cooldown_period": 10,
+		"node_spot_cooldown_period": null
+	},
+	"hadoop_settings": {
+		"use_hadoop2": true,
+		"use_spark": false,
+		"custom_config": null,
+		"fairscheduler_settings": {
+			"default_pool": null
+		},
+		"use_qubole_placement_policy": true
+	},
+	"security_settings": {
+		"encrypted_ephemerals": false
+	},
+	"presto_settings": {
+		"enable_presto": true,
+		"custom_config": "config.properties:\nascm.enabled=true\ncatalog/hive.properties:\nhive.parquet.use-column-names=true\nbootstrap-file-path:\ns3://vihagg.us/qubole/us/scripts/hadoop/node_bootstrap_uber_hudi_presto.sh"
+	},
+	"spark_settings": {
+		"custom_config": null
+	},
+	"datadog_settings": {
+		"datadog_api_token": null,
+		"datadog_app_token": null
+	},
+	"disallow_cluster_termination": false,
+	"enable_ganglia_monitoring": false,
+	"node_bootstrap_file": "hoodie-presto-bootstrap.sh",
+	"type":"presto",
+	"idle_cluster_timeout": 1
+}

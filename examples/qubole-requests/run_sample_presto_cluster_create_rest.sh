@@ -1,0 +1,2 @@
+X_AUTH_TOKEN=3126c735729e475684b9c3726ce211bc2d1f571d3a65460dae0ce4ee4ff52fbd
+curl -X POST -H "X-AUTH-TOKEN:$X_AUTH_TOKEN" -H "Content-Type:application/json" -H "Accept: application/json" -d @create-presto-debug-cluster.json https://us.qubole.com/api/v1.2/clusters

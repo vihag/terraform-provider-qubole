@@ -1,0 +1,49 @@
+{
+   "label":[
+   "my_cluster"
+ ],
+   "node_configuration":{
+     "slave_request_type":"spot",
+     "initial_nodes":1,
+     "spot_instance_settings":{
+      "timeout_for_request":10,
+      "maximum_spot_instance_percentage":60,
+      "maximum_bid_price_percentage":100.0
+   },
+     "max_nodes":10,
+     "master_instance_type":"m1.large",
+     "slave_instance_type":"m1.xlarge"
+ },
+  "hadoop_settings":{
+    "use_hadoop2":false,
+    "max_nodes":10,
+    "fairscheduler_settings":{
+      "default_pool":null
+    },
+   "custom_config":null
+},
+ "enable_ganglia_monitoring":false,
+ "state":"DOWN",
+ "node_bootstrap_file":"node_bootstrap.sh",
+ "use_hadoop2":false,
+ "security_settings":{
+  "encrypted_ephemerals":false
+},
+ "ec2_settings":{
+    "aws_region": "ap-southeast-1",
+		"aws_preferred_availability_zone": "Any",
+		"vpc_id": "vpc-0e2be045e5fe137cd",
+		"subnet_id": "subnet-05cf662ed46f9cde8",
+		"master_elastic_ip": null,
+		"bastion_node_public_dns": "13.229.7.25",
+		"bastion_node_port": 22,
+		"bastion_node_user": "ec2-user",
+		"role_instance_profile": null,
+		"use_account_compute_creds": false
+ },
+  "presto_settings":{
+    "enable_presto":false,
+    "custom_config":null
+},
+  "disallow_cluster_termination":false
+}

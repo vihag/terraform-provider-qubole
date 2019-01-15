@@ -1,7 +1,11 @@
 package entity
 
+import (
+	_ "fmt"
+)
+
 type SpotInstanceSettings struct {
-	maximum_bid_price_percentage     string
-	timeout_for_request              int
-	maximum_spot_instance_percentage int
+	Maximum_bid_price_percentage     string
+	Timeout_for_request              int
+	Maximum_spot_instance_percentage int
 }

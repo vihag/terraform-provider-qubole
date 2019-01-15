@@ -1,6 +1,10 @@
 package entity
 
-type HadoopSettings struct {
-	default_pool             string
-	fairscheduler_config_xml string
+import (
+	_ "fmt"
+)
+
+type FairSchedulerSettings struct {
+	Default_pool             string
+	Fairscheduler_config_xml string
 }

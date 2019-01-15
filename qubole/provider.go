@@ -18,22 +18,19 @@ func Provider() *schema.Provider {
 		Schema: map[string]*schema.Schema{
 			"auth_token": {
 				Type:        schema.TypeString,
-				Required:    false,
-				Default:     "",
+				Required:    true,
 				Description: descriptions["auth_token"],
 			},
 
 			"api_endpoint": {
 				Type:        schema.TypeString,
 				Required:    true,
-				Default:     "",
 				Description: descriptions["api_endpoint"],
 			},
 
 			"api_version": {
 				Type:        schema.TypeString,
 				Required:    true,
-				Default:     "",
 				Description: descriptions["api_version"],
 			},
 		},

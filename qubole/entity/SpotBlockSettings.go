@@ -1,5 +1,9 @@
 package entity
 
+import (
+	_ "fmt"
+)
+
 type SpotBlockSettings struct {
-	duration int
+	Duration int
 }

@@ -1,10 +1,10 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
-type HadoopSettings struct {
-	memory   string
+type HeterogeneousInstanceConfig struct {
+	Memory   string
 }
 

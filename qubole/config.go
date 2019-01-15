@@ -27,7 +27,7 @@ func (c *Config) getValidatedConfig() (interface{}, error) {
 	fmt.Println("Using api endpoint version: %s for endpoint %s", c.ApiVersion, c.ApiEndpoint)
 
 	//Ok, so we have a correct version and endpoint, all is well
-	c.connectionString = "https://" + c.ApiEndpoint + "/api/" + c.ApiVersion + "/"
+	c.ConnectionString = "https://" + c.ApiEndpoint + "/api/" + c.ApiVersion + "/"
 
 	return &c, nil
 
@@ -50,6 +50,8 @@ func (c *Config) ValidateEndpoint() error {
 	default:
 		return fmt.Errorf("Not a valid api endpoint: %s", c.ApiEndpoint)
 	}
+	
+	return nil
 
 }
 
@@ -91,6 +93,6 @@ func (c *Config) ValidateEndpointVersion() error {
 		return fmt.Errorf("Not a valid api endpoint: %s", c.ApiEndpoint)
 	}
 
-	return fmt.Errorf("Not a valid api endpoint version for api.qubole.com: %s", c.ApiVersion)
+	return fmt.Errorf("Not a valid api endpoint version for %s: %s", c.ApiEndpoint, c.ApiVersion)
 
 }

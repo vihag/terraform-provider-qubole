@@ -1,10 +1,10 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
-type SparkSettings struct {
-	datadog_api_token string
-	datadog_app_token string
+type DatadogSettings struct {
+	Datadog_api_token string
+	Datadog_app_token string
 }

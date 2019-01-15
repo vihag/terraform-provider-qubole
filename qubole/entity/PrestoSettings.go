@@ -1,10 +1,10 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 type PrestoSettings struct {
-	enable_presto bool
-	custom_config string
+	Enable_presto bool
+	Custom_config string
 }

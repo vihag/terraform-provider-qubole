@@ -1,0 +1,2 @@
+X_AUTH_TOKEN=66e1ecf421e04ce3ac53e0f1c55c1f6d34d23255b70f455a8fc9c2036c8a3373
+curl -X GET -H "X-AUTH-TOKEN:$X_AUTH_TOKEN" -H "Content-Type:application/json" -H "Accept: application/json" https://azure.qubole.com/api/v1.3/clusters/6223

@@ -1,11 +1,11 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 type SecuritySettings struct {
-	encrypted_ephemerals      bool
-	customer_ssh_key          string
-	persistent_security_group string
+	Encrypted_ephemerals      bool
+	Customer_ssh_key          string
+	Persistent_security_group string
 }

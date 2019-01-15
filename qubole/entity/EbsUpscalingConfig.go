@@ -1,9 +1,13 @@
 package entity
 
+import (
+	_ "fmt"
+)
+
 type EbsUpscalingConfig struct {
-	max_ebs_volume_count          int
-	percent_free_space_threshold  int
-	absolute_free_space_threshold int
-	sampling_interval             int
-	sampling_window               int
+	Max_ebs_volume_count          int
+	Percent_free_space_threshold  int
+	Absolute_free_space_threshold int
+	Sampling_interval             int
+	Sampling_window               int
 }

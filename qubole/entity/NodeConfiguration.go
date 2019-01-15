@@ -1,26 +1,26 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 type NodeConfiguration struct {
-	master_instance_type          string
-	slave_instance_type           string
-	heterogeneous_instance_config HeterogeneousInstanceConfig
-	initial_nodes                 int
-	max_nodes                     int
-	slave_request_type            string
-	spot_instance_settings        SpotInstanceSettings
-	stable_spot_instance_settings StableSpotInstanceSettings
-	spot_block_settings           SpotBlockSettings
-	fallback_to_ondemand          bool
-	ebs_volume_type               string
-	ebs_volume_size               string
-	ebs_volume_count              int
-	ebs_upscaling_config          EbsUpscalingConfig
-	custom_ec2_tags               map[string]string
-	idle_cluster_timeout_in_secs  int
-	node_base_cooldown_period     int
-	node_spot_cooldown_period     int
+	Master_instance_type          string
+	Slave_instance_type           string
+	Heterogeneous_instance_config HeterogeneousInstanceConfig
+	Initial_nodes                 int
+	Max_nodes                     int
+	Slave_request_type            string
+	Spot_instance_settings        SpotInstanceSettings
+	Stable_spot_instance_settings StableSpotInstanceSettings
+	Spot_block_settings           SpotBlockSettings
+	Fallback_to_ondemand          bool
+	Ebs_volume_type               string
+	Ebs_volume_size               int
+	Ebs_volume_count              int
+	Ebs_upscaling_config          EbsUpscalingConfig
+	Custom_ec2_tags               map[string]string
+	Idle_cluster_timeout_in_secs  int
+	Node_base_cooldown_period     int
+	Node_spot_cooldown_period     int
 }

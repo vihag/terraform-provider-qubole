@@ -1,13 +1,13 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 type HadoopSettings struct {
-	use_hadoop2                 bool
-	use_spark                   bool
-	custom_config               string
-	fairscheduler_settings      FairSchedulerSettings
-	use_qubole_placement_policy bool
+	Use_hadoop2                 bool
+	Use_spark                   bool
+	Custom_config               string
+	Fairscheduler_settings      FairSchedulerSettings
+	Use_qubole_placement_policy bool
 }

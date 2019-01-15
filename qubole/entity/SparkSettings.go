@@ -1,10 +1,10 @@
 package entity
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 type SparkSettings struct {
-	custom_config string
+	Custom_config string
 }
 

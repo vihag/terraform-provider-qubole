@@ -1,11 +1,14 @@
 package qubole
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/hashicorp/terraform/helper/schema"
 	entity "github.com/terraform-providers/terraform-provider-qubole/qubole/entity"
+	"io/ioutil"
 	"log"
+	"net/http"
 )
 
 func resourceQubolePresto() *schema.Resource {
@@ -401,7 +404,10 @@ func resourceQubolePresto() *schema.Resource {
 	Repeating because it is important: if there is an error, but the ID is set, the state is fully saved.
 */
 //m holds the data returned by the provider configurer, in this it will be a struct with the configuration
-func resourceQubolePrestoCreate(d *schema.ResourceData, m interface{}) error {
+func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error {
+
+	api_url := meta.(*Config).ConnectionString
+	auth_token := meta.(*Config).AuthToken
 
 	//Create the representative json object here
 	var cluster entity.Cluster
@@ -760,10 +766,27 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, m interface{}) error {
 	log.Printf(string(cluster_json))
 
 	//Make the http call to api here
+	log.Printf("Sending Create Cluster Request to URI %s", api_url)
+	var payload = []byte(string(cluster_json))
+	req, err := http.NewRequest("POST", api_url, bytes.NewBuffer(payload))
+	req.Header.Set("X-AUTH-TOKEN", auth_token)
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "application/json")
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Printf(err.Error())
+	}
+	defer resp.Body.Close()
+
+	log.Printf("response Status:", resp.Status)
+	log.Printf("response Headers:", resp.Header)
+	body, _ := ioutil.ReadAll(resp.Body)
+	log.Printf("response Body:", string(body))
 
 	//Parse the response back to cluster object
 
-	return resourceQubolePrestoRead(d, m)
+	return resourceQubolePrestoRead(d, meta)
 }
 
 /*

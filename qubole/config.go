@@ -27,9 +27,9 @@ func (c *Config) getValidatedConfig() (interface{}, error) {
 	fmt.Println("Using api endpoint version: %s for endpoint %s", c.ApiVersion, c.ApiEndpoint)
 
 	//Ok, so we have a correct version and endpoint, all is well
-	c.ConnectionString = "https://" + c.ApiEndpoint + "/api/" + c.ApiVersion + "/"
+	c.ConnectionString = "https://" + c.ApiEndpoint + "/api/" + c.ApiVersion + "/clusters/"
 
-	return &c, nil
+	return c, nil
 
 }
 

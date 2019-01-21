@@ -5,10 +5,10 @@ import (
 )
 
 type EngineConfig struct {
-	Dbtap_id      int
-	Fernet_key    string
-	Engine_type   string
-	Version       string
-	Overrides     bool
-	Hive_settings HiveSettings
+	Dbtap_id      int				`json:"dbtap_id,omitempty"`
+	Fernet_key    string			`json:"fernet_key,omitempty"`
+	Engine_type   string			`json:"engine_type,omitempty"`
+	Version       string			`json:"version,omitempty"`
+	Overrides     bool				`json:"overrides,omitempty"`
+	Hive_settings HiveSettings		`json:"hive_settings,omitempty"`
 }

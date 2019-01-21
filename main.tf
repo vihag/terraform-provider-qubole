@@ -1,5 +1,11 @@
+provider "qubole" {
+  auth_token	=	"${var.auth_token}"
+  api_endpoint	=	"${var.api_endpoint}"
+  api_version	=	"${var.api_version}"
+}
+
 resource "qubole_presto" "my-qubole-presto-server" {
-label 							=	["qubole-presto-by-terraform","cleanup-immediately","dev-mode"]
+label 							=	["terraform-provider-qubole", "dev"]
 presto_version 					=	"0.193"
 ec2_settings					=	[
 										{
@@ -54,11 +60,6 @@ presto_settings					=	[
 										{
 										enable_presto					=	true
 										custom_config					=	"config.properties:\nascm.enabled=true\ncatalog/hive.properties:\nhive.parquet.use-column-names=true\nbootstrap-file-path:\ns3://vihagg.us/qubole/us/scripts/hadoop/node_bootstrap_uber_hudi_presto.sh"
-										}
-									]
-spark_settings					=	[
-										{
-										custom_config					=	""
 										}
 									]
 datadog_settings				=	[

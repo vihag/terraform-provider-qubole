@@ -5,9 +5,9 @@ import (
 )
 
 type HiveSettings struct {
-	Is_hs2                     bool
-	Hive_version               string
-	Hive_qubole_metadata_cache bool
-	Hs2_thrift_port            int
-	Overrides                  bool
+	Is_hs2                     bool		`json:"is_hs2,omitempty"`
+	Hive_version               string	`json:"hive_version,omitempty"`
+	Hive_qubole_metadata_cache bool		`json:"hive_qubole_metadata_cache,omitempty"`
+	Hs2_thrift_port            int		`json:"hs2_thrift_port,omitempty"`
+	Overrides                  bool		`json:"overrides,omitempty"`
 }

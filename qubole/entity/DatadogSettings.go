@@ -5,6 +5,6 @@ import (
 )
 
 type DatadogSettings struct {
-	Datadog_api_token string
-	Datadog_app_token string
+	Datadog_api_token string	`json:"datadog_api_token,omitempty"`
+	Datadog_app_token string	`json:"datadog_app_token,omitempty"`
 }

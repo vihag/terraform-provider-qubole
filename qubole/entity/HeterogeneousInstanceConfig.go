@@ -5,6 +5,6 @@ import (
 )
 
 type HeterogeneousInstanceConfig struct {
-	Memory   string
+	Memory   string		`json:"memory,omitempty"`
 }
 

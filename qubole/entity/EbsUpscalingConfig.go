@@ -5,9 +5,9 @@ import (
 )
 
 type EbsUpscalingConfig struct {
-	Max_ebs_volume_count          int
-	Percent_free_space_threshold  int
-	Absolute_free_space_threshold int
-	Sampling_interval             int
-	Sampling_window               int
+	Max_ebs_volume_count          int	`json:"max_ebs_volume_count,omitempty"`
+	Percent_free_space_threshold  int	`json:"percent_free_space_threshold,omitempty"`
+	Absolute_free_space_threshold int	`json:"absolute_free_space_threshold,omitempty"`
+	Sampling_interval             int	`json:"sampling_interval,omitempty"`
+	Sampling_window               int	`json:"sampling_window,omitempty"`
 }

@@ -5,6 +5,6 @@ import (
 )
 
 type SparkSettings struct {
-	Custom_config string
+	Custom_config string	`json:"custom_config,omitempty"`
 }
 

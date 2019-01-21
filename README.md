@@ -16,23 +16,23 @@ Requirements
 Building The Provider
 ---------------------
 
-Clone repository to: `$GOPATH/src/github.com/terraform-providers/terraform-provider-aws`
+Clone repository to: `$GOPATH/src/github.com/terraform-providers/terraform-provider-qubole`
 
 ```sh
 $ mkdir -p $GOPATH/src/github.com/terraform-providers; cd $GOPATH/src/github.com/terraform-providers
-$ git clone git@github.com:terraform-providers/terraform-provider-aws
+$ git clone git@github.com:terraform-providers/terraform-provider-qubole
 ```
 
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-aws
+$ cd $GOPATH/src/github.com/terraform-providers/terraform-provider-qubole
 $ make build
 ```
 
 Using the provider
 ----------------------
-If you're building the provider, follow the instructions to [install it as a plugin.](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin) After placing it into your plugins directory,  run `terraform init` to initialize it. Documentation about the provider specific configuration options can be found on the [provider's website](https://www.terraform.io/docs/providers/aws/index.html).
+If you're building the provider, follow the instructions to [install it as a plugin.](https://www.terraform.io/docs/plugins/basics.html#installing-a-plugin) After placing it into your plugins directory,  run `terraform init` to initialize it. Documentation about the provider specific configuration options can be found on the [provider's website]
 
 Developing the Provider
 ---------------------------
@@ -44,13 +44,12 @@ To compile the provider, run `make build`. This will build the provider and put 
 ```sh
 $ make build
 ...
-$ $GOPATH/bin/terraform-provider-aws
+$ $GOPATH/bin/terraform-provider-qubole
 ...
 ```
 
 In order to test the provider, you can simply run `make test`.
 
-*Note:* Make sure no `AWS_ACCESS_KEY_ID` or `AWS_SECRET_ACCESS_KEY` variables are set, and there's no `[default]` section in the AWS credentials file `~/.aws/credentials`.
 
 ```sh
 $ make test
@@ -64,4 +63,3 @@ In order to run the full suite of Acceptance tests, run `make testacc`.
 $ make testacc
 ```
 
-If you need to add a new package in the vendor directory under `github.com/aws/aws-sdk-go`, create a separate PR handling _only_ the update of the vendor for your new requirement. Make sure to pin your dependency to a specific version, and that all versions of `github.com/aws/aws-sdk-go/*` are pinned to the same version.

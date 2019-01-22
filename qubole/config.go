@@ -55,6 +55,7 @@ func (c *Config) ValidateEndpoint() error {
 
 }
 
+
 // ValidateEndpointVersion returns an error if the configured endpoint version is not a
 // valid qubole endpoint version and nil otherwise.
 func (c *Config) ValidateEndpointVersion() error {

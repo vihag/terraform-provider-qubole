@@ -1041,13 +1041,18 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Printf(err.Error())
-			return nil
+			return fmt.Errorf("Error in cluster create API %s", err.Error())
 		}
+
 		defer resp.Body.Close()
 
-		log.Printf("response Status:", resp.Status)
-		log.Printf("response Headers:", resp.Header)
 		body, _ := ioutil.ReadAll(resp.Body)
+
+		if resp.StatusCode != 200 {
+			log.Printf("Error in creation. Http Status Code %s %s", resp.StatusCode, string(body))
+			return fmt.Errorf("Error in cluster create %s", string(body))
+		}
+
 		log.Printf("[INFO]response Body:", string(body))
 
 		//Parse the response back to cluster object
@@ -1103,13 +1108,17 @@ func resourceQubolePrestoRead(d *schema.ResourceData, meta interface{}) error {
 	if err != nil {
 		log.Printf(err.Error())
 		d.SetId("")
-		return nil
+		return fmt.Errorf("Error in cluster read %s", err.Error())
 	}
 	defer resp.Body.Close()
 
-	log.Printf("response Status:", resp.Status)
-	log.Printf("response Headers:", resp.Header)
 	body, _ := ioutil.ReadAll(resp.Body)
+
+	if resp.StatusCode != 200 {
+		log.Printf("Error in read. Http Status Code %s %s", resp.StatusCode, string(body))
+		return fmt.Errorf("Error in cluster read %s", string(body))
+	}
+
 	log.Printf("response Body:", string(body))
 
 	//Unmarshal the response to a cluster object
@@ -1216,7 +1225,7 @@ func resourceQubolePrestoUpdate(d *schema.ResourceData, meta interface{}) error 
 		final_url := api_url + d.Id()
 		log.Printf("[INFO]Sending Update Cluster Request to URI %s", final_url)
 		var payload = []byte(string(cluster_json))
-		req, err := http.NewRequest(http.MethodPut, api_url, bytes.NewBuffer(payload))
+		req, err := http.NewRequest(http.MethodPut, final_url, bytes.NewBuffer(payload))
 		req.Header.Set("X-AUTH-TOKEN", auth_token)
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Accept", "application/json")
@@ -1224,13 +1233,17 @@ func resourceQubolePrestoUpdate(d *schema.ResourceData, meta interface{}) error 
 		resp, err := client.Do(req)
 		if err != nil {
 			log.Printf(err.Error())
-			return nil
+			return fmt.Errorf("Error in cluster update API cal %s", err.Error())
 		}
 		defer resp.Body.Close()
 
-		log.Printf("response Status:", resp.Status)
-		log.Printf("response Headers:", resp.Header)
 		body, _ := ioutil.ReadAll(resp.Body)
+
+		if resp.StatusCode != 200 {
+			log.Printf("Error in update. Http Status Code %s %s", resp.StatusCode, string(body))
+			return fmt.Errorf("Error in cluster update %s", string(body))
+		}
+
 		log.Printf("[INFO]response Body:", string(body))
 
 		//Parse the response back to cluster object
@@ -1274,12 +1287,17 @@ func resourceQubolePrestoDelete(d *schema.ResourceData, meta interface{}) error 
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Printf(err.Error())
+		return fmt.Errorf("Error in cluster delete API call %s", err.Error())
 	}
 	defer resp.Body.Close()
 
-	log.Printf("response Status:", resp.Status)
-	log.Printf("response Headers:", resp.Header)
 	body, _ := ioutil.ReadAll(resp.Body)
+
+	if resp.StatusCode != 200 {
+		log.Printf("Error in deletion. Http Status Code %s %s", resp.StatusCode, string(body))
+		return fmt.Errorf("Error in cluster delete %s", string(body))
+	}
+
 	log.Printf("response Body:", string(body))
 
 	//Nilling the terraform resource id explicitly

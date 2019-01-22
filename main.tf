@@ -5,7 +5,7 @@ provider "qubole" {
 }
 
 resource "qubole_presto" "my-qubole-presto-server" {
-label 							=	["terraform-provider-qubole", "dev"]
+label 							=	["terraform-provider-qubole", "dev-presto-180", "smallercluster"]
 presto_version 					=	"0.193"
 ec2_settings					=	[
 										{
@@ -24,10 +24,10 @@ node_configuration				=	[
 										master_instance_type			=	"m4.xlarge"
 										slave_instance_type				=	"m4.xlarge"
 										initial_nodes					=	1
-										max_nodes						=	6
+										max_nodes						=	3
 										spot_instance_settings			=	[
 																				{
-																				maximum_bid_price_percentage	=	70
+																				maximum_bid_price_percentage	=	60
 																				timeout_for_request	=	10
 																				maximum_spot_instance_percentage	=	50
 																				}
@@ -68,7 +68,7 @@ datadog_settings				=	[
 										datadog_app_token				=	"app-token"
 										}
 									]
-disallow_cluster_termination 	=	"false"
+disallow_cluster_termination 	=	"true"
 enable_ganglia_monitoring 		=	"true"
 node_bootstrap_file 			=	"hoodie-presto-bootstrap.sh"
 idle_cluster_timeout 			=	"1"

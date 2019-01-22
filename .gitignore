@@ -1,0 +1,7 @@
+variables.tf
+terraform.tfvars
+quicktest.sh
+crash.log
+CHANGELOG.md
+terraform.tfstate
+terraform.tfstate.backup

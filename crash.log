@@ -1,85 +1,77 @@
-2019/01/21 22:28:59 [INFO] Terraform version: 0.11.8  
-2019/01/21 22:28:59 [INFO] Go runtime version: go1.10.3
-2019/01/21 22:28:59 [INFO] CLI args: []string{"/usr/local/Cellar/terraform/0.11.8/bin/terraform", "apply"}
-2019/01/21 22:28:59 [DEBUG] Attempting to open CLI config file: /Users/vihagg/.terraformrc
-2019/01/21 22:28:59 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
-2019/01/21 22:28:59 [INFO] CLI command args: []string{"apply"}
-2019/01/21 22:28:59 [INFO] command: empty terraform config, returning nil
-2019/01/21 22:28:59 [DEBUG] command: no data state file found for backend config
-2019/01/21 22:28:59 [DEBUG] New state was assigned lineage "1aad5b3e-05b7-3e9a-0595-3e67496329b3"
-2019/01/21 22:28:59 [INFO] command: backend initialized: <nil>
-2019/01/21 22:28:59 [DEBUG] checking for provider in "."
-2019/01/21 22:28:59 [WARN] found legacy provider "terraform-provider-qubole"
-2019/01/21 22:28:59 [DEBUG] checking for provider in "/usr/local/Cellar/terraform/0.11.8/bin"
-2019/01/21 22:28:59 [DEBUG] checking for provider in ".terraform/plugins/darwin_amd64"
-2019/01/21 22:28:59 [DEBUG] found valid plugin: "qubole", "0.0.0", "/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole"
-2019/01/21 22:28:59 [DEBUG] checking for provisioner in "."
-2019/01/21 22:28:59 [DEBUG] checking for provisioner in "/usr/local/Cellar/terraform/0.11.8/bin"
-2019/01/21 22:28:59 [DEBUG] checking for provisioner in ".terraform/plugins/darwin_amd64"
-2019/01/21 22:28:59 [INFO] command: backend <nil> is not enhanced, wrapping in local
-2019/01/21 22:28:59 [INFO] backend/local: starting Apply operation
-2019/01/21 22:28:59 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
-2019/01/21 22:28:59 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
-2019/01/21 22:28:59 [INFO] terraform: building graph: GraphTypeInput
-2019/01/21 22:28:59 [TRACE] ConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ConfigTransformer:
+2019/01/22 17:31:45 [INFO] Terraform version: 0.11.8  
+2019/01/22 17:31:45 [INFO] Go runtime version: go1.10.3
+2019/01/22 17:31:45 [INFO] CLI args: []string{"/usr/local/Cellar/terraform/0.11.8/bin/terraform", "apply"}
+2019/01/22 17:31:45 [DEBUG] Attempting to open CLI config file: /Users/vihagg/.terraformrc
+2019/01/22 17:31:45 [DEBUG] File doesn't exist, but doesn't need to. Ignoring.
+2019/01/22 17:31:45 [INFO] CLI command args: []string{"apply"}
+2019/01/22 17:31:45 [INFO] command: empty terraform config, returning nil
+2019/01/22 17:31:45 [DEBUG] command: no data state file found for backend config
+2019/01/22 17:31:45 [DEBUG] New state was assigned lineage "390da270-8bd9-043b-f168-b0d29a3fdb45"
+2019/01/22 17:31:45 [INFO] command: backend initialized: <nil>
+2019/01/22 17:31:45 [DEBUG] checking for provider in "."
+2019/01/22 17:31:45 [WARN] found legacy provider "terraform-provider-qubole"
+2019/01/22 17:31:45 [DEBUG] checking for provider in "/usr/local/Cellar/terraform/0.11.8/bin"
+2019/01/22 17:31:45 [DEBUG] checking for provider in ".terraform/plugins/darwin_amd64"
+2019/01/22 17:31:45 [DEBUG] found valid plugin: "qubole", "0.0.0", "/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole"
+2019/01/22 17:31:45 [DEBUG] checking for provisioner in "."
+2019/01/22 17:31:45 [DEBUG] checking for provisioner in "/usr/local/Cellar/terraform/0.11.8/bin"
+2019/01/22 17:31:45 [DEBUG] checking for provisioner in ".terraform/plugins/darwin_amd64"
+2019/01/22 17:31:45 [INFO] command: backend <nil> is not enhanced, wrapping in local
+2019/01/22 17:31:45 [INFO] backend/local: starting Apply operation
+2019/01/22 17:31:45 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
+2019/01/22 17:31:45 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
+2019/01/22 17:31:45 [INFO] terraform: building graph: GraphTypeInput
+2019/01/22 17:31:45 [TRACE] ConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.LocalTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.LocalTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Beginning...
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc420460000), RawConfig:(*config.RawConfig)(0xc4203cae70), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Beginning...
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc4201f2000), RawConfig:(*config.RawConfig)(0xc4202b53b0), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:45 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootVariableTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] ProviderConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Attach provider request: []string{} qubole
-2019/01/21 22:28:59 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc4203cacb0)}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
+2019/01/22 17:31:45 [TRACE] ProviderConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Attach provider request: []string{} qubole
+2019/01/22 17:31:45 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc420426cb0)}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.MissingProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderTransformer:
-
-provider.qubole - *terraform.NodeApplyableProvider
-qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.PruneProviderTransformer:
+2019/01/22 17:31:45 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
@@ -87,7 +79,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.PruneProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
@@ -95,7 +87,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.graphTransformerMulti:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ParentProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
@@ -103,7 +95,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.graphTransformerMulti:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
@@ -111,7 +103,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
@@ -119,12 +111,20 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_version" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.auth_token var.api_endpoint var.api_version]
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+
+provider.qubole - *terraform.NodeApplyableProvider
+qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_version" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.auth_token var.api_endpoint var.api_version]
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
   var.api_endpoint - *terraform.NodeRootVariable
@@ -135,7 +135,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -152,7 +152,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -169,27 +169,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProviderTransformer:
-
-meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole - *terraform.NodeApplyableProvider
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole (close) - *terraform.graphNodeCloseProvider
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProviderTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -209,7 +189,27 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.qubole - *terraform.NodeApplyableProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole - *terraform.NodeApplyableProvider
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole (close) - *terraform.graphNodeCloseProvider
+  provider.qubole - *terraform.NodeApplyableProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
+qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -232,7 +232,7 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   qubole_presto.my-qubole-presto-server - *terraform.NodeAbstractResource
@@ -250,129 +250,121 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] Starting graph walk: walkInput
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "root"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "provider.qubole"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "root", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.auth_token"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.auth_token': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_version"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_version': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_endpoint': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "provider.qubole"
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole': evaluating
-2019/01/21 22:28:59 [TRACE] [walkInput] Entering eval tree: provider.qubole
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInitProvider
-2019-01-21T22:28:59.301+0800 [DEBUG] plugin: starting plugin: path=/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole args=[/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole]
-2019-01-21T22:28:59.306+0800 [DEBUG] plugin: waiting for RPC address: path=/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole
-2019-01-21T22:28:59.324+0800 [DEBUG] plugin.terraform-provider-qubole: plugin address: timestamp=2019-01-21T22:28:59.324+0800 address=/var/folders/xm/8389p38s7rqd1wnnk71n8pgspj0d16/T/plugin829762396 network=unix
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalOpFilter
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolateProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInputProvider
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] [walkInput] Exiting eval tree: provider.qubole
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole (close)': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole (close)': evaluating
-2019/01/21 22:28:59 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
-2019/01/21 22:28:59 [TRACE] [walkInput] Entering eval tree: meta.count-boundary (count boundary fixup)
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
-2019/01/21 22:28:59 [TRACE] [walkInput] Entering eval tree: provider.qubole (close)
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCloseProvider
-2019/01/21 22:28:59 [TRACE] [walkInput] Exiting eval tree: meta.count-boundary (count boundary fixup)
-2019/01/21 22:28:59 [TRACE] [walkInput] Exiting eval tree: provider.qubole (close)
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "root"
-2019/01/21 22:28:59 [TRACE] vertex 'root.root': walking
-2019/01/21 22:28:59 [INFO] terraform: building graph: GraphTypeValidate
-2019/01/21 22:28:59 [TRACE] ConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ConfigTransformer:
+2019/01/22 17:31:45 [DEBUG] Starting graph walk: walkInput
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "root"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "provider.qubole"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "root", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_endpoint': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_version"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_version': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.auth_token"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.auth_token': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "provider.qubole"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole': evaluating
+2019/01/22 17:31:45 [TRACE] [walkInput] Entering eval tree: provider.qubole
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInitProvider
+2019-01-22T17:31:45.517+0800 [DEBUG] plugin: starting plugin: path=/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole args=[/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole]
+2019-01-22T17:31:45.528+0800 [DEBUG] plugin: waiting for RPC address: path=/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole
+2019-01-22T17:31:45.548+0800 [DEBUG] plugin.terraform-provider-qubole: plugin address: timestamp=2019-01-22T17:31:45.547+0800 address=/var/folders/xm/8389p38s7rqd1wnnk71n8pgspj0d16/T/plugin954879651 network=unix
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalOpFilter
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolateProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInputProvider
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] [walkInput] Exiting eval tree: provider.qubole
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole (close)': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole (close)': evaluating
+2019/01/22 17:31:45 [TRACE] [walkInput] Entering eval tree: provider.qubole (close)
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCloseProvider
+2019/01/22 17:31:45 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
+2019/01/22 17:31:45 [TRACE] [walkInput] Exiting eval tree: provider.qubole (close)
+2019/01/22 17:31:45 [TRACE] [walkInput] Entering eval tree: meta.count-boundary (count boundary fixup)
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
+2019/01/22 17:31:45 [TRACE] [walkInput] Exiting eval tree: meta.count-boundary (count boundary fixup)
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "root"
+2019/01/22 17:31:45 [TRACE] vertex 'root.root': walking
+2019/01/22 17:31:45 [INFO] terraform: building graph: GraphTypeValidate
+2019/01/22 17:31:45 [TRACE] ConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.LocalTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.LocalTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Beginning...
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc420460000), RawConfig:(*config.RawConfig)(0xc4203cae70), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Beginning...
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc4201f2000), RawConfig:(*config.RawConfig)(0xc4202b53b0), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:45 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootVariableTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] ProviderConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Attach provider request: []string{} qubole
-2019/01/21 22:28:59 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc4203cacb0)}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
+2019/01/22 17:31:45 [TRACE] ProviderConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Attach provider request: []string{} qubole
+2019/01/22 17:31:45 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc420426cb0)}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.MissingProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderTransformer:
-
-provider.qubole - *terraform.NodeApplyableProvider
-qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.PruneProviderTransformer:
+2019/01/22 17:31:45 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -380,7 +372,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.PruneProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -388,7 +380,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.graphTransformerMulti:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ParentProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -396,7 +388,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.MissingProvisionerTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.graphTransformerMulti:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -404,7 +396,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProvisionerTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.MissingProvisionerTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -412,7 +404,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.graphTransformerMulti:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProvisionerTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -420,7 +412,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.graphTransformerMulti:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -428,7 +420,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -436,12 +428,20 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_version" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.api_version var.auth_token var.api_endpoint]
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+
+provider.qubole - *terraform.NodeApplyableProvider
+qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_version" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.auth_token var.api_endpoint var.api_version]
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
   var.api_endpoint - *terraform.NodeRootVariable
@@ -452,7 +452,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -469,7 +469,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -486,27 +486,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProviderTransformer:
-
-meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole - *terraform.NodeApplyableProvider
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole (close) - *terraform.graphNodeCloseProvider
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProviderTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -526,7 +506,27 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.qubole - *terraform.NodeApplyableProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole - *terraform.NodeApplyableProvider
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole (close) - *terraform.graphNodeCloseProvider
+  provider.qubole - *terraform.NodeApplyableProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
+qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -549,7 +549,7 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResource
@@ -567,192 +567,192 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] Starting graph walk: walkValidate
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "root"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "provider.qubole"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "root", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_endpoint': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_version"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_version': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.auth_token"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.auth_token': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "provider.qubole"
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole': evaluating
-2019/01/21 22:28:59 [TRACE] [walkValidate] Entering eval tree: provider.qubole
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInitProvider
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalOpFilter
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolateProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalValidateProvider
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] [walkValidate] Exiting eval tree: provider.qubole
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
-2019/01/21 22:28:59 [TRACE] [walkValidate] Entering eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolate
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalIf
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalValidateCount
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundary
-2019/01/21 22:28:59 [TRACE] [walkValidate] Exiting eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': expanding/walking dynamic subgraph
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ResourceCountTransformer:
+2019/01/22 17:31:45 [DEBUG] Starting graph walk: walkValidate
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "root"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "provider.qubole"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "root", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_version"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_version': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.auth_token"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.auth_token': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_endpoint': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "provider.qubole"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole': evaluating
+2019/01/22 17:31:45 [TRACE] [walkValidate] Entering eval tree: provider.qubole
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInitProvider
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalOpFilter
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolateProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalValidateProvider
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] [walkValidate] Exiting eval tree: provider.qubole
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
+2019/01/22 17:31:45 [TRACE] [walkValidate] Entering eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolate
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalIf
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalValidateCount
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundary
+2019/01/22 17:31:45 [TRACE] [walkValidate] Exiting eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': expanding/walking dynamic subgraph
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ResourceCountTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResourceInstance
-2019/01/21 22:28:59 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:45 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResourceInstance
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResourceInstance
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResourceInstance
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeValidatableResourceInstance
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
-2019/01/21 22:28:59 [TRACE] [walkValidate] Entering eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalValidateResourceSelfRef
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolate
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalValidateResource
-2019/01/21 22:28:59 [TRACE] [walkValidate] Exiting eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole (close)': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole (close)': evaluating
-2019/01/21 22:28:59 [TRACE] [walkValidate] Entering eval tree: provider.qubole (close)
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCloseProvider
-2019/01/21 22:28:59 [TRACE] [walkValidate] Exiting eval tree: provider.qubole (close)
-2019/01/21 22:28:59 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
-2019/01/21 22:28:59 [TRACE] [walkValidate] Entering eval tree: meta.count-boundary (count boundary fixup)
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
-2019/01/21 22:28:59 [TRACE] [walkValidate] Exiting eval tree: meta.count-boundary (count boundary fixup)
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "root"
-2019/01/21 22:28:59 [TRACE] vertex 'root.root': walking
-2019/01/21 22:28:59 [INFO] backend/local: apply calling Refresh
-2019/01/21 22:28:59 [INFO] terraform: building graph: GraphTypeRefresh
-2019/01/21 22:28:59 [TRACE] No managed resources in state during refresh, skipping managed resource transformer
-2019/01/21 22:28:59 [TRACE] ConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ConfigTransformer:
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
+2019/01/22 17:31:45 [TRACE] [walkValidate] Entering eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalValidateResourceSelfRef
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolate
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalValidateResource
+2019/01/22 17:31:45 [TRACE] [walkValidate] Exiting eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole (close)': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole (close)': evaluating
+2019/01/22 17:31:45 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
+2019/01/22 17:31:45 [TRACE] [walkValidate] Entering eval tree: meta.count-boundary (count boundary fixup)
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
+2019/01/22 17:31:45 [TRACE] [walkValidate] Exiting eval tree: meta.count-boundary (count boundary fixup)
+2019/01/22 17:31:45 [TRACE] [walkValidate] Entering eval tree: provider.qubole (close)
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCloseProvider
+2019/01/22 17:31:45 [TRACE] [walkValidate] Exiting eval tree: provider.qubole (close)
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "root"
+2019/01/22 17:31:45 [TRACE] vertex 'root.root': walking
+2019/01/22 17:31:45 [INFO] backend/local: apply calling Refresh
+2019/01/22 17:31:45 [INFO] terraform: building graph: GraphTypeRefresh
+2019/01/22 17:31:45 [TRACE] No managed resources in state during refresh, skipping managed resource transformer
+2019/01/22 17:31:45 [TRACE] ConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ConfigTransformer:
 
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
 
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Beginning...
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Beginning...
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
 
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootVariableTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] ProviderConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Attach provider request: []string{} qubole
-2019/01/21 22:28:59 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc4203cacb0)}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
+2019/01/22 17:31:45 [TRACE] ProviderConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Attach provider request: []string{} qubole
+2019/01/22 17:31:45 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc420426cb0)}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.MissingProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] pruning unused provider provider.qubole
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.PruneProviderTransformer:
+2019/01/22 17:31:45 [DEBUG] pruning unused provider provider.qubole
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.PruneProviderTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ParentProviderTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.graphTransformerMulti:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.graphTransformerMulti:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.LocalTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.LocalTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OutputTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_version" references: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_version" references: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProviderTransformer:
 
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootTransformer:
 
 root - terraform.graphNodeRoot
   var.api_endpoint - *terraform.NodeRootVariable
@@ -761,7 +761,7 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
 
 root - terraform.graphNodeRoot
   var.api_endpoint - *terraform.NodeRootVariable
@@ -770,84 +770,76 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] Starting graph walk: walkRefresh
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "root"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "root", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_version"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_version': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.auth_token': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_endpoint': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "root"
-2019/01/21 22:28:59 [TRACE] vertex 'root.root': walking
-2019/01/21 22:28:59 [INFO] backend/local: apply calling Plan
-2019/01/21 22:28:59 [INFO] terraform: building graph: GraphTypePlan
-2019/01/21 22:28:59 [TRACE] ConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ConfigTransformer:
+2019/01/22 17:31:45 [DEBUG] Starting graph walk: walkRefresh
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "root"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "root", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_version"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_version': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_endpoint': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.auth_token': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "root"
+2019/01/22 17:31:45 [TRACE] vertex 'root.root': walking
+2019/01/22 17:31:45 [INFO] backend/local: apply calling Plan
+2019/01/22 17:31:45 [INFO] terraform: building graph: GraphTypePlan
+2019/01/22 17:31:45 [TRACE] ConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.LocalTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.LocalTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanResourceTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Beginning...
-2019/01/21 22:28:59 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc420460000), RawConfig:(*config.RawConfig)(0xc4203cae70), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Beginning...
+2019/01/22 17:31:45 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc4201f2000), RawConfig:(*config.RawConfig)(0xc4202b53b0), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:45 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootVariableTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] ProviderConfigTransformer: Starting for path: []
-2019/01/21 22:28:59 [TRACE] Attach provider request: []string{} qubole
-2019/01/21 22:28:59 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc4203cacb0)}
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
+2019/01/22 17:31:45 [TRACE] ProviderConfigTransformer: Starting for path: []
+2019/01/22 17:31:45 [TRACE] Attach provider request: []string{} qubole
+2019/01/22 17:31:45 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc420426cb0)}
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.MissingProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ProviderTransformer:
-
-provider.qubole - *terraform.NodeApplyableProvider
-qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.PruneProviderTransformer:
+2019/01/22 17:31:45 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
@@ -855,7 +847,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.PruneProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
@@ -863,7 +855,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.graphTransformerMulti:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ParentProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
@@ -871,7 +863,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.graphTransformerMulti:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
@@ -879,7 +871,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
@@ -887,12 +879,20 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.api_version var.auth_token var.api_endpoint]
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "var.api_version" references: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+
+provider.qubole - *terraform.NodeApplyableProvider
+qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "var.api_version" references: []
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.auth_token var.api_endpoint var.api_version]
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
   var.api_endpoint - *terraform.NodeRootVariable
@@ -903,7 +903,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -920,7 +920,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -937,27 +937,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProviderTransformer:
-
-meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole - *terraform.NodeApplyableProvider
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole (close) - *terraform.graphNodeCloseProvider
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProviderTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -977,7 +957,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -994,21 +974,23 @@ provider.qubole (close) - *terraform.graphNodeCloseProvider
   qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
   provider.qubole - *terraform.NodeApplyableProvider
-root - terraform.graphNodeRoot
-  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
-  provider.qubole (close) - *terraform.graphNodeCloseProvider
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.qubole - *terraform.NodeApplyableProvider
   qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
 provider.qubole - *terraform.NodeApplyableProvider
   var.api_endpoint - *terraform.NodeRootVariable
   var.api_version - *terraform.NodeRootVariable
   var.auth_token - *terraform.NodeRootVariable
 provider.qubole (close) - *terraform.graphNodeCloseProvider
+  provider.qubole - *terraform.NodeApplyableProvider
   qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
   provider.qubole - *terraform.NodeApplyableProvider
@@ -1018,116 +1000,134 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:28:59 [DEBUG] Starting graph walk: walkPlan
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "provider.qubole"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "root"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
-2019/01/21 22:28:59 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "root", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_endpoint"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_endpoint': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.api_version"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.api_version': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "var.auth_token"
-2019/01/21 22:28:59 [TRACE] vertex 'root.var.auth_token': walking
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "provider.qubole"
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole': evaluating
-2019/01/21 22:28:59 [TRACE] [walkPlan] Entering eval tree: provider.qubole
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInitProvider
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalOpFilter
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolateProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalOpFilter
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalConfigProvider
-2019/01/21 22:28:59 [TRACE] [walkPlan] Exiting eval tree: provider.qubole
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
-2019/01/21 22:28:59 [TRACE] [walkPlan] Entering eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolate
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCountCheckComputed
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalIf
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundary
-2019/01/21 22:28:59 [TRACE] [walkPlan] Exiting eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': expanding/walking dynamic subgraph
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ResourceCountTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
+provider.qubole - *terraform.NodeApplyableProvider
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole (close) - *terraform.graphNodeCloseProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
+qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResource
+  provider.qubole - *terraform.NodeApplyableProvider
+root - terraform.graphNodeRoot
+  meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.qubole (close) - *terraform.graphNodeCloseProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:45 [DEBUG] Starting graph walk: walkPlan
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "provider.qubole"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "root"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "root", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_endpoint"
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.api_version"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_version': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.api_endpoint': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "var.auth_token"
+2019/01/22 17:31:45 [TRACE] vertex 'root.var.auth_token': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "provider.qubole"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole': evaluating
+2019/01/22 17:31:45 [TRACE] [walkPlan] Entering eval tree: provider.qubole
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInitProvider
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalOpFilter
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolateProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalOpFilter
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalConfigProvider
+2019/01/22 17:31:45 [TRACE] [walkPlan] Exiting eval tree: provider.qubole
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
+2019/01/22 17:31:45 [TRACE] [walkPlan] Entering eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolate
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCountCheckComputed
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalIf
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundary
+2019/01/22 17:31:45 [TRACE] [walkPlan] Exiting eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': expanding/walking dynamic subgraph
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ResourceCountTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
-2019/01/21 22:28:59 [TRACE] OrphanResourceCount: Starting...
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.OrphanResourceCountTransformer:
+2019/01/22 17:31:45 [TRACE] OrphanResourceCount: Starting...
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.OrphanResourceCountTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
-2019/01/21 22:28:59 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:45 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
-2019/01/21 22:28:59 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:45 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
-2019/01/21 22:28:59 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:45 [TRACE] Graph after step *terraform.RootTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
-2019/01/21 22:28:59 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
-2019/01/21 22:28:59 [TRACE] [walkPlan] Entering eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalInterpolate
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalValidateResource
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalReadState
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalDiff
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCheckPreventDestroy
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalWriteState
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalWriteDiff
-2019/01/21 22:28:59 [TRACE] [walkPlan] Exiting eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "provider.qubole (close)"
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:28:59 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole (close)': walking
-2019/01/21 22:28:59 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
-2019/01/21 22:28:59 [TRACE] [walkPlan] Entering eval tree: meta.count-boundary (count boundary fixup)
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
-2019/01/21 22:28:59 [TRACE] [walkPlan] Exiting eval tree: meta.count-boundary (count boundary fixup)
-2019/01/21 22:28:59 [TRACE] vertex 'root.provider.qubole (close)': evaluating
-2019/01/21 22:28:59 [TRACE] [walkPlan] Entering eval tree: provider.qubole (close)
-2019/01/21 22:28:59 [TRACE] root: eval: *terraform.EvalCloseProvider
-2019/01/21 22:28:59 [TRACE] [walkPlan] Exiting eval tree: provider.qubole (close)
-2019/01/21 22:28:59 [TRACE] dag/walk: walking "root"
-2019/01/21 22:28:59 [TRACE] vertex 'root.root': walking
-2019/01/21 22:28:59 [DEBUG] command: asking for input: "Do you want to perform these actions?"
-2019/01/21 22:29:00 [INFO] terraform: building graph: GraphTypeApply
-2019/01/21 22:29:00 [TRACE] DiffTransformer: starting
-2019/01/21 22:29:00 [TRACE] DiffTransformer: Module: CREATE: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
+2019/01/22 17:31:45 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
+2019/01/22 17:31:45 [TRACE] [walkPlan] Entering eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalInterpolate
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalValidateResource
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalReadState
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalDiff
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCheckPreventDestroy
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalWriteState
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalWriteDiff
+2019/01/22 17:31:45 [TRACE] [walkPlan] Exiting eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "provider.qubole (close)"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole (close)': walking
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:45 [TRACE] vertex 'root.provider.qubole (close)': evaluating
+2019/01/22 17:31:45 [TRACE] [walkPlan] Entering eval tree: provider.qubole (close)
+2019/01/22 17:31:45 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': walking
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCloseProvider
+2019/01/22 17:31:45 [TRACE] vertex 'root.meta.count-boundary (count boundary fixup)': evaluating
+2019/01/22 17:31:45 [TRACE] [walkPlan] Exiting eval tree: provider.qubole (close)
+2019/01/22 17:31:45 [TRACE] [walkPlan] Entering eval tree: meta.count-boundary (count boundary fixup)
+2019/01/22 17:31:45 [TRACE] root: eval: *terraform.EvalCountFixZeroOneBoundaryGlobal
+2019/01/22 17:31:45 [TRACE] [walkPlan] Exiting eval tree: meta.count-boundary (count boundary fixup)
+2019/01/22 17:31:45 [TRACE] dag/walk: walking "root"
+2019/01/22 17:31:45 [TRACE] vertex 'root.root': walking
+2019/01/22 17:31:45 [DEBUG] command: asking for input: "Do you want to perform these actions?"
+2019/01/22 17:31:47 [INFO] terraform: building graph: GraphTypeApply
+2019/01/22 17:31:47 [TRACE] DiffTransformer: starting
+2019/01/22 17:31:47 [TRACE] DiffTransformer: Module: CREATE: qubole_presto.my-qubole-presto-server
   datadog_settings.#:                                                             "0" => "1"
   disallow_cluster_termination:                                                   "" => "false"
   ec2_settings.#:                                                                 "0" => "1"
@@ -1173,86 +1173,78 @@ qubole_presto.my-qubole-presto-server - *terraform.NodePlannableResourceInstance
   presto_version:                                                                 "" => "0.193"
   security_settings.#:                                                            "0" => "1"
   security_settings.0.persistent_security_group:                                  "" => "persistent-security-group"
-2019/01/21 22:29:00 [TRACE] DiffTransformer: Resource "qubole_presto.my-qubole-presto-server": *terraform.InstanceDiff{mu:sync.Mutex{state:0, sema:0x0}, Attributes:map[string]*terraform.ResourceAttrDiff{"node_configuration.0.custom_ec2_tags.Environment":*terraform.ResourceAttrDiff{Old:"", New:"Dev", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.max_nodes":*terraform.ResourceAttrDiff{Old:"", New:"4", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.ebs_volume_type":*terraform.ResourceAttrDiff{Old:"", New:"standard", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.bastion_node_public_dns":*terraform.ResourceAttrDiff{Old:"", New:"13.229.7.25", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.bastion_node_port":*terraform.ResourceAttrDiff{Old:"", New:"22", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "hadoop_settings.0.use_spark":*terraform.ResourceAttrDiff{Old:"", New:"false", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "security_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_bootstrap_file":*terraform.ResourceAttrDiff{Old:"", New:"hoodie-presto-bootstrap.sh", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "label.292811013":*terraform.ResourceAttrDiff{Old:"", New:"dev", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.0.maximum_spot_instance_percentage":*terraform.ResourceAttrDiff{Old:"", New:"50", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.aws_preferred_availability_zone":*terraform.ResourceAttrDiff{Old:"", New:"Any", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.ebs_volume_size":*terraform.ResourceAttrDiff{Old:"", New:"100", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "security_settings.0.persistent_security_group":*terraform.ResourceAttrDiff{Old:"", New:"persistent-security-group", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "hadoop_settings.0.use_hadoop2":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "hadoop_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "enable_ganglia_monitoring":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.0.maximum_bid_price_percentage":*terraform.ResourceAttrDiff{Old:"", New:"100", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "disallow_cluster_termination":*terraform.ResourceAttrDiff{Old:"", New:"false", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.use_account_compute_creds":*terraform.ResourceAttrDiff{Old:"", New:"false", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_settings.0.custom_config":*terraform.ResourceAttrDiff{Old:"", New:"config.properties:\nascm.enabled=true\ncatalog/hive.properties:\nhive.parquet.use-column-names=true\nbootstrap-file-path:\ns3://vihagg.us/qubole/us/scripts/hadoop/node_bootstrap_uber_hudi_presto.sh", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.Project":*terraform.ResourceAttrDiff{Old:"", New:"Terraform Provider", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.0.timeout_for_request":*terraform.ResourceAttrDiff{Old:"", New:"10", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.slave_instance_type":*terraform.ResourceAttrDiff{Old:"", New:"m4.xlarge", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.initial_nodes":*terraform.ResourceAttrDiff{Old:"", New:"2", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "id":*terraform.ResourceAttrDiff{Old:"", New:"", NewComputed:true, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x2}, "presto_version":*terraform.ResourceAttrDiff{Old:"", New:"0.193", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.%":*terraform.ResourceAttrDiff{Old:"0", New:"3", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "idle_cluster_timeout":*terraform.ResourceAttrDiff{Old:"", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.aws_region":*terraform.ResourceAttrDiff{Old:"", New:"ap-southeast-1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "label.235450586":*terraform.ResourceAttrDiff{Old:"", New:"terraform-provider-qubole", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.Owner":*terraform.ResourceAttrDiff{Old:"", New:"Vihag Gupta", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.ebs_volume_count":*terraform.ResourceAttrDiff{Old:"", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.master_instance_type":*terraform.ResourceAttrDiff{Old:"", New:"m4.xlarge", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.bastion_node_user":*terraform.ResourceAttrDiff{Old:"", New:"ec2-user", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.fallback_to_ondemand":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.node_base_cooldown_period":*terraform.ResourceAttrDiff{Old:"", New:"10", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.vpc_id":*terraform.ResourceAttrDiff{Old:"", New:"vpc-0e2be045e5fe137cd", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_settings.0.enable_presto":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "datadog_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.subnet_id":*terraform.ResourceAttrDiff{Old:"", New:"subnet-05cf662ed46f9cde8", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.idle_cluster_timeout_in_secs":*terraform.ResourceAttrDiff{Old:"", New:"2700", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "label.#":*terraform.ResourceAttrDiff{Old:"0", New:"2", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}}, Destroy:false, DestroyDeposed:false, DestroyTainted:false, Meta:map[string]interface {}(nil)}
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.DiffTransformer:
+2019/01/22 17:31:47 [TRACE] DiffTransformer: Resource "qubole_presto.my-qubole-presto-server": *terraform.InstanceDiff{mu:sync.Mutex{state:0, sema:0x0}, Attributes:map[string]*terraform.ResourceAttrDiff{"node_configuration.0.master_instance_type":*terraform.ResourceAttrDiff{Old:"", New:"m4.xlarge", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "security_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "id":*terraform.ResourceAttrDiff{Old:"", New:"", NewComputed:true, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:true, Sensitive:false, Type:0x2}, "node_configuration.0.node_base_cooldown_period":*terraform.ResourceAttrDiff{Old:"", New:"10", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.ebs_volume_count":*terraform.ResourceAttrDiff{Old:"", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.ebs_volume_type":*terraform.ResourceAttrDiff{Old:"", New:"standard", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_version":*terraform.ResourceAttrDiff{Old:"", New:"0.193", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.fallback_to_ondemand":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.use_account_compute_creds":*terraform.ResourceAttrDiff{Old:"", New:"false", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.bastion_node_port":*terraform.ResourceAttrDiff{Old:"", New:"22", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.bastion_node_public_dns":*terraform.ResourceAttrDiff{Old:"", New:"13.229.7.25", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "label.235450586":*terraform.ResourceAttrDiff{Old:"", New:"terraform-provider-qubole", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.Project":*terraform.ResourceAttrDiff{Old:"", New:"Terraform Provider", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "hadoop_settings.0.use_spark":*terraform.ResourceAttrDiff{Old:"", New:"false", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "enable_ganglia_monitoring":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.max_nodes":*terraform.ResourceAttrDiff{Old:"", New:"4", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.ebs_volume_size":*terraform.ResourceAttrDiff{Old:"", New:"100", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "datadog_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.Environment":*terraform.ResourceAttrDiff{Old:"", New:"Dev", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "idle_cluster_timeout":*terraform.ResourceAttrDiff{Old:"", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.initial_nodes":*terraform.ResourceAttrDiff{Old:"", New:"2", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.0.maximum_bid_price_percentage":*terraform.ResourceAttrDiff{Old:"", New:"100", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "hadoop_settings.0.use_hadoop2":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.Owner":*terraform.ResourceAttrDiff{Old:"", New:"Vihag Gupta", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.aws_region":*terraform.ResourceAttrDiff{Old:"", New:"ap-southeast-1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.0.timeout_for_request":*terraform.ResourceAttrDiff{Old:"", New:"10", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.0.maximum_spot_instance_percentage":*terraform.ResourceAttrDiff{Old:"", New:"50", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "label.#":*terraform.ResourceAttrDiff{Old:"0", New:"2", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.spot_instance_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "security_settings.0.persistent_security_group":*terraform.ResourceAttrDiff{Old:"", New:"persistent-security-group", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "label.292811013":*terraform.ResourceAttrDiff{Old:"", New:"dev", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.bastion_node_user":*terraform.ResourceAttrDiff{Old:"", New:"ec2-user", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "hadoop_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.idle_cluster_timeout_in_secs":*terraform.ResourceAttrDiff{Old:"", New:"2700", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.vpc_id":*terraform.ResourceAttrDiff{Old:"", New:"vpc-0e2be045e5fe137cd", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "disallow_cluster_termination":*terraform.ResourceAttrDiff{Old:"", New:"false", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_settings.0.custom_config":*terraform.ResourceAttrDiff{Old:"", New:"config.properties:\nascm.enabled=true\ncatalog/hive.properties:\nhive.parquet.use-column-names=true\nbootstrap-file-path:\ns3://vihagg.us/qubole/us/scripts/hadoop/node_bootstrap_uber_hudi_presto.sh", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.aws_preferred_availability_zone":*terraform.ResourceAttrDiff{Old:"", New:"Any", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_bootstrap_file":*terraform.ResourceAttrDiff{Old:"", New:"hoodie-presto-bootstrap.sh", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.custom_ec2_tags.%":*terraform.ResourceAttrDiff{Old:"0", New:"3", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.#":*terraform.ResourceAttrDiff{Old:"0", New:"1", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "ec2_settings.0.subnet_id":*terraform.ResourceAttrDiff{Old:"", New:"subnet-05cf662ed46f9cde8", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "presto_settings.0.enable_presto":*terraform.ResourceAttrDiff{Old:"", New:"true", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}, "node_configuration.0.slave_instance_type":*terraform.ResourceAttrDiff{Old:"", New:"m4.xlarge", NewComputed:false, NewRemoved:false, NewExtra:interface {}(nil), RequiresNew:false, Sensitive:false, Type:0x0}}, Destroy:false, DestroyDeposed:false, DestroyTainted:false, Meta:map[string]interface {}(nil)}
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.DiffTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.OrphanOutputTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-2019/01/21 22:29:00 [TRACE] AttachResourceConfigTransformer: Beginning...
-2019/01/21 22:29:00 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
-2019/01/21 22:29:00 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc420460000), RawConfig:(*config.RawConfig)(0xc4203cae70), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
+2019/01/22 17:31:47 [TRACE] AttachResourceConfigTransformer: Beginning...
+2019/01/22 17:31:47 [TRACE] AttachResourceConfigTransformer: Attach resource config request: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:47 [TRACE] Attaching resource config: &config.Resource{Mode:0, Name:"my-qubole-presto-server", Type:"qubole_presto", RawCount:(*config.RawConfig)(0xc4201f2000), RawConfig:(*config.RawConfig)(0xc4202b53b0), Provisioners:[]*config.Provisioner(nil), Provider:"", DependsOn:[]string(nil), Lifecycle:config.ResourceLifecycle{CreateBeforeDestroy:false, PreventDestroy:false, IgnoreChanges:[]string(nil)}}
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.AttachResourceConfigTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-2019/01/21 22:29:00 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.AttachStateTransformer:
+2019/01/22 17:31:47 [DEBUG] Resource state not found for "qubole_presto.my-qubole-presto-server": qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.AttachStateTransformer:
 
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-2019/01/21 22:29:00 [TRACE] ProviderConfigTransformer: Starting for path: []
-2019/01/21 22:29:00 [TRACE] Attach provider request: []string{} qubole
-2019/01/21 22:29:00 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc4203cacb0)}
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
-
-provider.qubole - *terraform.NodeApplyableProvider
-qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.MissingProviderTransformer:
+2019/01/22 17:31:47 [TRACE] ProviderConfigTransformer: Starting for path: []
+2019/01/22 17:31:47 [TRACE] Attach provider request: []string{} qubole
+2019/01/22 17:31:47 [TRACE] Attaching provider config: *config.ProviderConfig{Name:"qubole", Alias:"", Version:"", RawConfig:(*config.RawConfig)(0xc420426cb0)}
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.ProviderConfigTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-2019/01/21 22:29:00 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.ProviderTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.MissingProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-  provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.PruneProviderTransformer:
+2019/01/22 17:31:47 [DEBUG] resource qubole_presto.my-qubole-presto-server using provider provider.qubole
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.ProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.ParentProviderTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.PruneProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.graphTransformerMulti:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.ParentProviderTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] DestroyEdgeTransformer: Beginning destroy edge transformation...
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.DestroyEdgeTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.graphTransformerMulti:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] CBDEdgeTransformer: Beginning CBD transformation...
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.CBDEdgeTransformer:
+2019/01/22 17:31:47 [TRACE] DestroyEdgeTransformer: Beginning destroy edge transformation...
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.DestroyEdgeTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.MissingProvisionerTransformer:
+2019/01/22 17:31:47 [TRACE] CBDEdgeTransformer: Beginning CBD transformation...
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.CBDEdgeTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.ProvisionerTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.MissingProvisionerTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.RootVariableTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.ProvisionerTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
   provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.LocalTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.RootVariableTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
@@ -1260,7 +1252,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.OutputTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.LocalTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
@@ -1268,7 +1260,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.OutputTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
@@ -1276,7 +1268,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.ModuleVariableTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
 qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
@@ -1284,12 +1276,20 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
-2019/01/21 22:29:00 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.api_version var.auth_token var.api_endpoint]
-2019/01/21 22:29:00 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
-2019/01/21 22:29:00 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
-2019/01/21 22:29:00 [DEBUG] ReferenceTransformer: "var.api_version" references: []
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.ReferenceTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.RemovedModuleTransformer:
+
+provider.qubole - *terraform.NodeApplyableProvider
+qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:47 [DEBUG] ReferenceTransformer: "var.auth_token" references: []
+2019/01/22 17:31:47 [DEBUG] ReferenceTransformer: "var.api_endpoint" references: []
+2019/01/22 17:31:47 [DEBUG] ReferenceTransformer: "var.api_version" references: []
+2019/01/22 17:31:47 [DEBUG] ReferenceTransformer: "qubole_presto.my-qubole-presto-server" references: []
+2019/01/22 17:31:47 [DEBUG] ReferenceTransformer: "provider.qubole" references: [var.api_version var.auth_token var.api_endpoint]
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.ReferenceTransformer:
 
 provider.qubole - *terraform.NodeApplyableProvider
   var.api_endpoint - *terraform.NodeRootVariable
@@ -1300,7 +1300,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.CountBoundaryTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -1317,7 +1317,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.TargetsTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.TargetsTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -1334,27 +1334,7 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.CloseProviderTransformer:
-
-meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole - *terraform.NodeApplyableProvider
-  var.api_endpoint - *terraform.NodeRootVariable
-  var.api_version - *terraform.NodeRootVariable
-  var.auth_token - *terraform.NodeRootVariable
-provider.qubole (close) - *terraform.graphNodeCloseProvider
-  provider.qubole - *terraform.NodeApplyableProvider
-  qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
-  provider.qubole - *terraform.NodeApplyableProvider
-var.api_endpoint - *terraform.NodeRootVariable
-var.api_version - *terraform.NodeRootVariable
-var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.CloseProviderTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -1374,7 +1354,27 @@ qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.RootTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.CloseProvisionerTransformer:
+
+meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
+  provider.qubole - *terraform.NodeApplyableProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole - *terraform.NodeApplyableProvider
+  var.api_endpoint - *terraform.NodeRootVariable
+  var.api_version - *terraform.NodeRootVariable
+  var.auth_token - *terraform.NodeRootVariable
+provider.qubole (close) - *terraform.graphNodeCloseProvider
+  provider.qubole - *terraform.NodeApplyableProvider
+  qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
+qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
+  provider.qubole - *terraform.NodeApplyableProvider
+var.api_endpoint - *terraform.NodeRootVariable
+var.api_version - *terraform.NodeRootVariable
+var.auth_token - *terraform.NodeRootVariable
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.RootTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   provider.qubole - *terraform.NodeApplyableProvider
@@ -1397,7 +1397,7 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
+2019/01/22 17:31:47 [TRACE] Graph after step *terraform.TransitiveReductionTransformer:
 
 meta.count-boundary (count boundary fixup) - *terraform.NodeCountBoundary
   qubole_presto.my-qubole-presto-server - *terraform.NodeApplyableResource
@@ -1415,113 +1415,118 @@ root - terraform.graphNodeRoot
 var.api_endpoint - *terraform.NodeRootVariable
 var.api_version - *terraform.NodeRootVariable
 var.auth_token - *terraform.NodeRootVariable
-2019/01/21 22:29:00 [DEBUG] Starting graph walk: walkApply
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "provider.qubole"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "var.auth_token"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "var.api_version"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "root"
-2019/01/21 22:29:00 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
-2019/01/21 22:29:00 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:29:00 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
-2019/01/21 22:29:00 [TRACE] dag/walk: dependencies changed for "root", sending new deps
-2019/01/21 22:29:00 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
-2019/01/21 22:29:00 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
-2019/01/21 22:29:00 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
-2019/01/21 22:29:00 [TRACE] dag/walk: walking "var.api_endpoint"
-2019/01/21 22:29:00 [TRACE] vertex 'root.var.api_endpoint': walking
-2019/01/21 22:29:00 [TRACE] dag/walk: walking "var.api_version"
-2019/01/21 22:29:00 [TRACE] vertex 'root.var.api_version': walking
-2019/01/21 22:29:00 [TRACE] dag/walk: walking "var.auth_token"
-2019/01/21 22:29:00 [TRACE] vertex 'root.var.auth_token': walking
-2019/01/21 22:29:00 [TRACE] dag/walk: walking "provider.qubole"
-2019/01/21 22:29:00 [TRACE] vertex 'root.provider.qubole': walking
-2019/01/21 22:29:00 [TRACE] vertex 'root.provider.qubole': evaluating
-2019/01/21 22:29:00 [TRACE] [walkApply] Entering eval tree: provider.qubole
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalInitProvider
-2019/01/21 22:29:00 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:29:00 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalOpFilter
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalInterpolateProvider
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalOpFilter
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalConfigProvider
-2019/01/21 22:29:00 [TRACE] [walkApply] Exiting eval tree: provider.qubole
-2019/01/21 22:29:00 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
-2019/01/21 22:29:00 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
-2019/01/21 22:29:00 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
-2019/01/21 22:29:00 [TRACE] [walkApply] Entering eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalSequence
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalInstanceInfo
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalReadDiff
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalIf
-2019/01/21 22:29:00 [TRACE] root: eval: terraform.EvalNoop
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalIf
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalInterpolate
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalInterpolate
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalReadState
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalValidateResource
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalDiff
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalReadDiff
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalCompareDiff
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalGetProvider
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalReadState
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalApplyPre
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalApply
-2019/01/21 22:29:00 [DEBUG] apply: qubole_presto.my-qubole-presto-server: executing Apply
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: panic: interface conversion: interface {} is *qubole.Config, not qubole.Config
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: goroutine 68 [running]:
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/terraform-providers/terraform-provider-qubole/qubole.resourceQubolePrestoCreate(0xc0001892d0, 0x199dba0, 0xc000358180, 0x2, 0x234fe40)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/qubole/resource_qubole_presto.go:406 +0x3053
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/hashicorp/terraform/helper/schema.(*Resource).Apply(0xc000181100, 0xc0003ef4f0, 0xc0000cd960, 0x199dba0, 0xc000358180, 0x100d701, 0xc00034bb80, 0x10be78c)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/hashicorp/terraform/helper/schema/resource.go:286 +0x363
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/hashicorp/terraform/helper/schema.(*Provider).Apply(0xc000188000, 0xc0003ef4a0, 0xc0003ef4f0, 0xc0000cd960, 0xc000233000, 0x18, 0x3800000)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/hashicorp/terraform/helper/schema/provider.go:283 +0x9c
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/hashicorp/terraform/plugin.(*ResourceProviderServer).Apply(0xc0003b73e0, 0xc0000cd500, 0xc000476d10, 0x0, 0x0)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/hashicorp/terraform/plugin/resource_provider.go:530 +0x57
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: reflect.Value.call(0xc0000c8ae0, 0xc00015a758, 0x13, 0x1a92390, 0x4, 0xc00034bf18, 0x3, 0x3, 0xc000042780, 0xc0003bc000, ...)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/reflect/value.go:447 +0x454
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: reflect.Value.Call(0xc0000c8ae0, 0xc00015a758, 0x13, 0xc000063f18, 0x3, 0x3, 0x0, 0xc00008e540, 0x0)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/reflect/value.go:308 +0xa4
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: net/rpc.(*service).call(0xc0000ba5c0, 0xc0003eed20, 0xc0003ac530, 0xc0003ac540, 0xc000181180, 0xc0003b78e0, 0x18eade0, 0xc0000cd500, 0x16, 0x18eae20, ...)
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/net/rpc/server.go:384 +0x14e
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: created by net/rpc.(*Server).ServeCodec
-2019-01-21T22:29:00.583+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/net/rpc/server.go:481 +0x47e
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalWriteState
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalApplyProvisioners
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalIf
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalWriteState
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalWriteDiff
-2019/01/21 22:29:00 [TRACE] root: eval: *terraform.EvalApplyPost
-2019/01/21 22:29:00 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
+2019/01/22 17:31:47 [DEBUG] Starting graph walk: walkApply
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "provider.qubole"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "var.auth_token"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "var.api_endpoint"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "var.api_version"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "provider.qubole (close)"
+2019/01/22 17:31:47 [TRACE] dag/walk: added new vertex: "root"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_endpoint"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "root" waiting on "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "qubole_presto.my-qubole-presto-server" waiting on "provider.qubole"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "provider.qubole (close)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "root" waiting on "provider.qubole (close)"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "meta.count-boundary (count boundary fixup)" waiting on "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.api_version"
+2019/01/22 17:31:47 [TRACE] dag/walk: added edge: "provider.qubole" waiting on "var.auth_token"
+2019/01/22 17:31:47 [TRACE] dag/walk: dependencies changed for "provider.qubole", sending new deps
+2019/01/22 17:31:47 [TRACE] dag/walk: dependencies changed for "root", sending new deps
+2019/01/22 17:31:47 [TRACE] dag/walk: dependencies changed for "qubole_presto.my-qubole-presto-server", sending new deps
+2019/01/22 17:31:47 [TRACE] dag/walk: dependencies changed for "provider.qubole (close)", sending new deps
+2019/01/22 17:31:47 [TRACE] dag/walk: dependencies changed for "meta.count-boundary (count boundary fixup)", sending new deps
+2019/01/22 17:31:47 [TRACE] dag/walk: walking "var.auth_token"
+2019/01/22 17:31:47 [TRACE] vertex 'root.var.auth_token': walking
+2019/01/22 17:31:47 [TRACE] dag/walk: walking "var.api_version"
+2019/01/22 17:31:47 [TRACE] vertex 'root.var.api_version': walking
+2019/01/22 17:31:47 [TRACE] dag/walk: walking "var.api_endpoint"
+2019/01/22 17:31:47 [TRACE] vertex 'root.var.api_endpoint': walking
+2019/01/22 17:31:47 [TRACE] dag/walk: walking "provider.qubole"
+2019/01/22 17:31:47 [TRACE] vertex 'root.provider.qubole': walking
+2019/01/22 17:31:47 [TRACE] vertex 'root.provider.qubole': evaluating
+2019/01/22 17:31:47 [TRACE] [walkApply] Entering eval tree: provider.qubole
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalInitProvider
+2019/01/22 17:31:47 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:47 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalOpFilter
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalInterpolateProvider
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalBuildProviderConfig
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalOpFilter
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalConfigProvider
+2019/01/22 17:31:47 [TRACE] [walkApply] Exiting eval tree: provider.qubole
+2019/01/22 17:31:47 [TRACE] dag/walk: walking "qubole_presto.my-qubole-presto-server"
+2019/01/22 17:31:47 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': walking
+2019/01/22 17:31:47 [TRACE] vertex 'root.qubole_presto.my-qubole-presto-server': evaluating
+2019/01/22 17:31:47 [TRACE] [walkApply] Entering eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalSequence
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalInstanceInfo
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalReadDiff
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalIf
+2019/01/22 17:31:47 [TRACE] root: eval: terraform.EvalNoop
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalIf
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalInterpolate
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalInterpolate
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalReadState
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalValidateResource
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalDiff
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalReadDiff
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalCompareDiff
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalGetProvider
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalReadState
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalApplyPre
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalApply
+2019/01/22 17:31:47 [DEBUG] apply: qubole_presto.my-qubole-presto-server: executing Apply
+2019-01-22T17:31:47.065+0800 [DEBUG] plugin.terraform-provider-qubole: 2019/01/22 17:31:47 [WARN] No spark_settings seen.
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: panic: interface conversion: interface {} is nil, not map[string]interface {}
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: 
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: goroutine 84 [running]:
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/terraform-providers/terraform-provider-qubole/qubole.readDatadogSettingsFromTf(0xc000146cb0, 0x1e, 0x0, 0x0, 0x0, 0x19)
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/qubole/resource_qubole_presto.go:813 +0x209
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/terraform-providers/terraform-provider-qubole/qubole.readClusterFromTf(0xc000146cb0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...)
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/qubole/resource_qubole_presto.go:929 +0x42e
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/terraform-providers/terraform-provider-qubole/qubole.resourceQubolePrestoCreate(0xc000146cb0, 0x19a7fe0, 0xc00036e980, 0x0, 0x0)
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/qubole/resource_qubole_presto.go:992 +0xde
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/hashicorp/terraform/helper/schema.(*Resource).Apply(0xc000191380, 0xc0000d7950, 0xc00043cc80, 0x19a7fe0, 0xc00036e980, 0x100d701, 0xc000072b80, 0x10be78c)
+2019-01-22T17:31:47.067+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/hashicorp/terraform/helper/schema/resource.go:286 +0x363
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/hashicorp/terraform/helper/schema.(*Provider).Apply(0xc000146af0, 0xc0000d7900, 0xc0000d7950, 0xc00043cc80, 0xc000356800, 0x18, 0x3100d80)
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/hashicorp/terraform/helper/schema/provider.go:283 +0x9c
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: github.com/hashicorp/terraform/plugin.(*ResourceProviderServer).Apply(0xc00043c800, 0xc00043c860, 0xc000488390, 0x0, 0x0)
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: 	/Users/vihagg/go/src/github.com/hashicorp/terraform/plugin/resource_provider.go:530 +0x57
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: reflect.Value.call(0xc00016a960, 0xc0000cc018, 0x13, 0x1a9cb53, 0x4, 0xc000072f18, 0x3, 0x3, 0xc000042280, 0x0, ...)
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/reflect/value.go:447 +0x454
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: reflect.Value.Call(0xc00016a960, 0xc0000cc018, 0x13, 0xc000063f18, 0x3, 0x3, 0x0, 0x0, 0x0)
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/reflect/value.go:308 +0xa4
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: net/rpc.(*service).call(0xc00036e180, 0xc0003f2230, 0xc000448050, 0xc000448060, 0xc00013a000, 0xc0004b27c0, 0x18f4fe0, 0xc00043c860, 0x16, 0x18f5020, ...)
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/net/rpc/server.go:384 +0x14e
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: created by net/rpc.(*Server).ServeCodec
+2019-01-22T17:31:47.068+0800 [DEBUG] plugin.terraform-provider-qubole: 	/usr/local/go/src/net/rpc/server.go:481 +0x47e
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalWriteState
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalApplyProvisioners
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalIf
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalWriteState
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalWriteDiff
+2019/01/22 17:31:47 [TRACE] root: eval: *terraform.EvalApplyPost
+2019/01/22 17:31:47 [ERROR] root: eval: *terraform.EvalApplyPost, err: 1 error(s) occurred:
 
 * qubole_presto.my-qubole-presto-server: unexpected EOF
-2019/01/21 22:29:00 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
+2019/01/22 17:31:47 [ERROR] root: eval: *terraform.EvalSequence, err: 1 error(s) occurred:
 
 * qubole_presto.my-qubole-presto-server: unexpected EOF
-2019/01/21 22:29:00 [TRACE] [walkApply] Exiting eval tree: qubole_presto.my-qubole-presto-server
-2019/01/21 22:29:00 [TRACE] dag/walk: upstream errored, not walking "provider.qubole (close)"
-2019/01/21 22:29:00 [TRACE] dag/walk: upstream errored, not walking "meta.count-boundary (count boundary fixup)"
-2019/01/21 22:29:00 [TRACE] dag/walk: upstream errored, not walking "root"
-2019-01-21T22:29:00.585+0800 [DEBUG] plugin: plugin process exited: path=/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole
-2019/01/21 22:29:00 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
-2019/01/21 22:29:00 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
-2019/01/21 22:29:00 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
-2019/01/21 22:29:00 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
-2019/01/21 22:29:00 [DEBUG] plugin: waiting for all plugin processes to complete...
-2019-01-21T22:29:00.587+0800 [WARN ] plugin: error closing client during Kill: err="connection is shut down"
+2019/01/22 17:31:47 [TRACE] [walkApply] Exiting eval tree: qubole_presto.my-qubole-presto-server
+2019/01/22 17:31:47 [TRACE] dag/walk: upstream errored, not walking "provider.qubole (close)"
+2019/01/22 17:31:47 [TRACE] dag/walk: upstream errored, not walking "meta.count-boundary (count boundary fixup)"
+2019/01/22 17:31:47 [TRACE] dag/walk: upstream errored, not walking "root"
+2019-01-22T17:31:47.070+0800 [DEBUG] plugin: plugin process exited: path=/Users/vihagg/go/src/github.com/terraform-providers/terraform-provider-qubole/terraform-provider-qubole
+2019/01/22 17:31:47 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
+2019/01/22 17:31:47 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
+2019/01/22 17:31:47 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
+2019/01/22 17:31:47 [TRACE] Preserving existing state lineage "49b22613-ef2d-3c01-78dc-c04707bafa40"
+2019/01/22 17:31:47 [DEBUG] plugin: waiting for all plugin processes to complete...
+2019-01-22T17:31:47.073+0800 [WARN ] plugin: error closing client during Kill: err="connection is shut down"

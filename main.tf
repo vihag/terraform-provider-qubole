@@ -23,11 +23,11 @@ node_configuration				=	[
 										{
 										master_instance_type			=	"m4.xlarge"
 										slave_instance_type				=	"m4.xlarge"
-										initial_nodes					=	2
-										max_nodes						=	4
+										initial_nodes					=	1
+										max_nodes						=	6
 										spot_instance_settings			=	[
 																				{
-																				maximum_bid_price_percentage	=	100
+																				maximum_bid_price_percentage	=	70
 																				timeout_for_request	=	10
 																				maximum_spot_instance_percentage	=	50
 																				}
@@ -64,8 +64,8 @@ presto_settings					=	[
 									]
 datadog_settings				=	[
 										{
-										datadog_api_token				=	""
-										datadog_app_token				=	""
+										datadog_api_token				=	"api-token"
+										datadog_app_token				=	"app-token"
 										}
 									]
 disallow_cluster_termination 	=	"false"

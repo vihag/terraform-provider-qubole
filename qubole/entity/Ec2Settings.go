@@ -17,4 +17,8 @@ type Ec2Settings struct {
 	Bastion_node_user               string		`json:"bastion_node_user,omitempty"`
 	Role_instance_profile           string		`json:"role_instance_profile,omitempty"`
 	Use_account_compute_creds       bool		`json:"use_account_compute_creds,omitempty"`
+	Compute_validated				bool		`json:"compute_validated,omitempty"`
+	Instance_tenancy				string		`json:"instance_tenancy,omitempty"`
+	Compute_role_arn				string		`json:"compute_role_arn,omitempty"`
+	Compute_external_id				string		`json:"compute_external_id,omitempty"`
 }

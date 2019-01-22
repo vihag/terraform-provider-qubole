@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func resourceQubolePresto() *schema.Resource {
@@ -91,6 +92,22 @@ func resourceQubolePresto() *schema.Resource {
 							Type:     schema.TypeBool,
 							Optional: true,
 						},
+						"instance_tenancy": &schema.Schema{
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"compute_validated": &schema.Schema{
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"compute_role_arn": &schema.Schema{
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"compute_external_id": &schema.Schema{
+							Type:     schema.TypeString,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -105,6 +122,14 @@ func resourceQubolePresto() *schema.Resource {
 							Optional: true,
 						},
 						"slave_instance_type": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"slave_request_type": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"cluster_name": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
@@ -231,6 +256,10 @@ func resourceQubolePresto() *schema.Resource {
 										Type:     schema.TypeInt,
 										Optional: true,
 									},
+									"absolute_free_space_threshold": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
 									"sampling_interval": {
 										Type:     schema.TypeInt,
 										Optional: true,
@@ -262,6 +291,14 @@ func resourceQubolePresto() *schema.Resource {
 							Type:     schema.TypeInt,
 							Optional: true,
 						},
+						"parent_cluster_id": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"child_hs2_cluster_id": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
 					},
 				},
 			},
@@ -277,6 +314,26 @@ func resourceQubolePresto() *schema.Resource {
 						},
 						"use_spark": {
 							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"use_hbase": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"use_qubole_placement_policy": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"is_ha": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"enable_rubix": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"node_bootstrap_timeout": {
+							Type:     schema.TypeInt,
 							Optional: true,
 						},
 						"custom_config": {
@@ -299,10 +356,6 @@ func resourceQubolePresto() *schema.Resource {
 									},
 								},
 							},
-						},
-						"use_qubole_placement_policy": {
-							Type:     schema.TypeBool,
-							Optional: true,
 						},
 					},
 				},
@@ -391,29 +444,78 @@ func resourceQubolePresto() *schema.Resource {
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
+			"tunnel_server_ip": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+			},
+			"engine_config": {
+				Type:     schema.TypeList,
+				MaxItems: 1,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"dbtap_id": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"fernet_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"engine_type": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"version": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"overrides": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"hive_settings": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"is_hs2": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"hive_version": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"hive_qubole_metadata_cache": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"hs2_thrift_port": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"overrides": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 	}
 }
 
 /*
-1. If the Create callback returns with or without an error without an ID set using SetId,
-	the resource is assumed to not be created, and no state is saved.
-
-2. If the Create callback returns with or without an error and an ID has been set,
-	the resource is assumed created and all state is saved with it.
-	Repeating because it is important: if there is an error, but the ID is set, the state is fully saved.
+Parser methods
 */
-//m holds the data returned by the provider configurer, in this it will be a struct with the configuration
-func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error {
+//TODO move to util classes
+func readEc2SettingsFromTf(d *schema.ResourceData) (entity.Ec2Settings, bool) {
 
-	api_url := meta.(*Config).ConnectionString
-	auth_token := meta.(*Config).AuthToken
-
-	//Create the representative json object here
-	var cluster entity.Cluster
-
-	//create nested datas structures
-	//1. EC2 Settings
 	var ec2_settings entity.Ec2Settings
 	if v, ok := d.GetOk("ec2_settings"); ok {
 		ec2Settings := v.([]interface{})
@@ -452,11 +554,14 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 			if v, ok := settings["use_account_compute_creds"]; ok {
 				ec2_settings.Use_account_compute_creds = v.(bool)
 			}
-			cluster.Ec2_settings = ec2_settings
+			return ec2_settings, true
 		}
 	}
+	//the reading method needs to check for the boolean variable to see if all was okay
+	return ec2_settings, false
+}
 
-	//2. Node configuration, but this will require constructing other sub-objects
+func readNodeConfigurationFromTf(d *schema.ResourceData) (entity.NodeConfiguration, bool) {
 	var node_configuration entity.NodeConfiguration
 	if v, ok := d.GetOk("node_configuration"); ok {
 		nodeConfigurations := v.([]interface{})
@@ -492,13 +597,13 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 				if len(spotInstanceSettings) > 0 {
 					spotInstSettings := spotInstanceSettings[0].(map[string]interface{})
 					if v, ok := spotInstSettings["maximum_bid_price_percentage"]; ok {
-						spot_instance_settings.Maximum_bid_price_percentage = v.(int)
+						spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
 					}
 					if v, ok := spotInstSettings["timeout_for_request"]; ok {
 						spot_instance_settings.Timeout_for_request = v.(int)
 					}
 					if v, ok := spotInstSettings["maximum_spot_instance_percentage"]; ok {
-						spot_instance_settings.Maximum_spot_instance_percentage = v.(int)
+						spot_instance_settings.Maximum_spot_instance_percentage = float32(v.(int))
 					}
 					node_configuration.Spot_instance_settings = spot_instance_settings
 				}
@@ -511,7 +616,7 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 				if len(stableSpotInstanceSettings) > 0 {
 					stableSpotInstSettings := stableSpotInstanceSettings[0].(map[string]interface{})
 					if v, ok := stableSpotInstSettings["maximum_bid_price_percentage"]; ok {
-						stable_spot_instance_settings.Maximum_bid_price_percentage = v.(int)
+						stable_spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
 					}
 					if v, ok := stableSpotInstSettings["timeout_for_request"]; ok {
 						stable_spot_instance_settings.Timeout_for_request = v.(int)
@@ -610,11 +715,13 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 			if v, ok := configurations["node_spot_cooldown_period"]; ok {
 				node_configuration.Node_spot_cooldown_period = v.(int)
 			}
-			cluster.Node_configuration = node_configuration
+			return node_configuration, true
 		}
 	}
+	return node_configuration, false
+}
 
-	//3. Hadoop Settings, but this will require constructing other sub-objects
+func readHadoopSettingsFromTf(d *schema.ResourceData) (entity.HadoopSettings, bool) {
 	var hadoop_settings entity.HadoopSettings
 	if v, ok := d.GetOk("hadoop_settings"); ok {
 		hadoopSettings := v.([]interface{})
@@ -627,6 +734,22 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 
 			if v, ok := hdSettings["use_spark"]; ok {
 				hadoop_settings.Use_spark = v.(bool)
+			}
+
+			if v, ok := hdSettings["use_hbase"]; ok {
+				hadoop_settings.Use_hbase = v.(bool)
+			}
+
+			if v, ok := hdSettings["is_ha"]; ok {
+				hadoop_settings.Is_ha = v.(bool)
+			}
+
+			if v, ok := hdSettings["enable_rubix"]; ok {
+				hadoop_settings.Enable_rubix = v.(bool)
+			}
+
+			if v, ok := hdSettings["node_bootstrap_timeout"]; ok {
+				hadoop_settings.Node_bootstrap_timeout = v.(int)
 			}
 
 			if v, ok := hdSettings["use_qubole_placement_policy"]; ok {
@@ -648,11 +771,13 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 					hadoop_settings.Fairscheduler_settings = fairscheduler_settings
 				}
 			}
-			cluster.Hadoop_settings = hadoop_settings
+			return hadoop_settings, true
 		}
 	}
+	return hadoop_settings, false
+}
 
-	//4. SecuritySettings
+func readSecuritySettingsFromTf(d *schema.ResourceData) (entity.SecuritySettings, bool) {
 	var security_settings entity.SecuritySettings
 	if v, ok := d.GetOk("security_settings"); ok {
 		securitySettings := v.([]interface{})
@@ -670,11 +795,13 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 			if v, ok := secSettings["persistent_security_group"]; ok {
 				security_settings.Persistent_security_group = v.(string)
 			}
-			cluster.Security_settings = security_settings
+			return security_settings, true
 		}
 	}
+	return security_settings, false
+}
 
-	//5. PrestoSettings
+func readPrestoSettingsFromTf(d *schema.ResourceData) (entity.PrestoSettings, bool) {
 	var presto_settings entity.PrestoSettings
 	if v, ok := d.GetOk("presto_settings"); ok {
 		prestoSettings := v.([]interface{})
@@ -688,11 +815,13 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 			if v, ok := pSettings["custom_config"]; ok {
 				presto_settings.Custom_config = v.(string)
 			}
-			cluster.Presto_settings = presto_settings
+			return presto_settings, true
 		}
 	}
+	return presto_settings, false
+}
 
-	//6. SparkSettings
+func readSparkSettingsFromTf(d *schema.ResourceData) (entity.SparkSettings, bool) {
 	var spark_settings entity.SparkSettings
 	if v, ok := d.GetOk("spark_settings"); ok {
 		sparkSettings := v.([]interface{})
@@ -702,13 +831,15 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 			if v, ok := sSettings["custom_config"]; ok {
 				spark_settings.Custom_config = v.(string)
 			}
-			cluster.Spark_settings = spark_settings
+			return spark_settings, true
 		}
 	}
+	return spark_settings, false
+}
 
-	//7. DatadogSettings
+func readDatadogSettingsFromTf(d *schema.ResourceData) (entity.DatadogSettings, bool) {
 	var datadog_settings entity.DatadogSettings
-	if v, ok := d.GetOk("presto_settings"); ok {
+	if v, ok := d.GetOk("datadog_settings"); ok {
 		datadogSettings := v.([]interface{})
 		if len(datadogSettings) > 0 {
 			ddSettings := datadogSettings[0].(map[string]interface{})
@@ -720,8 +851,124 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 			if v, ok := ddSettings["datadog_app_token"]; ok {
 				datadog_settings.Datadog_app_token = v.(string)
 			}
-			cluster.Datadog_settings = datadog_settings
+			return datadog_settings, true
 		}
+	}
+	return datadog_settings, false
+}
+
+func readEngineConfigFromTf(d *schema.ResourceData) (entity.EngineConfig, bool) {
+	var engine_config entity.EngineConfig
+	if v, ok := d.GetOk("engine_config"); ok {
+		engineConfigs := v.([]interface{})
+		if len(engineConfigs) > 0 {
+			eConfigs := engineConfigs[0].(map[string]interface{})
+
+			if v, ok := eConfigs["dbtap_id"]; ok {
+				engine_config.Dbtap_id = v.(int)
+			}
+			if v, ok := eConfigs["fernet_key"]; ok {
+				engine_config.Fernet_key = v.(string)
+			}
+			if v, ok := eConfigs["engine_type"]; ok {
+				engine_config.Engine_type = v.(string)
+			}
+			if v, ok := eConfigs["version"]; ok {
+				engine_config.Version = v.(string)
+			}
+			if v, ok := eConfigs["overrides"]; ok {
+				engine_config.Overrides = v.(string)
+			}
+			//Hive Settings
+			var hive_settings entity.HiveSettings
+			if v, ok := eConfigs["hive_settings"]; ok {
+				hiveSettings := v.([]interface{})
+				if len(hiveSettings) > 0 {
+					hvSettings := hiveSettings[0].(map[string]interface{})
+					if v, ok := hvSettings["is_hs2"]; ok {
+						hive_settings.Is_hs2 = v.(bool)
+					}
+					if v, ok := hvSettings["hive_version"]; ok {
+						hive_settings.Hive_version = v.(string)
+					}
+					if v, ok := hvSettings["hive_qubole_metadata_cache"]; ok {
+						hive_settings.Hive_qubole_metadata_cache = v.(bool)
+					}
+					if v, ok := hvSettings["hs2_thrift_port"]; ok {
+						hive_settings.Hs2_thrift_port = v.(int)
+					}
+					if v, ok := hvSettings["overrides"]; ok {
+						hive_settings.Overrides = v.(string)
+					}
+					engine_config.Hive_settings = hive_settings
+				}
+			}
+			return engine_config, true
+		}
+	}
+	return engine_config, false
+}
+
+func readClusterFromTf(d *schema.ResourceData) (entity.Cluster, bool) {
+
+	//Create the representative json object here
+	var cluster entity.Cluster
+
+	//create nested datas structures
+	//1. EC2 Settings
+	if ec2_settings, ok := readEc2SettingsFromTf(d); ok {
+		cluster.Ec2_settings = ec2_settings
+	} else {
+		log.Printf("[WARN] No ec2_settings seen.")
+	}
+
+	//2. Node configuration, but this will require constructing other sub-objects
+	if node_configuration, ok := readNodeConfigurationFromTf(d); ok {
+		cluster.Node_configuration = node_configuration
+	} else {
+		log.Printf("[WARN] No node_configuration seen.")
+	}
+
+	//3. Hadoop Settings, but this will require constructing other sub-objects
+	if hadoop_settings, ok := readHadoopSettingsFromTf(d); ok {
+		cluster.Hadoop_settings = hadoop_settings
+	} else {
+		log.Printf("[WARN] No hadoop_settings seen.")
+	}
+
+	//4. SecuritySettings
+	if security_settings, ok := readSecuritySettingsFromTf(d); ok {
+		cluster.Security_settings = security_settings
+	} else {
+		log.Printf("[WARN] No security_settings seen.")
+	}
+
+	//5. PrestoSettings
+	if presto_settings, ok := readPrestoSettingsFromTf(d); ok {
+		cluster.Presto_settings = presto_settings
+	} else {
+		log.Printf("[WARN] No presto_settings seen.")
+	}
+
+	//6. SparkSettings
+	if spark_settings, ok := readSparkSettingsFromTf(d); ok {
+		cluster.Spark_settings = spark_settings
+	} else {
+		log.Printf("[WARN] No spark_settings seen.")
+	}
+
+	//7. DatadogSettings
+	if datadog_settings, ok := readDatadogSettingsFromTf(d); ok {
+		cluster.Datadog_settings = datadog_settings
+	} else {
+		log.Printf("[WARN] No datadog_settings seen.")
+	}
+
+	//8. EngineConfig
+	if engine_config, ok := readEngineConfigFromTf(d); ok {
+		cluster.Engine_config = engine_config
+	} else {
+		log.Printf("[WARN] No engine_config seen.")
 	}
 
 	//Finally, the cluster
@@ -756,35 +1003,68 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 		cluster.Idle_cluster_timeout = v.(int)
 	}
 
-	//log the json constructed
-	log.Printf("printing json.....")
-	cluster_json, err := json.Marshal(cluster)
-	if err != nil {
-		log.Printf(err.Error())
-		return nil
+	return cluster, true
+
+}
+
+/*
+1. If the Create callback returns with or without an error without an ID set using SetId,
+	the resource is assumed to not be created, and no state is saved.
+
+2. If the Create callback returns with or without an error and an ID has been set,
+	the resource is assumed created and all state is saved with it.
+	Repeating because it is important: if there is an error, but the ID is set, the state is fully saved.
+*/
+//m holds the data returned by the provider configurer, in this it will be a struct with the configuration
+func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error {
+
+	api_url := meta.(*Config).ConnectionString
+	auth_token := meta.(*Config).AuthToken
+
+	if cluster, ok := readClusterFromTf(d); ok {
+		log.Printf("[INFO]constructing payload json representing the cluster.....")
+		cluster_json, err := json.Marshal(cluster)
+		if err != nil {
+			log.Printf(err.Error())
+			return nil
+		}
+		log.Printf(string(cluster_json))
+
+		//Make the http call to api here
+		log.Printf("[INFO]Sending Create Cluster Request to URI %s", api_url)
+		var payload = []byte(string(cluster_json))
+		req, err := http.NewRequest(http.MethodPost, api_url, bytes.NewBuffer(payload))
+		req.Header.Set("X-AUTH-TOKEN", auth_token)
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Accept", "application/json")
+		client := &http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			log.Printf(err.Error())
+			return nil
+		}
+		defer resp.Body.Close()
+
+		log.Printf("response Status:", resp.Status)
+		log.Printf("response Headers:", resp.Header)
+		body, _ := ioutil.ReadAll(resp.Body)
+		log.Printf("[INFO]response Body:", string(body))
+
+		//Parse the response back to cluster object
+		var clusterResponse entity.Cluster
+		unmarshallingError := json.Unmarshal(body, &clusterResponse)
+		if unmarshallingError != nil {
+			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
+			return nil
+		}
+		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", clusterResponse)
+
+		//Set Terraform ID; typecast the received ID to string for terraform
+		d.SetId(strconv.Itoa(clusterResponse.Id))
+
+	} else {
+		log.Printf("[WARN] No valid cluster definition seen.")
 	}
-	log.Printf(string(cluster_json))
-
-	//Make the http call to api here
-	log.Printf("Sending Create Cluster Request to URI %s", api_url)
-	var payload = []byte(string(cluster_json))
-	req, err := http.NewRequest("POST", api_url, bytes.NewBuffer(payload))
-	req.Header.Set("X-AUTH-TOKEN", auth_token)
-	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Accept", "application/json")
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		log.Printf(err.Error())
-	}
-	defer resp.Body.Close()
-
-	log.Printf("response Status:", resp.Status)
-	log.Printf("response Headers:", resp.Header)
-	body, _ := ioutil.ReadAll(resp.Body)
-	log.Printf("response Body:", string(body))
-
-	//Parse the response back to cluster object
 
 	return resourceQubolePrestoRead(d, meta)
 }
@@ -805,7 +1085,113 @@ client := m.(*MyClient)
   d.Set("address", obj.Address)
   return nil
 */
-func resourceQubolePrestoRead(d *schema.ResourceData, m interface{}) error {
+func resourceQubolePrestoRead(d *schema.ResourceData, meta interface{}) error {
+
+	api_url := meta.(*Config).ConnectionString
+	auth_token := meta.(*Config).AuthToken
+
+	final_url := api_url + d.Id()
+
+	//Make the http call to api here
+	log.Printf("Sending GET Cluster Request to URI %s", final_url)
+	req, err := http.NewRequest(http.MethodGet, final_url, nil)
+	req.Header.Set("X-AUTH-TOKEN", auth_token)
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "application/json")
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Printf(err.Error())
+		d.SetId("")
+		return nil
+	}
+	defer resp.Body.Close()
+
+	log.Printf("response Status:", resp.Status)
+	log.Printf("response Headers:", resp.Header)
+	body, _ := ioutil.ReadAll(resp.Body)
+	log.Printf("response Body:", string(body))
+
+	//Unmarshal the response to a cluster object
+	var cluster entity.Cluster
+	unmarshallingError := json.Unmarshal(body, &cluster)
+	if unmarshallingError != nil {
+		log.Printf("There was an error:", unmarshallingError.Error())
+	}
+	log.Printf(">>>Pretty Printing Unmarshalled Response")
+	log.Printf("%#v", cluster)
+
+	//Now start setting d with data from the unmarshalled object
+	//Set EC2 settings
+	if err := d.Set("ec2_settings", flattenEc2Settings(&cluster.Ec2_settings)); err != nil {
+		log.Printf("[ERR] Error setting EC2 Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+	//Set Hadoop settings
+	if err := d.Set("hadoop_settings", flattenHadoopSettings(&cluster.Hadoop_settings)); err != nil {
+		log.Printf("[ERR] Error setting Hadoop Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set Security settings
+	if err := d.Set("security_settings", flattenSecuritySettings(&cluster.Security_settings)); err != nil {
+		log.Printf("[ERR] Error setting Security Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set Presto settings
+	if err := d.Set("presto_settings", flattenPrestoSettings(&cluster.Presto_settings)); err != nil {
+		log.Printf("[ERR] Error setting Presto Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set Spark settings
+	if err := d.Set("spark_settings", flattenSparkSettings(&cluster.Spark_settings)); err != nil {
+		log.Printf("[ERR] Error setting Spark Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set Datadog settings
+	if err := d.Set("datadog_settings", flattenDatadogSettings(&cluster.Datadog_settings)); err != nil {
+		log.Printf("[ERR] Error setting Datadog Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set Node Configuration
+	if err := d.Set("node_configuration", flattenNodeConfiguration(&cluster.Node_configuration)); err != nil {
+		log.Printf("[ERR] Error setting Node Configuration Settings: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set Engine Configuration
+	if err := d.Set("engine_config", flattenEngineConfig(&cluster.Engine_config)); err != nil {
+		log.Printf("[ERR] Error setting Engine Config: %s", err)
+		d.SetId("")
+		return nil
+	}
+
+	//Set rest of the simple objects
+	d.Set("state", cluster.State)
+	d.Set("force_tunnel", cluster.Force_tunnel)
+	d.Set("tunnel_server_ip", cluster.Tunnel_server_ip)
+	d.Set("label", cluster.Label)
+	d.Set("presto_version", cluster.Presto_version)
+	d.Set("spark_version", cluster.Spark_version)
+	d.Set("zeppelin_interpreter_mode", cluster.Zeppelin_interpreter_mode)
+	d.Set("disallow_cluster_termination", cluster.Disallow_cluster_termination)
+	d.Set("enable_ganglia_monitoring", cluster.Enable_ganglia_monitoring)
+	d.Set("node_bootstrap_file", cluster.Spark_version)
+	d.Set("idle_cluster_timeout", cluster.Zeppelin_interpreter_mode)
+	d.Set("spark_s3_package_name", cluster.Disallow_cluster_termination)
+	d.Set("zeppelin_s3_package_name", cluster.Enable_ganglia_monitoring)
+
 	return nil
 }
 
@@ -813,8 +1199,57 @@ func resourceQubolePrestoRead(d *schema.ResourceData, m interface{}) error {
 1. If the Update callback returns with or without an error, the full state is saved.
 	If the ID becomes blank, the resource is destroyed (even within an update, though this shouldn't happen except in error scenarios).
 */
-func resourceQubolePrestoUpdate(d *schema.ResourceData, m interface{}) error {
-	return resourceQubolePrestoRead(d, m)
+func resourceQubolePrestoUpdate(d *schema.ResourceData, meta interface{}) error {
+	api_url := meta.(*Config).ConnectionString
+	auth_token := meta.(*Config).AuthToken
+
+	if cluster, ok := readClusterFromTf(d); ok {
+		log.Printf("[INFO]constructing payload json representing the cluster.....")
+		cluster_json, err := json.Marshal(cluster)
+		if err != nil {
+			log.Printf(err.Error())
+			return nil
+		}
+		log.Printf(string(cluster_json))
+
+		//Make the http call to api here
+		final_url := api_url + d.Id()
+		log.Printf("[INFO]Sending Update Cluster Request to URI %s", final_url)
+		var payload = []byte(string(cluster_json))
+		req, err := http.NewRequest(http.MethodPut, api_url, bytes.NewBuffer(payload))
+		req.Header.Set("X-AUTH-TOKEN", auth_token)
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Accept", "application/json")
+		client := &http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			log.Printf(err.Error())
+			return nil
+		}
+		defer resp.Body.Close()
+
+		log.Printf("response Status:", resp.Status)
+		log.Printf("response Headers:", resp.Header)
+		body, _ := ioutil.ReadAll(resp.Body)
+		log.Printf("[INFO]response Body:", string(body))
+
+		//Parse the response back to cluster object
+		var clusterResponse entity.Cluster
+		unmarshallingError := json.Unmarshal(body, &clusterResponse)
+		if unmarshallingError != nil {
+			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
+			return nil
+		}
+		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", clusterResponse)
+
+		//Set Terraform ID; typecast the received ID to string for terraform
+		d.SetId(strconv.Itoa(clusterResponse.Id))
+
+	} else {
+		log.Printf("[WARN] No valid cluster definition seen.")
+	}
+
+	return resourceQubolePrestoRead(d, meta)
 }
 
 /*
@@ -822,9 +1257,470 @@ func resourceQubolePrestoUpdate(d *schema.ResourceData, m interface{}) error {
 
 2. If the Destroy callback returns with an error, the resource is assumed to still exist, and all prior state is preserved.
 */
-func resourceQubolePrestoDelete(d *schema.ResourceData, m interface{}) error {
-	// d.SetId("") is automatically called assuming delete returns no errors, but
-	// it is added here for explicitness.
+func resourceQubolePrestoDelete(d *schema.ResourceData, meta interface{}) error {
+	// d.SetId("") is automatically called assuming delete returns no errors
+	api_url := meta.(*Config).ConnectionString
+	auth_token := meta.(*Config).AuthToken
+
+	final_url := api_url + d.Id()
+
+	//Make the http call to api here
+	log.Printf("Sending Delete Cluster Request to URI %s", final_url)
+	req, err := http.NewRequest(http.MethodDelete, final_url, nil)
+	req.Header.Set("X-AUTH-TOKEN", auth_token)
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Accept", "application/json")
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Printf(err.Error())
+	}
+	defer resp.Body.Close()
+
+	log.Printf("response Status:", resp.Status)
+	log.Printf("response Headers:", resp.Header)
+	body, _ := ioutil.ReadAll(resp.Body)
+	log.Printf("response Body:", string(body))
+
+	//Nilling the terraform resource id explicitly
 	d.SetId("")
 	return nil
+}
+
+/*
+function to flatten EC2 settings to the schema that is defined
+*/
+func flattenEc2Settings(ia *entity.Ec2Settings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Compute_access_key != nil {
+		attrs["compute_access_key"] = ia.Compute_access_key
+	}
+	if &ia.Compute_secret_key != nil {
+		attrs["compute_secret_key"] = ia.Compute_secret_key
+	}
+	if &ia.Aws_region != nil {
+		attrs["aws_region"] = ia.Aws_region
+	}
+	if &ia.Aws_preferred_availability_zone != nil {
+		attrs["aws_preferred_availability_zone"] = ia.Aws_preferred_availability_zone
+	}
+	if &ia.Vpc_id != nil {
+		attrs["vpc_id"] = ia.Vpc_id
+	}
+	if &ia.Subnet_id != nil {
+		attrs["subnet_id"] = ia.Subnet_id
+	}
+	if &ia.Master_elastic_ip != nil {
+		attrs["master_elastic_ip"] = ia.Master_elastic_ip
+	}
+	if &ia.Bastion_node_public_dns != nil {
+		attrs["bastion_node_public_dns"] = ia.Bastion_node_public_dns
+	}
+	if &ia.Bastion_node_port != nil {
+		attrs["bastion_node_port"] = ia.Bastion_node_port
+	}
+	if &ia.Bastion_node_user != nil {
+		attrs["bastion_node_user"] = ia.Bastion_node_user
+	}
+	if &ia.Master_elastic_ip != nil {
+		attrs["master_elastic_ip"] = ia.Master_elastic_ip
+	}
+	if &ia.Role_instance_profile != nil {
+		attrs["role_instance_profile"] = ia.Role_instance_profile
+	}
+	if &ia.Use_account_compute_creds != nil {
+		attrs["use_account_compute_creds"] = ia.Use_account_compute_creds
+	}
+	if &ia.Compute_validated != nil {
+		attrs["compute_validated"] = ia.Compute_validated
+	}
+	if &ia.Instance_tenancy != nil {
+		attrs["instance_tenancy"] = ia.Instance_tenancy
+	}
+	if &ia.Compute_role_arn != nil {
+		attrs["compute_role_arn"] = ia.Compute_role_arn
+	}
+	if &ia.Compute_external_id != nil {
+		attrs["compute_external_id"] = ia.Compute_external_id
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Heterogenous Instance Config
+*/
+func flattenHeterogenousInstanceConfig(ia *entity.HeterogeneousInstanceConfig) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Memory != nil {
+		attrs["memory"] = ia.Memory
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Spot Instance Settings
+*/
+func flattenSpotInstanceSettings(ia *entity.SpotInstanceSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Maximum_bid_price_percentage != nil {
+		attrs["maximum_bid_price_percentage"] = ia.Maximum_bid_price_percentage
+	}
+
+	if &ia.Timeout_for_request != nil {
+		attrs["timeout_for_request"] = ia.Timeout_for_request
+	}
+
+	if &ia.Maximum_spot_instance_percentage != nil {
+		attrs["maximum_spot_instance_percentage"] = ia.Maximum_spot_instance_percentage
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Stable Spot Instance Settings
+*/
+func flattenStableSpotInstanceSettings(ia *entity.StableSpotInstanceSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Maximum_bid_price_percentage != nil {
+		attrs["maximum_bid_price_percentage"] = ia.Maximum_bid_price_percentage
+	}
+
+	if &ia.Timeout_for_request != nil {
+		attrs["timeout_for_request"] = ia.Timeout_for_request
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Stable Spot Instance Settings
+*/
+func flattenSpotBlockSettings(ia *entity.SpotBlockSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Duration != nil {
+		attrs["duration"] = ia.Duration
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Spark Settings
+*/
+func flattenSparkSettings(ia *entity.SparkSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Custom_config != nil {
+		attrs["custom_config"] = ia.Custom_config
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Security Settings
+*/
+func flattenSecuritySettings(ia *entity.SecuritySettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Encrypted_ephemerals != nil {
+		attrs["encrypted_ephemerals"] = ia.Encrypted_ephemerals
+	}
+	if &ia.Customer_ssh_key != nil {
+		attrs["customer_ssh_key"] = ia.Customer_ssh_key
+	}
+	if &ia.Persistent_security_group != nil {
+		attrs["persistent_security_group"] = ia.Persistent_security_group
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Presto Settings
+*/
+func flattenPrestoSettings(ia *entity.PrestoSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Enable_presto != nil {
+		attrs["enable_presto"] = ia.Enable_presto
+	}
+	if &ia.Custom_config != nil {
+		attrs["custom_config"] = ia.Custom_config
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Hive Settings
+*/
+func flattenHiveSettings(ia *entity.HiveSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Is_hs2 != nil {
+		attrs["is_hs2"] = ia.Is_hs2
+	}
+	if &ia.Hive_version != nil {
+		attrs["hive_version"] = ia.Hive_version
+	}
+	if &ia.Hive_qubole_metadata_cache != nil {
+		attrs["hive_qubole_metadata_cache"] = ia.Hive_qubole_metadata_cache
+	}
+	if &ia.Hs2_thrift_port != nil {
+		attrs["hs2_thrift_port"] = ia.Hs2_thrift_port
+	}
+	if &ia.Overrides != nil {
+		attrs["overrides"] = ia.Overrides
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Fair Scheduler Settings
+*/
+func flattenFairSchedulerSettings(ia *entity.FairSchedulerSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Default_pool != nil {
+		attrs["default_pool"] = ia.Default_pool
+	}
+	if &ia.Fairscheduler_config_xml != nil {
+		attrs["fairscheduler_config_xml"] = ia.Fairscheduler_config_xml
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten EBS Upscaling Config
+*/
+func flattenEbsUpscalingConfig(ia *entity.EbsUpscalingConfig) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Max_ebs_volume_count != nil {
+		attrs["max_ebs_volume_count"] = ia.Max_ebs_volume_count
+	}
+	if &ia.Percent_free_space_threshold != nil {
+		attrs["percent_free_space_threshold"] = ia.Percent_free_space_threshold
+	}
+	if &ia.Absolute_free_space_threshold != nil {
+		attrs["absolute_free_space_threshold"] = ia.Absolute_free_space_threshold
+	}
+	if &ia.Sampling_interval != nil {
+		attrs["sampling_interval"] = ia.Sampling_interval
+	}
+	if &ia.Sampling_window != nil {
+		attrs["sampling_window"] = ia.Sampling_window
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Datadog Settings
+*/
+func flattenDatadogSettings(ia *entity.DatadogSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Datadog_api_token != nil {
+		attrs["datadog_api_token"] = ia.Datadog_api_token
+	}
+	if &ia.Datadog_app_token != nil {
+		attrs["datadog_app_token"] = ia.Datadog_app_token
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Hadoop Settings
+*/
+func flattenHadoopSettings(ia *entity.HadoopSettings) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Use_hadoop2 != nil {
+		attrs["use_hadoop2"] = ia.Use_hadoop2
+	}
+	if &ia.Use_spark != nil {
+		attrs["use_spark"] = ia.Use_spark
+	}
+	if &ia.Use_hbase != nil {
+		attrs["use_hbase"] = ia.Use_hbase
+	}
+	if &ia.Use_qubole_placement_policy != nil {
+		attrs["use_qubole_placement_policy"] = ia.Use_qubole_placement_policy
+	}
+	if &ia.Is_ha != nil {
+		attrs["is_ha"] = ia.Is_ha
+	}
+	if &ia.Enable_rubix != nil {
+		attrs["enable_rubix"] = ia.Enable_rubix
+	}
+	if &ia.Node_bootstrap_timeout != nil {
+		attrs["node_bootstrap_timeout"] = ia.Node_bootstrap_timeout
+	}
+	if &ia.Custom_config != nil {
+		attrs["custom_config"] = ia.Custom_config
+	}
+	if &ia.Fairscheduler_settings != nil {
+		attrs["fairscheduler_settings"] = flattenFairSchedulerSettings(&ia.Fairscheduler_settings)
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Node Configuration
+*/
+func flattenNodeConfiguration(ia *entity.NodeConfiguration) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Master_instance_type != nil {
+		attrs["master_instance_type"] = ia.Master_instance_type
+	}
+	if &ia.Slave_instance_type != nil {
+		attrs["slave_instance_type"] = ia.Slave_instance_type
+	}
+	if &ia.Heterogeneous_instance_config != nil {
+		attrs["heterogeneous_instance_config"] = flattenHeterogenousInstanceConfig(&ia.Heterogeneous_instance_config)
+	}
+	if &ia.Initial_nodes != nil {
+		attrs["initial_nodes"] = ia.Initial_nodes
+	}
+	if &ia.Max_nodes != nil {
+		attrs["max_nodes"] = ia.Max_nodes
+	}
+	if &ia.Slave_request_type != nil {
+		attrs["slave_request_type"] = ia.Slave_request_type
+	}
+	if &ia.Spot_instance_settings != nil {
+		attrs["spot_instance_settings"] = flattenSpotInstanceSettings(&ia.Spot_instance_settings)
+	}
+	if &ia.Stable_spot_instance_settings != nil {
+		attrs["stable_spot_instance_settings"] = flattenStableSpotInstanceSettings(&ia.Stable_spot_instance_settings)
+	}
+	if &ia.Spot_block_settings != nil {
+		attrs["spot_block_settings"] = flattenSpotBlockSettings(&ia.Spot_block_settings)
+	}
+	if &ia.Fallback_to_ondemand != nil {
+		attrs["fallback_to_ondemand"] = ia.Fallback_to_ondemand
+	}
+	if &ia.Ebs_volume_type != nil {
+		attrs["ebs_volume_type"] = ia.Ebs_volume_type
+	}
+	if &ia.Ebs_volume_size != nil {
+		attrs["ebs_volume_size"] = ia.Ebs_volume_size
+	}
+	if &ia.Ebs_volume_count != nil {
+		attrs["ebs_volume_count"] = ia.Ebs_volume_count
+	}
+	if &ia.Ebs_upscaling_config != nil {
+		attrs["ebs_upscaling_config"] = flattenEbsUpscalingConfig(&ia.Ebs_upscaling_config)
+	}
+	if &ia.Custom_ec2_tags != nil {
+		attrs["custom_ec2_tags"] = ia.Custom_ec2_tags
+	}
+	if &ia.Idle_cluster_timeout_in_secs != nil {
+		attrs["idle_cluster_timeout_in_secs"] = ia.Idle_cluster_timeout_in_secs
+	}
+	if &ia.Node_base_cooldown_period != nil {
+		attrs["node_base_cooldown_period"] = ia.Node_base_cooldown_period
+	}
+	if &ia.Node_spot_cooldown_period != nil {
+		attrs["node_spot_cooldown_period"] = ia.Node_spot_cooldown_period
+	}
+	if &ia.Child_hs2_cluster_id != nil {
+		attrs["child_hs2_cluster_id"] = ia.Child_hs2_cluster_id
+	}
+	if &ia.Parent_cluster_id != nil {
+		attrs["parent_cluster_id"] = ia.Parent_cluster_id
+	}
+	if &ia.Cluster_name != nil {
+		attrs["cluster_name"] = ia.Cluster_name
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+
+/*
+function to flatten Engine Config
+*/
+func flattenEngineConfig(ia *entity.EngineConfig) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Dbtap_id != nil {
+		attrs["dbtap_id"] = ia.Dbtap_id
+	}
+	if &ia.Fernet_key != nil {
+		attrs["fernet_key"] = ia.Fernet_key
+	}
+	if &ia.Engine_type != nil {
+		attrs["engine_type"] = ia.Engine_type
+	}
+	if &ia.Version != nil {
+		attrs["version"] = ia.Version
+	}
+	if &ia.Overrides != nil {
+		attrs["overrides"] = ia.Overrides
+	}
+	if &ia.Hive_settings != nil {
+		attrs["hive_settings"] = flattenHiveSettings(&ia.Hive_settings)
+	}
+
+	result = append(result, attrs)
+
+	return result
 }

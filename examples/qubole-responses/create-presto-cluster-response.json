@@ -1,12 +1,12 @@
 {
 	"state": "DOWN",
-	"id": 16707,
+	"id": 16914,
 	"spark_version": null,
 	"presto_version": "0.193",
-	"label": ["terraform-provider-qubole"],
+	"label": ["terraform-provider-qubole", "dev"],
 	"disallow_cluster_termination": false,
 	"force_tunnel": true,
-	"enable_ganglia_monitoring": false,
+	"enable_ganglia_monitoring": true,
 	"node_bootstrap_file": "hoodie-presto-bootstrap.sh",
 	"tunnel_server_ip": null,
 	"ec2_settings": {
@@ -42,15 +42,16 @@
 		"master_instance_type": "m4.xlarge",
 		"slave_instance_type": "m4.xlarge",
 		"initial_nodes": 2,
-		"max_nodes": 2,
+		"max_nodes": 4,
 		"idle_cluster_timeout_in_secs": 2700,
 		"node_base_cooldown_period": 10,
 		"node_spot_cooldown_period": null,
 		"child_hs2_cluster_id": null,
 		"parent_cluster_id": null,
 		"custom_ec2_tags": {
-			"project": "terraform-provider-qubole",
-			"owner": "vihagg@qubole.com"
+			"Environment": "Dev",
+			"Owner": "Vihag Gupta",
+			"Project": "Terraform Provider"
 		},
 		"slave_request_type": "spot",
 		"fallback_to_ondemand": true,
@@ -62,17 +63,18 @@
 		"ebs_volume_count": 1,
 		"ebs_volume_type": "standard",
 		"ebs_volume_size": 100,
-		"cluster_name": "qbol_acc1252_cl16707"
+		"cluster_name": "qbol_acc1252_cl16914"
 	},
 	"security_settings": {
-		"encrypted_ephemerals": false
+		"encrypted_ephemerals": false,
+		"persistent_security_group": "persistent-security-group"
 	},
 	"presto_settings": {
 		"enable_presto": true,
 		"custom_config": "config.properties:\nascm.enabled=true\ncatalog/hive.properties:\nhive.parquet.use-column-names=true\nbootstrap-file-path:\ns3://vihagg.us/qubole/us/scripts/hadoop/node_bootstrap_uber_hudi_presto.sh"
 	},
 	"spark_settings": {
-		"custom_config": ""
+		"custom_config": null
 	},
 	"errors": [],
 	"datadog_settings": {

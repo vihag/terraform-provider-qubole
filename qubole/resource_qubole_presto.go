@@ -1026,7 +1026,7 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 		cluster_json, err := json.Marshal(cluster)
 		if err != nil {
 			log.Printf(err.Error())
-			return nil
+			return fmt.Errorf("Error in marshalling json during create %s", err.Error())
 		}
 		log.Printf(string(cluster_json))
 
@@ -1060,7 +1060,7 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 		unmarshallingError := json.Unmarshal(body, &clusterResponse)
 		if unmarshallingError != nil {
 			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
-			return nil
+			return fmt.Errorf("Error in unmarshalling json during update %s", err.Error())
 		}
 		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", clusterResponse)
 
@@ -1077,18 +1077,6 @@ func resourceQubolePrestoCreate(d *schema.ResourceData, meta interface{}) error 
 /*
 The Read callback is used to sync the local state with the actual state (upstream). This is called at various points by Terraform and should be a read-only operation.
 This callback should never modify the real resource.
-client := m.(*MyClient)
-// Attempt to read from an upstream API
-  obj, ok := client.Get(d.Id())
-// If the resource does not exist, inform Terraform. We want to immediately
-// return here to prevent further processing.
-  if !ok {
-    d.SetId("")
-    return nil
-  }
-
-  d.Set("address", obj.Address)
-  return nil
 */
 func resourceQubolePrestoRead(d *schema.ResourceData, meta interface{}) error {
 
@@ -1135,55 +1123,55 @@ func resourceQubolePrestoRead(d *schema.ResourceData, meta interface{}) error {
 	if err := d.Set("ec2_settings", flattenEc2Settings(&cluster.Ec2_settings)); err != nil {
 		log.Printf("[ERR] Error setting EC2 Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting EC2 Settings: %s", err)
 	}
 	//Set Hadoop settings
 	if err := d.Set("hadoop_settings", flattenHadoopSettings(&cluster.Hadoop_settings)); err != nil {
 		log.Printf("[ERR] Error setting Hadoop Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Hadoop Settings: %s", err)
 	}
 
 	//Set Security settings
 	if err := d.Set("security_settings", flattenSecuritySettings(&cluster.Security_settings)); err != nil {
 		log.Printf("[ERR] Error setting Security Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Security Settings: %s", err)
 	}
 
 	//Set Presto settings
 	if err := d.Set("presto_settings", flattenPrestoSettings(&cluster.Presto_settings)); err != nil {
 		log.Printf("[ERR] Error setting Presto Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Presto Settings: %s", err)
 	}
 
 	//Set Spark settings
 	if err := d.Set("spark_settings", flattenSparkSettings(&cluster.Spark_settings)); err != nil {
 		log.Printf("[ERR] Error setting Spark Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Spark Settings: %s", err)
 	}
 
 	//Set Datadog settings
 	if err := d.Set("datadog_settings", flattenDatadogSettings(&cluster.Datadog_settings)); err != nil {
 		log.Printf("[ERR] Error setting Datadog Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Datadog Settings: %s", err)
 	}
 
 	//Set Node Configuration
 	if err := d.Set("node_configuration", flattenNodeConfiguration(&cluster.Node_configuration)); err != nil {
 		log.Printf("[ERR] Error setting Node Configuration Settings: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Node Configurations: %s", err)
 	}
 
 	//Set Engine Configuration
 	if err := d.Set("engine_config", flattenEngineConfig(&cluster.Engine_config)); err != nil {
 		log.Printf("[ERR] Error setting Engine Config: %s", err)
 		d.SetId("")
-		return nil
+		return fmt.Errorf("[ERR] Error setting Engine Config: %s", err)
 	}
 
 	//Set rest of the simple objects
@@ -1217,7 +1205,7 @@ func resourceQubolePrestoUpdate(d *schema.ResourceData, meta interface{}) error 
 		cluster_json, err := json.Marshal(cluster)
 		if err != nil {
 			log.Printf(err.Error())
-			return nil
+			return fmt.Errorf("Error in marshalling json during update %s", err.Error())
 		}
 		log.Printf(string(cluster_json))
 
@@ -1251,7 +1239,7 @@ func resourceQubolePrestoUpdate(d *schema.ResourceData, meta interface{}) error 
 		unmarshallingError := json.Unmarshal(body, &clusterResponse)
 		if unmarshallingError != nil {
 			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
-			return nil
+			return fmt.Errorf("Error in unmarshalling json during update %s", err.Error())
 		}
 		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", clusterResponse)
 

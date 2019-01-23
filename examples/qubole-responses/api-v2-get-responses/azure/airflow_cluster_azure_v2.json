@@ -1,0 +1,88 @@
+{
+	"state": "DOWN",
+	"id": 6463,
+	"cloud_config": {
+		"provider": "azure",
+		"resource_group_name": "qubole-apac-azure-readiness-secure-rg",
+		"compute_config": {
+			"compute_validated": true,
+			"use_account_compute_creds": true,
+			"compute_client_id": "d8a16374-2aeb-417f-843b-df3f6b4c6b9e",
+			"compute_client_secret": "e00a1b84-7bc4-4d0d-91a7-3b6a114a1993",
+			"compute_tenant_id": "43d6e5ed-23bd-4a7c-8f52-35b9e8187263",
+			"compute_subscription_id": "53db48cb-d982-4a6e-ba70-e0998d5d1dc6"
+		},
+		"location": {
+			"location": "southeastasia"
+		},
+		"network_config": {
+			"persistent_security_group_resource_group_name": null,
+			"persistent_security_group_name": null,
+			"vnet_name": "qubole-apac-azure-readniness-secure-vnet",
+			"subnet_name": "private-subnet-for-secure-app",
+			"vnet_resource_group_name": "qubole-apac-azure-readiness-secure-rg",
+			"master_static_nic_name": null,
+			"master_static_public_ip_name": null,
+			"bastion_node_public_dns": "13.76.216.161",
+			"bastion_node_port": 22,
+			"bastion_node_user": "ec2-user",
+			"master_elastic_ip": null
+		},
+		"storage_config": {
+			"storage_access_key": "IaTjqeshGPR1EwGfxSeD0xYs6XxAkaSKhm1NPGd442oRpwl+b95ft5F+dwnDJgWpKVdepg5qGbY/TbS/6ITaTA==",
+			"storage_account_name": "secureazblobgpv1",
+			"disk_storage_account_name": null,
+			"disk_storage_account_resource_group_name": null,
+			"managed_disk_account_type": "standard_lrs",
+			"data_disk_count": 0,
+			"data_disk_size": 256,
+			"disk_upscaling_config": null
+		}
+	},
+	"cluster_info": {
+		"master_instance_type": "Standard_A6",
+		"slave_instance_type": "Standard_A6",
+		"node_base_cooldown_period": null,
+		"label": ["airflow-on-azure"],
+		"min_nodes": 1,
+		"max_nodes": 1,
+		"idle_cluster_timeout_in_secs": null,
+		"cluster_name": "UsProdAzureqbol_acc1849_cl6463",
+		"node_bootstrap": "node_bootstrap.sh",
+		"disallow_cluster_termination": true,
+		"force_tunnel": false,
+		"customer_ssh_key": null,
+		"child_hs2_cluster_id": null,
+		"parent_cluster_id": null,
+		"env_settings": {},
+		"datadisk": {
+			"encryption": false
+		},
+		"slave_request_type": "ondemand",
+		"spot_settings": {}
+	},
+	"engine_config": {
+		"flavour": "airflow",
+		"airflow_settings": {
+			"dbtap_id": -1,
+			"fernet_key": "Wk607UZxIATjFfvIr/r12xAUTb/CRlKrXAJwUSEl4YQ=",
+			"overrides": null,
+			"version": "1.8.2",
+			"airflow_python_version": "2.7"
+		}
+	},
+	"monitoring": {
+		"ganglia": false,
+		"datadog": {
+			"datadog_api_token": null,
+			"datadog_app_token": null
+		}
+	},
+	"errors": [],
+	"internal": {
+		"zeppelin_interpreter_mode": null,
+		"image_uri_overrides": null,
+		"spark_s3_package_name": null,
+		"zeppelin_s3_package_name": null
+	}
+}

@@ -5,5 +5,5 @@ import (
 )
 
 type SpotBlockSettings struct {
-	Duration int	`json:"duration,omitempty"`
+	Duration int `json:"duration,omitempty"`
 }

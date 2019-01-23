@@ -20,98 +20,217 @@ func resourceQuboleCluster() *schema.Resource {
 		Delete: resourceQuboleClusterDelete,
 
 		Schema: map[string]*schema.Schema{
-			"label": &schema.Schema{
-				Type:     schema.TypeSet,
-				Required: true,
-				Elem:     &schema.Schema{Type: schema.TypeString},
-				Set:      schema.HashString,
-			},
-			"presto_version": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
-			},
-			"spark_version": &schema.Schema{
+			"state": &schema.Schema{
 				Type:     schema.TypeString,
 				Optional: true,
 			},
-			"zeppelin_interpreter_mode": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"ec2_settings": {
+			"cloud_config": {
 				Type:     schema.TypeList,
 				MaxItems: 1,
 				Required: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"compute_access_key": {
+						"provider": {
 							Type:     schema.TypeString,
-							Optional: true,
+							Required: true,
 						},
-						"compute_secret_key": {
-							Type:     schema.TypeString,
+						"compute_config": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
 							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"compute_validated": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"Use_account_compute_creds": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"Instance_tenancy": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"role_instance_profile": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"compute_role_arn": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"compute_external_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"compute_client_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"compute_client_secret": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"compute_tenant_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"compute_subscription_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
 						},
-						"aws_region": {
-							Type:     schema.TypeString,
+						"location": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
 							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"aws_region": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"aws_availability_zone": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"location": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
 						},
-						"aws_preferred_availability_zone": {
-							Type:     schema.TypeString,
+						"network_config": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
 							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"vpc_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"subnet_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"bastion_node_public_dns": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"bastion_node_port": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"bastion_node_user": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"master_elastic_ip": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"persistent_security_groups": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"persistent_security_group_resource_group_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"persistent_security_group_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"vnet_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"subnet_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"vnet_resource_group_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"master_static_nic_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"master_static_public_ip_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
 						},
-						"vpc_id": {
-							Type:     schema.TypeString,
+						"storage_config": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
 							Optional: true,
-						},
-						"subnet_id": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"master_elastic_ip": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"bastion_node_public_dns": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"bastion_node_port": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"bastion_node_user": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"role_instance_profile": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"use_account_compute_creds": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"instance_tenancy": &schema.Schema{
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"compute_validated": &schema.Schema{
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"compute_role_arn": &schema.Schema{
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"compute_external_id": &schema.Schema{
-							Type:     schema.TypeString,
-							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"storage_access_key": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"storage_account_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"disk_storage_account_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"disk_storage_account_resource_group_name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"managed_disk_account_type": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"data_disk_count": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"data_disk_size": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"disk_upscaling_config": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"percent_free_space_threshold": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"max_data_disk_count": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"absolute_free_space_threshold": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+											},
+										},
+									},
+								},
+							},
 						},
 					},
 				},
 			},
-			"node_configuration": {
+			"cluster_info": {
 				Type:     schema.TypeList,
 				MaxItems: 1,
 				Required: true,
@@ -125,15 +244,132 @@ func resourceQuboleCluster() *schema.Resource {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"slave_request_type": {
-							Type:     schema.TypeString,
+						"node_base_cooldown_period": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"label": &schema.Schema{
+							Type:     schema.TypeSet,
+							Required: true,
+							Elem:     &schema.Schema{Type: schema.TypeString},
+							Set:      schema.HashString,
+						},
+						"min_nodes": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"max_nodes": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"idle_cluster_timeout_in_secs": {
+							Type:     schema.TypeInt,
 							Optional: true,
 						},
 						"cluster_name": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"heterogeneous_instance_config": {
+						"node_bootstrap": &schema.Schema{
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"disallow_cluster_termination": &schema.Schema{
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"force_tunnel": &schema.Schema{
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"customer_ssh_key": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"child_hs2_cluster_id": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"parent_cluster_id": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"env_settings": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"python_version": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"r_version": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"name": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
+						},
+						"datadisk": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"count": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"type": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"encryption": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"size": { //Be careful, the GET will return this as an array
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"ebs_upscaling_config": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"max_ebs_volume_count": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"percent_free_space_threshold": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"absolute_free_space_threshold": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"sampling_interval": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"sampling_window": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						"heterogeneouse_config": {
 							Type:     schema.TypeList,
 							MaxItems: 1,
 							Optional: true,
@@ -156,323 +392,170 @@ func resourceQuboleCluster() *schema.Resource {
 								},
 							},
 						},
-						"initial_nodes": {
-							Type:     schema.TypeInt,
+						"slave_request_type": {
+							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"max_nodes": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"spot_instance_settings": {
+						"spot_settings": {
 							Type:     schema.TypeList,
 							MaxItems: 1,
 							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"maximum_bid_price_percentage": {
-										Type:     schema.TypeInt,
+									"spot_instance_settings": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
 										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"maximum_bid_price_percentage": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"timeout_for_request": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"maximum_spot_instance_percentage": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+											},
+										},
 									},
-									"timeout_for_request": {
-										Type:     schema.TypeInt,
+									"stable_spot_instance_settings": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
 										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"maximum_bid_price_percentage": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												"timeout_for_request": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+											},
+										},
 									},
-									"maximum_spot_instance_percentage": {
-										Type:     schema.TypeInt,
+									"spot_block_settings": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
 										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"duration": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+											},
+										},
 									},
 								},
 							},
 						},
-						"stable_spot_instance_settings": {
-							Type:     schema.TypeList,
-							MaxItems: 1,
+						"custom_tags": {
+							Type:     schema.TypeMap,
 							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"maximum_bid_price_percentage": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-									"timeout_for_request": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-								},
-							},
-						},
-						"spot_block_settings": {
-							Type:     schema.TypeList,
-							MaxItems: 1,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"duration": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-								},
-							},
 						},
 						"fallback_to_ondemand": {
 							Type:     schema.TypeBool,
 							Optional: true,
 						},
-						/*
-							1. The default EBS volume type is standard (magnetic). The other possible values are
-							2. ssd (gp2, General Purpose SSD),
-							3. st1 (Throughput Optimized HDD), and
-							4. sc1 (Cold HDD)
-						*/
-						"ebs_volume_type": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						/*
-							1. For standard (magnetic) EBS volume type, the supported value range is 100 GB to 1 TB.
-							2. For ssd/gp2 (General Purpose SSD) EBS volume type, the supported value range is 100 GB to 16 GB.
-							3. For st1 (Throughput Optimized HDD) and sc1 (Cold HDD), the supported value range is 500 GB to 16 TB.
-						*/
-						"ebs_volume_size": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"ebs_volume_count": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"ebs_upscaling_config": {
-							Type:     schema.TypeList,
-							MaxItems: 1,
-							Optional: true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"max_ebs_volume_count": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-									"percent_free_space_threshold": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-									"absolute_free_space_threshold": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-									"sampling_interval": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-									"sampling_window": {
-										Type:     schema.TypeInt,
-										Optional: true,
-									},
-								},
-							},
-						},
-						/*
-							1. Json of key value pairs.
-						*/
-						//TODO better schema representation of this JSON instead of String
-						"custom_ec2_tags": {
-							Type:     schema.TypeMap,
-							Optional: true,
-						},
-						"idle_cluster_timeout_in_secs": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"node_base_cooldown_period": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"node_spot_cooldown_period": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"parent_cluster_id": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"child_hs2_cluster_id": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
 					},
 				},
 			},
-			"hadoop_settings": {
+			"engine_config": {
 				Type:     schema.TypeList,
 				MaxItems: 1,
 				Required: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"use_hadoop2": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"use_spark": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"use_hbase": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"use_qubole_placement_policy": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"is_ha": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"enable_rubix": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"node_bootstrap_timeout": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"custom_config": {
+						"flavour": {
 							Type:     schema.TypeString,
 							Optional: true,
 						},
-						"fairscheduler_settings": {
+						"hadoop_settings": {
 							Type:     schema.TypeList,
 							MaxItems: 1,
 							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									"fairscheduler_config_xml": {
+									"use_qubole_placement_policy": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"is_ha": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"custom_hadoop_config": {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
-									"default_pool": {
+									"fairscheduler_settings": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"fairscheduler_config_xml": {
+													Type:     schema.TypeString,
+													Optional: true,
+												},
+												"default_pool": {
+													Type:     schema.TypeString,
+													Optional: true,
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+						"presto_settings": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"presto_version": {
 										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"custom_presto_config": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"enable_rubix": {
+										Type:     schema.TypeBool,
 										Optional: true,
 									},
 								},
 							},
 						},
-					},
-				},
-			},
-			"security_settings": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"encrypted_ephemerals": {
-							Type:     schema.TypeBool,
+						"spark_settings": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
 							Optional: true,
-						},
-						"customer_ssh_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"persistent_security_group": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-					},
-				},
-			},
-			"presto_settings": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"enable_presto": {
-							Type:     schema.TypeBool,
-							Optional: true,
-						},
-						"custom_config": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-					},
-				},
-			},
-			"spark_settings": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"custom_config": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-					},
-				},
-			},
-			"datadog_settings": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"datadog_api_token": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"datadog_app_token": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-					},
-				},
-			},
-			"disallow_cluster_termination": &schema.Schema{
-				Type:     schema.TypeBool,
-				Optional: true,
-			},
-			"enable_ganglia_monitoring": &schema.Schema{
-				Type:     schema.TypeBool,
-				Optional: true,
-			},
-			"node_bootstrap_file": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"idle_cluster_timeout": &schema.Schema{
-				Type:     schema.TypeInt,
-				Optional: true,
-			},
-			"tunnel_server_ip": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
-			},
-			"engine_config": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"dbtap_id": {
-							Type:     schema.TypeInt,
-							Optional: true,
-						},
-						"fernet_key": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"engine_type": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"version": {
-							Type:     schema.TypeString,
-							Optional: true,
-						},
-						"overrides": {
-							Type:     schema.TypeString,
-							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"custom_spark_config": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"spark_version": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"enable_rubix": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+								},
+							},
 						},
 						"hive_settings": {
 							Type:     schema.TypeList,
@@ -488,7 +571,7 @@ func resourceQuboleCluster() *schema.Resource {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
-									"hive_qubole_metadata_cache": {
+									"is_metadata_cache_enabled": {
 										Type:     schema.TypeBool,
 										Optional: true,
 									},
@@ -500,8 +583,93 @@ func resourceQuboleCluster() *schema.Resource {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
+									"execution_engine": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
 								},
 							},
+						},
+						"airflow_settings": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"dbtap_id": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"fernet_key": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"overrides": {
+										Type:     schema.TypeBool,
+										Optional: true,
+									},
+									"version": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"airflow_python_version": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			"monitoring": {
+				Type:     schema.TypeList,
+				MaxItems: 1,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"ganglia": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+
+						"datadog": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"datadog_api_token": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"datadog_app_token": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			"internal": {
+				Type:     schema.TypeList,
+				MaxItems: 1,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"zeppelin_interpreter_mode": {
+							Type:     schema.TypeBool,
+							Optional: true,
+						},
+						"spark_s3_package_name": {
+							Type:     schema.TypeString,
+							Optional: true,
+						},
+						"zeppelin_s3_package_name": {
+							Type:     schema.TypeString,
+							Optional: true,
 						},
 					},
 				},
@@ -514,399 +682,608 @@ func resourceQuboleCluster() *schema.Resource {
 Parser methods
 */
 //TODO move to util classes
-func readEc2SettingsFromTf(d *schema.ResourceData) (model.Ec2Settings, bool) {
+func readCloudConfigFromTf(d *schema.ResourceData) (model.CloudConfig, bool) {
 
-	var ec2_settings model.Ec2Settings
-	if v, ok := d.GetOk("ec2_settings"); ok {
-		ec2Settings := v.([]interface{})
-		if len(ec2Settings) > 0 {
-			settings := ec2Settings[0].(map[string]interface{})
-			if v, ok := settings["compute_access_key"]; ok {
-				ec2_settings.Compute_access_key = v.(string)
+	var cloud_config model.CloudConfig
+	if v, ok := d.GetOk("cloud_config"); ok {
+		cloudConfig := v.([]interface{})
+		if len(cloudConfig) > 0 {
+			configs := cloudConfig[0].(map[string]interface{})
+			//Read cloud provider aws/azure/gcp
+			if v, ok := configs["provider"]; ok {
+				cloud_config.Provider = v.(string)
 			}
-			if v, ok := settings["compute_secret_key"]; ok {
-				ec2_settings.Compute_secret_key = v.(string)
+			//Read compute config
+			var compute_config model.ComputeConfig
+			if v, ok := configs["compute_config"]; ok {
+				computeConfig := v.([]interface{})
+				if len(computeConfig) > 0 {
+					configs := computeConfig[0].(map[string]interface{})
+					if v, ok := configs["compute_validated"]; ok {
+						compute_config.Compute_validated = v.(bool)
+					}
+					if v, ok := configs["use_account_compute_creds"]; ok {
+						compute_config.Use_account_compute_creds = v.(bool)
+					}
+					if v, ok := configs["instance_tenancy"]; ok {
+						compute_config.Instance_tenancy = v.(string)
+					}
+					if v, ok := configs["role_instance_profile"]; ok {
+						compute_config.Role_instance_profile = v.(string)
+					}
+					if v, ok := configs["compute_role_arn"]; ok {
+						compute_config.Compute_role_arn = v.(string)
+					}
+					if v, ok := configs["compute_external_id"]; ok {
+						compute_config.Compute_external_id = v.(string)
+					}
+					if v, ok := configs["compute_client_id"]; ok {
+						compute_config.Compute_client_id = v.(string)
+					}
+					if v, ok := configs["compute_client_secret"]; ok {
+						compute_config.Compute_client_secret = v.(string)
+					}
+					if v, ok := configs["compute_tenant_id"]; ok {
+						compute_config.Compute_tenant_id = v.(string)
+					}
+					if v, ok := configs["compute_subscription_id"]; ok {
+						compute_config.Compute_subscription_id = v.(string)
+					}
+					cloud_config.Compute_config = compute_config
+				}
 			}
-			if v, ok := settings["aws_region"]; ok {
-				ec2_settings.Aws_region = v.(string)
+			//Read location
+			var location model.Location
+			if v, ok := configs["location"]; ok {
+				locationConfig := v.([]interface{})
+				if len(locationConfig) > 0 {
+					configs := locationConfig[0].(map[string]interface{})
+					if v, ok := configs["aws_region"]; ok {
+						location.aws_region = v.(string)
+					}
+					if v, ok := configs["aws_availability_zone"]; ok {
+						location.aws_availability_zone = v.(string)
+					}
+					if v, ok := configs["location"]; ok {
+						location.location = v.(string)
+					}
+					cloud_config.Location = location
+				}
 			}
-			if v, ok := settings["aws_preferred_availability_zone"]; ok {
-				ec2_settings.Aws_preferred_availability_zone = v.(string)
+			//Read network config
+			var network_config model.NetworkConfig
+			if v, ok := configs["network_config"]; ok {
+				networkConfig := v.([]interface{})
+				if len(networkConfig) > 0 {
+					configs := networkConfig[0].(map[string]interface{})
+					if v, ok := configs["vpc_id"]; ok {
+						network_config.Vpc_id = v.(string)
+					}
+					if v, ok := configs["subnet_id"]; ok {
+						network_config.Subnet_id = v.(string)
+					}
+					if v, ok := configs["bastion_node_public_dns"]; ok {
+						network_config.Bastion_node_public_dns = v.(string)
+					}
+					if v, ok := configs["bastion_node_port"]; ok {
+						network_config.Bastion_node_port = v.(int)
+					}
+					if v, ok := configs["bastion_node_user"]; ok {
+						network_config.Bastion_node_user = v.(string)
+					}
+					if v, ok := configs["master_elastic_ip"]; ok {
+						network_config.Master_elastic_ip = v.(string)
+					}
+					if v, ok := configs["persistent_security_groups"]; ok {
+						network_config.Persistent_security_groups = v.(string)
+					}
+					if v, ok := configs["persistent_security_group_resource_group_name"]; ok {
+						network_config.Persistent_security_group_resource_group_name = v.(string)
+					}
+					if v, ok := configs["persistent_security_group_name"]; ok {
+						network_config.Persistent_security_group_name = v.(string)
+					}
+					if v, ok := configs["vnet_name"]; ok {
+						network_config.Vnet_name = v.(string)
+					}
+					if v, ok := configs["subnet_name"]; ok {
+						network_config.Subnet_name = v.(string)
+					}
+					if v, ok := configs["vnet_resource_group_name"]; ok {
+						network_config.Vnet_resource_group_name = v.(string)
+					}
+					if v, ok := configs["master_static_nic_name"]; ok {
+						network_config.Master_static_nic_name = v.(string)
+					}
+					if v, ok := configs["master_static_public_ip_name"]; ok {
+						network_config.Master_static_public_ip_name = v.(string)
+					}
+					cloud_config.Network_config = network_config
+				}
 			}
-			if v, ok := settings["vpc_id"]; ok {
-				ec2_settings.Vpc_id = v.(string)
+			//Read storage config
+			var storage_config model.StorageConfig
+			if v, ok := configs["storage_config"]; ok {
+				storageConfig := v.([]interface{})
+				if len(storageConfig) > 0 {
+					configs := storageConfig[0].(map[string]interface{})
+					if v, ok := configs["storage_access_key"]; ok {
+						storage_config.Storage_access_key = v.(string)
+					}
+					if v, ok := configs["storage_account_name"]; ok {
+						storage_config.Storage_account_name = v.(string)
+					}
+					if v, ok := configs["disk_storage_account_name"]; ok {
+						storage_config.Disk_storage_account_name = v.(string)
+					}
+					if v, ok := configs["disk_storage_account_resource_group_name"]; ok {
+						storage_config.Disk_storage_account_resource_group_name = v.(string)
+					}
+					if v, ok := configs["managed_disk_account_type"]; ok {
+						storage_config.Managed_disk_account_type = v.(string)
+					}
+					if v, ok := configs["data_disk_count"]; ok {
+						storage_config.Data_disk_count = v.(int)
+					}
+					if v, ok := configs["data_disk_size"]; ok {
+						storage_config.Data_disk_size = v.(int)
+					}
+					//Read disk upscaling config
+					var disk_upscaling_config model.DiskUpscalingConfig
+					if v, ok := configs["disk_upscaling_config"]; ok {
+						diskUpscalingConfig := v.([]interface{})
+						if len(diskUpscalingConfig) > 0 {
+							configs := diskUpscalingConfig[0].(map[string]interface{})
+							if v, ok := configs["percent_free_space_threshold"]; ok {
+								disk_upscaling_config.percent_free_space_threshold = float32(v.(int))
+							}
+							if v, ok := configs["max_data_disk_count"]; ok {
+								disk_upscaling_config.max_data_disk_count = v.(string)
+							}
+							if v, ok := configs["absolute_free_space_threshold"]; ok {
+								disk_upscaling_config.absolute_free_space_threshold = float32(v.(int))
+							}
+							storage_config.Disk_upscaling_config = disk_upscaling_config
+						}
+					}
+					cloud_config.Storage_config = storage_config
+				}
 			}
-			if v, ok := settings["subnet_id"]; ok {
-				ec2_settings.Subnet_id = v.(string)
-			}
-			if v, ok := settings["bastion_node_public_dns"]; ok {
-				ec2_settings.Bastion_node_public_dns = v.(string)
-			}
-			if v, ok := settings["bastion_node_port"]; ok {
-				ec2_settings.Bastion_node_port = v.(int)
-			}
-			if v, ok := settings["bastion_node_user"]; ok {
-				ec2_settings.Bastion_node_user = v.(string)
-			}
-			if v, ok := settings["role_instance_profile"]; ok {
-				ec2_settings.Role_instance_profile = v.(string)
-			}
-			if v, ok := settings["use_account_compute_creds"]; ok {
-				ec2_settings.Use_account_compute_creds = v.(bool)
-			}
-			return ec2_settings, true
+			return cloud_config, true
 		}
 	}
 	//the reading method needs to check for the boolean variable to see if all was okay
-	return ec2_settings, false
+	return cloud_config, false
 }
 
-func readNodeConfigurationFromTf(d *schema.ResourceData) (model.NodeConfiguration, bool) {
-	var node_configuration model.NodeConfiguration
-	if v, ok := d.GetOk("node_configuration"); ok {
-		nodeConfigurations := v.([]interface{})
-		if len(nodeConfigurations) > 0 {
-			configurations := nodeConfigurations[0].(map[string]interface{})
+func readClusterInfoFromTf(d *schema.ResourceData) (model.ClusterInfo, bool) {
 
-			if v, ok := configurations["master_instance_type"]; ok {
-				node_configuration.Master_instance_type = v.(string)
+	var cluster_info model.ClusterInfo
+	if v, ok := d.GetOk("cluster_info"); ok {
+		clusterInfo := v.([]interface{})
+		if len(clusterInfo) > 0 {
+			configs := clusterInfo[0].(map[string]interface{})
+
+			if v, ok := configs["master_instance_type"]; ok {
+				cluster_info.Master_instance_type = v.(string)
 			}
 
-			if v, ok := configurations["slave_instance_type"]; ok {
-				node_configuration.Slave_instance_type = v.(string)
+			if v, ok := configs["slave_instance_type"]; ok {
+				cluster_info.Slave_instance_type = v.(string)
 			}
 
-			//Get Heterogeneous Instance Config
-			var heterogeneous_instance_config model.HeterogeneousInstanceConfig
-			if v, ok := configurations["heterogeneous_instance_config"]; ok {
-				heterogeneousInstanceConfigs := v.([]interface{})
-				if len(heterogeneousInstanceConfigs) > 0 {
-					heteroInstanceConfigs := heterogeneousInstanceConfigs[0].(map[string]interface{})
-					if v, ok := heteroInstanceConfigs["memory"]; ok {
-						heterogeneous_instance_config.Memory = v.(string)
-					}
-					node_configuration.Heterogeneous_instance_config = heterogeneous_instance_config
+			if v, ok := configs["node_base_cooldown_period"]; ok {
+				cluster_info.Node_base_cooldown_period = v.(int)
+			}
+
+			if v, ok := configs["label"]; ok {
+				labelSet = v.(*schema.Set)
+				labels := make([]*string, labelSet.Len())
+				for i, label := range labelSet.List() {
+					labels[i] = String(label.(string))
 				}
-
+				cluster_info.Label = labels
 			}
 
-			//Get Spot Instance Settings
-			var spot_instance_settings model.SpotInstanceSettings
-			if v, ok := configurations["spot_instance_settings"]; ok {
-				spotInstanceSettings := v.([]interface{})
-				if len(spotInstanceSettings) > 0 {
-					spotInstSettings := spotInstanceSettings[0].(map[string]interface{})
-					if v, ok := spotInstSettings["maximum_bid_price_percentage"]; ok {
-						spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
-					}
-					if v, ok := spotInstSettings["timeout_for_request"]; ok {
-						spot_instance_settings.Timeout_for_request = v.(int)
-					}
-					if v, ok := spotInstSettings["maximum_spot_instance_percentage"]; ok {
-						spot_instance_settings.Maximum_spot_instance_percentage = float32(v.(int))
-					}
-					node_configuration.Spot_instance_settings = spot_instance_settings
-				}
+			if v, ok := configs["min_nodes"]; ok {
+				cluster_info.Min_nodes = v.(int)
 			}
 
-			//Get Stable Spot Settings
-			var stable_spot_instance_settings model.StableSpotInstanceSettings
-			if v, ok := configurations["stable_spot_instance_settings"]; ok {
-				stableSpotInstanceSettings := v.([]interface{})
-				if len(stableSpotInstanceSettings) > 0 {
-					stableSpotInstSettings := stableSpotInstanceSettings[0].(map[string]interface{})
-					if v, ok := stableSpotInstSettings["maximum_bid_price_percentage"]; ok {
-						stable_spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
-					}
-					if v, ok := stableSpotInstSettings["timeout_for_request"]; ok {
-						stable_spot_instance_settings.Timeout_for_request = v.(int)
-					}
-					node_configuration.Stable_spot_instance_settings = stable_spot_instance_settings
-				}
+			if v, ok := configs["max_nodes"]; ok {
+				cluster_info.Max_nodes = v.(int)
 			}
 
-			//Get Spot Block Settings
-			var spot_block_settings model.SpotBlockSettings
-			if v, ok := configurations["spot_block_settings"]; ok {
-				spotBlockSettings := v.([]interface{})
-				if len(spotBlockSettings) > 0 {
-					blockSettings := spotBlockSettings[0].(map[string]interface{})
-					if v, ok := blockSettings["duration"]; ok {
-						spot_block_settings.Duration = v.(int)
-					}
-					node_configuration.Spot_block_settings = spot_block_settings
-				}
+			if v, ok := configs["idle_cluster_timeout_in_secs"]; ok {
+				cluster_info.Idle_cluster_timeout_in_secs = v.(int)
 			}
 
-			//Ebs Upscaling Config
-			var ebs_upscaling_config model.EbsUpscalingConfig
-			if v, ok := configurations["ebs_upscaling_config"]; ok {
-				ebsUpscalingConfig := v.([]interface{})
-				if len(ebsUpscalingConfig) > 0 {
-					upscalingConfig := ebsUpscalingConfig[0].(map[string]interface{})
-					if v, ok := upscalingConfig["max_ebs_volume_count"]; ok {
-						ebs_upscaling_config.Max_ebs_volume_count = v.(int)
+			if v, ok := configs["cluster_name"]; ok {
+				cluster_info.Cluster_name = v.(int)
+			}
+
+			if v, ok := configs["node_bootstrap"]; ok {
+				cluster_info.Node_bootstrap = v.(string)
+			}
+
+			if v, ok := configs["disallow_cluster_termination"]; ok {
+				cluster_info.Disallow_cluster_termination = v.(int)
+			}
+
+			if v, ok := configs["force_tunnel"]; ok {
+				cluster_info.Force_tunnel = v.(int)
+			}
+
+			if v, ok := configs["customer_ssh_key"]; ok {
+				cluster_info.Customer_ssh_key = v.(string)
+			}
+
+			if v, ok := configs["child_hs2_cluster_id"]; ok {
+				cluster_info.Child_hs2_cluster_id = v.(int)
+			}
+
+			if v, ok := configs["parent_cluster_id"]; ok {
+				cluster_info.Parent_cluster_id = v.(int)
+			}
+			//Read Env Settings
+			var env_settings model.EnvSettings
+			if v, ok := configs["env_settings"]; ok {
+				envSettings := v.([]interface{})
+				if len(envSettings) > 0 {
+					configs := envSettings[0].(map[string]interface{})
+					if v, ok := configs["python_version"]; ok {
+						env_settings.Python_version = v.(string)
 					}
-					if v, ok := upscalingConfig["percent_free_space_threshold"]; ok {
-						ebs_upscaling_config.Percent_free_space_threshold = float32(v.(int))
+					if v, ok := configs["r_version"]; ok {
+						env_settings.R_version = v.(string)
 					}
-					if v, ok := upscalingConfig["absolute_free_space_threshold"]; ok {
-						ebs_upscaling_config.Absolute_free_space_threshold = float32(v.(int))
+					if v, ok := configs["name"]; ok {
+						env_settings.Name = v.(string)
 					}
-					if v, ok := upscalingConfig["sampling_interval"]; ok {
-						ebs_upscaling_config.Sampling_interval = v.(int)
-					}
-					if v, ok := upscalingConfig["sampling_window"]; ok {
-						ebs_upscaling_config.Sampling_window = v.(int)
-					}
-					node_configuration.Ebs_upscaling_config = ebs_upscaling_config
+					cluster_info.Env_settings = env_settings
 				}
 			}
-
-			if v, ok := configurations["initial_nodes"]; ok {
-				node_configuration.Initial_nodes = v.(int)
+			//Read datadisk
+			var datadisk model.Datadisk
+			if v, ok := configs["datadisk"]; ok {
+				datadiskConfig := v.([]interface{})
+				if len(datadiskConfig) > 0 {
+					configs := datadiskConfig[0].(map[string]interface{})
+					if v, ok := configs["count"]; ok {
+						datadisk.Count = v.(int)
+					}
+					if v, ok := configs["type"]; ok {
+						datadisk.DiskType = v.(string)
+					}
+					if v, ok := configs["encryption"]; ok {
+						datadisk.Encryption = v.(bool)
+					}
+					if v, ok := configs["size"]; ok {
+						datadisk.Size = v.(int)
+					}
+					//Read disk upscaling config
+					var ebs_upscaling_config model.EbsUpscalingConfig
+					if v, ok := configs["ebs_upscaling_config"]; ok {
+						ebsUpscalingConfigs := v.([]interface{})
+						if len(ebsUpscalingConfigs) > 0 {
+							configs := ebsUpscalingConfigs[0].(map[string]interface{})
+							if v, ok := configs["max_ebs_volume_count"]; ok {
+								ebs_upscaling_config.Max_ebs_volume_count = float32(v.(int))
+							}
+							if v, ok := configs["percent_free_space_threshold"]; ok {
+								ebs_upscaling_config.Percent_free_space_threshold = float32(v.(int))
+							}
+							if v, ok := configs["absolute_free_space_threshold"]; ok {
+								ebs_upscaling_config.Absolute_free_space_threshold = float32(v.(int))
+							}
+							if v, ok := configs["sampling_interval"]; ok {
+								ebs_upscaling_config.Sampling_interval = v.(string)
+							}
+							if v, ok := configs["sampling_window"]; ok {
+								ebs_upscaling_config.Sampling_window = v.(string)
+							}
+							datadisk.Ebs_upscaling_config = ebs_upscaling_config
+						}
+					}
+					cluster_info.Datadisk = datadisk
+				}
+			}
+			//Read Heterogeneous Config
+			var heterogeneous_config model.HeterogeneousConfig
+			if v, ok := configs["heterogeneous_config"]; ok {
+				heterogeneousConfigs := v.([]interface{})
+				if len(heterogeneousConfigs) > 0 {
+					configs := heterogeneousConfigs[0].(map[string]interface{})
+					if v, ok := configs["memory"]; ok {
+						heterogeneous_config.Memory = v.(string)
+					}
+					cluster_info.Heterogeneous_config = heterogeneous_config
+				}
 			}
 
-			if v, ok := configurations["max_nodes"]; ok {
-				node_configuration.Max_nodes = v.(int)
+			if v, ok := configs["slave_request_type"]; ok {
+				cluster_info.Slave_request_type = v.(string)
 			}
 
-			if v, ok := configurations["slave_request_type"]; ok {
-				node_configuration.Slave_request_type = v.(string)
+			//Read spot settings
+			var spot_settings model.SpotSettings
+			if v, ok := configs["spot_settings"]; ok {
+				spotSettings := v.([]interface{})
+				if len(spotSettings) > 0 {
+					configs := spotSettings[0].(map[string]interface{})
+
+					//Read spot instance settings
+					var spot_instance_settings model.SpotInstanceSettings
+					if v, ok := configs["spot_instance_settings"]; ok {
+						spotInstanceSettings := v.([]interface{})
+						if len(spotInstanceSettings) > 0 {
+							configs := spotInstanceSettings[0].(map[string]interface{})
+							if v, ok := configs["maximum_bid_price_percentage"]; ok {
+								spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
+							}
+							if v, ok := configs["timeout_for_request"]; ok {
+								spot_instance_settings.Timeout_for_request = v.(int)
+							}
+							if v, ok := configs["maximum_spot_instance_percentage"]; ok {
+								spot_instance_settings.Maximum_spot_instance_percentage = float32(v.(int))
+							}
+							spot_settings.Spot_instance_settings = spot_instance_settings
+						}
+					}
+
+					//Read stable spot instance settings
+					var stable_spot_instance_settings model.StableSpotInstanceSettings
+					if v, ok := configs["stable_spot_instance_settings"]; ok {
+						stableSpotInstanceSettings := v.([]interface{})
+						if len(stableSpotInstanceSettings) > 0 {
+							configs := stableSpotInstanceSettings[0].(map[string]interface{})
+							if v, ok := configs["maximum_bid_price_percentage"]; ok {
+								stable_spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
+							}
+							if v, ok := configs["timeout_for_request"]; ok {
+								stable_spot_instance_settings.Timeout_for_request = v.(int)
+							}
+							spot_settings.Stable_spot_instance_settings = stable_spot_instance_settings
+						}
+					}
+
+					//Read spot block settings
+					var spot_block_settings model.SpotBlockSettings
+					if v, ok := configs["spot_block_settings"]; ok {
+						spotBlockSettings := v.([]interface{})
+						if len(spotBlockSettings) > 0 {
+							configs := spotBlockSettings[0].(map[string]interface{})
+							if v, ok := configs["duration"]; ok {
+								spot_block_settings.Duration = v.(int)
+							}
+							spot_settings.Spot_block_settings = spot_block_settings
+						}
+					}
+
+					cluster_info.Spot_settings = spot_settings
+				}
 			}
 
-			if v, ok := configurations["fallback_to_ondemand"]; ok {
-				node_configuration.Fallback_to_ondemand = v.(bool)
-			}
-
-			if v, ok := configurations["ebs_volume_type"]; ok {
-				node_configuration.Ebs_volume_type = v.(string)
-			}
-
-			if v, ok := configurations["ebs_volume_size"]; ok {
-				node_configuration.Ebs_volume_size = v.(int)
-			}
-
-			if v, ok := configurations["ebs_volume_count"]; ok {
-				node_configuration.Ebs_volume_count = v.(int)
-			}
-
-			if v, ok := configurations["custom_ec2_tags"]; ok {
-				//node_configuration.Custom_ec2_tags = v.(map[string]string)
-				ec2_tags := v.(map[string]interface{})
-				custom_ec2_tags := make(map[string]string)
-				for key, value := range ec2_tags {
+			if v, ok := configurations["custom_tags"]; ok {
+				billing_tags := v.(map[string]interface{})
+				custom_tags := make(map[string]string)
+				for key, value := range billing_tags {
 					strKey := fmt.Sprintf("%v", key)
 					strValue := fmt.Sprintf("%v", value)
 
-					custom_ec2_tags[strKey] = strValue
+					custom_tags[strKey] = strValue
 				}
-				node_configuration.Custom_ec2_tags = custom_ec2_tags
+				cluster_info.Custom_tags = custom_tags
 			}
 
-			if v, ok := configurations["idle_cluster_timeout_in_secs"]; ok {
-				node_configuration.Idle_cluster_timeout_in_secs = v.(int)
+			if v, ok := configs["fallback_to_ondemand"]; ok {
+				cluster_info.Fallback_to_ondemand = v.(bool)
 			}
 
-			if v, ok := configurations["node_base_cooldown_period"]; ok {
-				node_configuration.Node_base_cooldown_period = v.(int)
-			}
-
-			if v, ok := configurations["node_spot_cooldown_period"]; ok {
-				node_configuration.Node_spot_cooldown_period = v.(int)
-			}
-			return node_configuration, true
+			return cluster_info, true
 		}
 	}
-	return node_configuration, false
-}
+	//the reading method needs to check for the boolean variable to see if all was okay
+	return cluster_info, false
 
-func readHadoopSettingsFromTf(d *schema.ResourceData) (model.HadoopSettings, bool) {
-	var hadoop_settings model.HadoopSettings
-	if v, ok := d.GetOk("hadoop_settings"); ok {
-		hadoopSettings := v.([]interface{})
-		if len(hadoopSettings) > 0 {
-			hdSettings := hadoopSettings[0].(map[string]interface{})
-
-			if v, ok := hdSettings["use_hadoop2"]; ok {
-				hadoop_settings.Use_hadoop2 = v.(bool)
-			}
-
-			if v, ok := hdSettings["use_spark"]; ok {
-				hadoop_settings.Use_spark = v.(bool)
-			}
-
-			if v, ok := hdSettings["use_hbase"]; ok {
-				hadoop_settings.Use_hbase = v.(bool)
-			}
-
-			if v, ok := hdSettings["is_ha"]; ok {
-				hadoop_settings.Is_ha = v.(bool)
-			}
-
-			if v, ok := hdSettings["enable_rubix"]; ok {
-				hadoop_settings.Enable_rubix = v.(bool)
-			}
-
-			if v, ok := hdSettings["node_bootstrap_timeout"]; ok {
-				hadoop_settings.Node_bootstrap_timeout = v.(int)
-			}
-
-			if v, ok := hdSettings["use_qubole_placement_policy"]; ok {
-				hadoop_settings.Use_qubole_placement_policy = v.(bool)
-			}
-
-			//Fair Scheduler Settings
-			var fairscheduler_settings model.FairSchedulerSettings
-			if v, ok := hdSettings["spot_block_settings"]; ok {
-				fairSchedulerSettings := v.([]interface{})
-				if len(fairSchedulerSettings) > 0 {
-					fsSettings := fairSchedulerSettings[0].(map[string]interface{})
-					if v, ok := fsSettings["default_pool"]; ok {
-						fairscheduler_settings.Default_pool = v.(string)
-					}
-					if v, ok := fsSettings["fairscheduler_config_xml"]; ok {
-						fairscheduler_settings.Fairscheduler_config_xml = v.(string)
-					}
-					hadoop_settings.Fairscheduler_settings = fairscheduler_settings
-				}
-			}
-			return hadoop_settings, true
-		}
-	}
-	return hadoop_settings, false
-}
-
-func readSecuritySettingsFromTf(d *schema.ResourceData) (model.SecuritySettings, bool) {
-	var security_settings model.SecuritySettings
-	if v, ok := d.GetOk("security_settings"); ok {
-		securitySettings := v.([]interface{})
-		if len(securitySettings) > 0 {
-			secSettings := securitySettings[0].(map[string]interface{})
-
-			if v, ok := secSettings["encrypted_ephemerals"]; ok {
-				security_settings.Encrypted_ephemerals = v.(bool)
-			}
-
-			if v, ok := secSettings["customer_ssh_key"]; ok {
-				security_settings.Customer_ssh_key = v.(string)
-			}
-
-			if v, ok := secSettings["persistent_security_group"]; ok {
-				security_settings.Persistent_security_group = v.(string)
-			}
-			return security_settings, true
-		}
-	}
-	return security_settings, false
-}
-
-func readPrestoSettingsFromTf(d *schema.ResourceData) (model.PrestoSettings, bool) {
-	var presto_settings model.PrestoSettings
-	if v, ok := d.GetOk("presto_settings"); ok {
-		prestoSettings := v.([]interface{})
-		if len(prestoSettings) > 0 {
-			pSettings := prestoSettings[0].(map[string]interface{})
-
-			if v, ok := pSettings["enable_presto"]; ok {
-				presto_settings.Enable_presto = v.(bool)
-			}
-
-			if v, ok := pSettings["custom_config"]; ok {
-				presto_settings.Custom_config = v.(string)
-			}
-			return presto_settings, true
-		}
-	}
-	return presto_settings, false
-}
-
-func readSparkSettingsFromTf(d *schema.ResourceData) (model.SparkSettings, bool) {
-	var spark_settings model.SparkSettings
-	if v, ok := d.GetOk("spark_settings"); ok {
-		sparkSettings := v.([]interface{})
-		if len(sparkSettings) > 0 {
-			sSettings := sparkSettings[0].(map[string]interface{})
-
-			if v, ok := sSettings["custom_config"]; ok {
-				spark_settings.Custom_config = v.(string)
-			}
-			return spark_settings, true
-		}
-	}
-	return spark_settings, false
-}
-
-func readDatadogSettingsFromTf(d *schema.ResourceData) (model.DatadogSettings, bool) {
-	var datadog_settings model.DatadogSettings
-	if v, ok := d.GetOk("datadog_settings"); ok {
-		datadogSettings := v.([]interface{})
-		if len(datadogSettings) > 0 {
-			ddSettings := datadogSettings[0].(map[string]interface{})
-
-			if v, ok := ddSettings["datadog_api_token"]; ok {
-				datadog_settings.Datadog_api_token = v.(string)
-			}
-
-			if v, ok := ddSettings["datadog_app_token"]; ok {
-				datadog_settings.Datadog_app_token = v.(string)
-			}
-			return datadog_settings, true
-		}
-	}
-	return datadog_settings, false
 }
 
 func readEngineConfigFromTf(d *schema.ResourceData) (model.EngineConfig, bool) {
+
 	var engine_config model.EngineConfig
 	if v, ok := d.GetOk("engine_config"); ok {
-		engineConfigs := v.([]interface{})
-		if len(engineConfigs) > 0 {
-			eConfigs := engineConfigs[0].(map[string]interface{})
+		engineConfig := v.([]interface{})
+		if len(engineConfig) > 0 {
+			configs := engineConfig[0].(map[string]interface{})
+			//Read engine type spark/presto/airflow/hadoop2
+			if v, ok := configs["flavour"]; ok {
+				cloud_config.Flavour = v.(string)
+			}
 
-			if v, ok := eConfigs["dbtap_id"]; ok {
-				engine_config.Dbtap_id = v.(int)
+			//Read hadoop settings
+			var hadoop_settings model.HadoopSettings
+			if v, ok := configs["hadoop_settings"]; ok {
+				hadoopSettings := v.([]interface{})
+				if len(hadoopSettings) > 0 {
+					configs := hadoopSettings[0].(map[string]interface{})
+					if v, ok := configs["use_qubole_placement_policy"]; ok {
+						hadoop_settings.Use_qubole_placement_policy = v.(bool)
+					}
+					if v, ok := configs["is_ha"]; ok {
+						hadoop_settings.Is_ha = v.(bool)
+					}
+					if v, ok := configs["custom_hadoop_config"]; ok {
+						hadoop_settings.Custom_hadoop_config = v.(string)
+					}
+					//Read Fair Scheduler Settings
+					var fairscheduler_settings model.FairSchedulerSettings
+					if v, ok := configs["fairscheduler_settings"]; ok {
+						fairSchedulerSettings := v.([]interface{})
+						if len(fairSchedulerSettings) > 0 {
+							configs := envSettings[0].(map[string]interface{})
+							if v, ok := configs["default_pool"]; ok {
+								fairscheduler_settings.Default_pool = v.(string)
+							}
+							if v, ok := configs["fairscheduler_config_xml"]; ok {
+								fairscheduler_settings.Fairscheduler_config_xml = v.(string)
+							}
+							hadoop_settings.Fairscheduler_settings = fairscheduler_settings
+						}
+					}
+					engine_config.Hadoop_settings = hadoop_settings
+				}
 			}
-			if v, ok := eConfigs["fernet_key"]; ok {
-				engine_config.Fernet_key = v.(string)
+			//Read presto settings
+			var presto_settings model.PrestoSettings
+			if v, ok := configs["presto_settings"]; ok {
+				prestoSettings := v.([]interface{})
+				if len(prestoSettings) > 0 {
+					configs := prestoSettings[0].(map[string]interface{})
+					if v, ok := configs["presto_version"]; ok {
+						presto_settings.Presto_version = v.(string)
+					}
+					if v, ok := configs["custom_presto_config"]; ok {
+						presto_settings.Custom_presto_config = v.(string)
+					}
+					if v, ok := configs["enable_rubix"]; ok {
+						presto_settings.Enable_rubix = v.(bool)
+					}
+					engine_config.Presto_settings = presto_settings
+				}
 			}
-			if v, ok := eConfigs["engine_type"]; ok {
-				engine_config.Engine_type = v.(string)
+			//Read spark settings
+			var spark_settings model.SparkSettings
+			if v, ok := configs["spark_settings"]; ok {
+				sparkSettings := v.([]interface{})
+				if len(sparkSettings) > 0 {
+					configs := sparkSettings[0].(map[string]interface{})
+					if v, ok := configs["spark_version"]; ok {
+						spark_settings.Spark_version = v.(string)
+					}
+					if v, ok := configs["custom_spark_config"]; ok {
+						spark_settings.Custom_spark_config = v.(string)
+					}
+					if v, ok := configs["enable_rubix"]; ok {
+						spark_settings.Enable_rubix = v.(bool)
+					}
+					engine_config.Spark_settings = spark_settings
+				}
 			}
-			if v, ok := eConfigs["version"]; ok {
-				engine_config.Version = v.(string)
-			}
-			if v, ok := eConfigs["overrides"]; ok {
-				engine_config.Overrides = v.(string)
-			}
-			//Hive Settings
+			//Read hive settings
 			var hive_settings model.HiveSettings
-			if v, ok := eConfigs["hive_settings"]; ok {
+			if v, ok := configs["hive_settings"]; ok {
 				hiveSettings := v.([]interface{})
 				if len(hiveSettings) > 0 {
-					hvSettings := hiveSettings[0].(map[string]interface{})
-					if v, ok := hvSettings["is_hs2"]; ok {
+					configs := hiveSettings[0].(map[string]interface{})
+					if v, ok := configs["is_hs2"]; ok {
 						hive_settings.Is_hs2 = v.(bool)
 					}
-					if v, ok := hvSettings["hive_version"]; ok {
+					if v, ok := configs["hive_version"]; ok {
 						hive_settings.Hive_version = v.(string)
 					}
-					if v, ok := hvSettings["hive_qubole_metadata_cache"]; ok {
-						hive_settings.Hive_qubole_metadata_cache = v.(bool)
+					if v, ok := configs["is_metadata_cache_enabled"]; ok {
+						hive_settings.Is_metadata_cache_enabled = v.(bool)
 					}
-					if v, ok := hvSettings["hs2_thrift_port"]; ok {
+					if v, ok := configs["hs2_thrift_port"]; ok {
 						hive_settings.Hs2_thrift_port = v.(int)
 					}
-					if v, ok := hvSettings["overrides"]; ok {
-						hive_settings.Overrides = v.(string)
+					if v, ok := configs["overrides"]; ok {
+						hive_settings.Overrides = v.(bool)
+					}
+					if v, ok := configs["execution_engine"]; ok {
+						hive_settings.Execution_engine = v.(string)
 					}
 					engine_config.Hive_settings = hive_settings
+				}
+			}
+			//Read airflow settings
+			var airflow_settings model.AirflowSettings
+			if v, ok := configs["airflow_settings"]; ok {
+				airflowSettings := v.([]interface{})
+				if len(airflowSettings) > 0 {
+					configs := airflowSettings[0].(map[string]interface{})
+					if v, ok := configs["dbtap_id"]; ok {
+						airflow_settings.Dbtap_id = v.(int)
+					}
+					if v, ok := configs["fernet_key"]; ok {
+						airflow_settings.Fernet_key = v.(string)
+					}
+					if v, ok := configs["overrides"]; ok {
+						airflow_settings.Overrides = v.(string)
+					}
+					if v, ok := configs["version"]; ok {
+						airflow_settings.Version = v.(string)
+					}
+					if v, ok := configs["airflow_python_version"]; ok {
+						airflow_settings.Airflow_python_version = v.(string)
+					}
+					engine_config.Airflow_settings = airflow_settings
 				}
 			}
 			return engine_config, true
 		}
 	}
+	//the reading method needs to check for the boolean variable to see if all was okay
 	return engine_config, false
+}
+
+func readMonitoringFromTf(d *schema.ResourceData) (model.Monitoring, bool) {
+
+	var monitoring model.Monitoring
+	if v, ok := d.GetOk("monitoring"); ok {
+		monitoringConfig := v.([]interface{})
+		if len(monitoringConfig) > 0 {
+			configs := monitoringConfig[0].(map[string]interface{})
+
+			if v, ok := configs["ganglia"]; ok {
+				monitoring.Ganglia = v.(bool)
+			}
+
+			//Read datadog settings
+			var datadog model.Datadog
+			if v, ok := configs["datadog"]; ok {
+				datadogSettings := v.([]interface{})
+				if len(datadogSettings) > 0 {
+					configs := datadogSettings[0].(map[string]interface{})
+					if v, ok := configs["datadog_api_token"]; ok {
+						datadog.Datadog_api_token = v.(string)
+					}
+					if v, ok := configs["datadog_app_token"]; ok {
+						datadog.Datadog_app_token = v.(string)
+					}
+					monitoring.Datadog = datadog
+				}
+			}
+
+			return monitoring, true
+		}
+	}
+	//the reading method needs to check for the boolean variable to see if all was okay
+	return monitoring, false
+}
+
+func readInternalFromTf(d *schema.ResourceData) (model.Internal, bool) {
+
+	var internal model.Internal
+	if v, ok := d.GetOk("internal"); ok {
+		internalConfig := v.([]interface{})
+		if len(internalConfig) > 0 {
+			configs := internalConfig[0].(map[string]interface{})
+
+			if v, ok := configs["zeppelin_interpreter_mode"]; ok {
+				internal.Zeppelin_interpreter_mode = v.(string)
+			}
+			if v, ok := configs["spark_s3_package_name"]; ok {
+				internal.Spark_s3_package_name = v.(string)
+			}
+			if v, ok := configs["zeppelin_s3_package_name"]; ok {
+				internal.Zeppelin_s3_package_name = v.(string)
+			}
+
+			return internal, true
+		}
+	}
+	//the reading method needs to check for the boolean variable to see if all was okay
+	return internal, false
 }
 
 func readClusterFromTf(d *schema.ResourceData) (model.Cluster, bool) {
@@ -915,94 +1292,42 @@ func readClusterFromTf(d *schema.ResourceData) (model.Cluster, bool) {
 	var cluster model.Cluster
 
 	//create nested datas structures
-	//1. EC2 Settings
-	if ec2_settings, ok := readEc2SettingsFromTf(d); ok {
-		cluster.Ec2_settings = ec2_settings
+	//1. Cloud Config
+	if cloud_config, ok := readCloudConfigFromTf(d); ok {
+		cluster.Cloud_config = cloud_config
 	} else {
-		log.Printf("[WARN] No ec2_settings seen.")
+		log.Printf("[WARN] No cloud_config seen.")
 	}
 
-	//2. Node configuration, but this will require constructing other sub-objects
-	if node_configuration, ok := readNodeConfigurationFromTf(d); ok {
-		cluster.Node_configuration = node_configuration
+	//2. Cluster Info
+	if cluster_info, ok := readClusterInfoFromTf(d); ok {
+		cluster.Cluster_info = cluster_info
 	} else {
-		log.Printf("[WARN] No node_configuration seen.")
+		log.Printf("[WARN] No cluster_info seen.")
 	}
 
-	//3. Hadoop Settings, but this will require constructing other sub-objects
-	if hadoop_settings, ok := readHadoopSettingsFromTf(d); ok {
-		cluster.Hadoop_settings = hadoop_settings
-	} else {
-		log.Printf("[WARN] No hadoop_settings seen.")
-	}
-
-	//4. SecuritySettings
-	if security_settings, ok := readSecuritySettingsFromTf(d); ok {
-		cluster.Security_settings = security_settings
-	} else {
-		log.Printf("[WARN] No security_settings seen.")
-	}
-
-	//5. PrestoSettings
-	if presto_settings, ok := readPrestoSettingsFromTf(d); ok {
-		cluster.Presto_settings = presto_settings
-	} else {
-		log.Printf("[WARN] No presto_settings seen.")
-	}
-
-	//6. SparkSettings
-	if spark_settings, ok := readSparkSettingsFromTf(d); ok {
-		cluster.Spark_settings = spark_settings
-	} else {
-		log.Printf("[WARN] No spark_settings seen.")
-	}
-
-	//7. DatadogSettings
-	if datadog_settings, ok := readDatadogSettingsFromTf(d); ok {
-		cluster.Datadog_settings = datadog_settings
-	} else {
-		log.Printf("[WARN] No datadog_settings seen.")
-	}
-
-	//8. EngineConfig
+	//3. Engine Config
 	if engine_config, ok := readEngineConfigFromTf(d); ok {
 		cluster.Engine_config = engine_config
 	} else {
 		log.Printf("[WARN] No engine_config seen.")
 	}
 
+	//4. Monitoring
+	if monitoring, ok := readMonitoringFromTf(d); ok {
+		cluster.Monitoring = monitoring
+	} else {
+		log.Printf("[WARN] No monitoring seen.")
+	}
+
+	//5. Internal
+	if internal, ok := readInternalFromTf(d); ok {
+		cluster.Internal = internal
+	} else {
+		log.Printf("[WARN] No internal seen.")
+	}
+
 	//Finally, the cluster
-
-	if v, ok := d.GetOk("label"); ok {
-		labelSet := v.(*schema.Set)
-		labels := make([]*string, labelSet.Len())
-		for i, label := range labelSet.List() {
-			labels[i] = String(label.(string))
-		}
-		cluster.Label = labels
-	}
-	if v, ok := d.GetOk("presto_version"); ok {
-		cluster.Presto_version = v.(string)
-	}
-	if v, ok := d.GetOk("spark_version"); ok {
-		cluster.Spark_version = v.(string)
-	}
-	if v, ok := d.GetOk("zeppelin_interpreter_mode"); ok {
-		cluster.Zeppelin_interpreter_mode = v.(string)
-	}
-	if v, ok := d.GetOk("disallow_cluster_termination"); ok {
-		cluster.Disallow_cluster_termination = v.(bool)
-	}
-	if v, ok := d.GetOk("enable_ganglia_monitoring"); ok {
-		cluster.Enable_ganglia_monitoring = v.(bool)
-	}
-	if v, ok := d.GetOk("node_bootstrap_file"); ok {
-		cluster.Node_bootstrap_file = v.(string)
-	}
-	if v, ok := d.GetOk("idle_cluster_timeout"); ok {
-		cluster.Idle_cluster_timeout = v.(int)
-	}
-
 	return cluster, true
 
 }

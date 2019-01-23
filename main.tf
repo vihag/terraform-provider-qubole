@@ -1,12 +1,11 @@
 provider "qubole" {
   auth_token	=	"${var.auth_token}"
   api_endpoint	=	"${var.api_endpoint}"
-  api_version	=	"${var.api_version}"
 }
 
-resource "qubole_presto" "my-qubole-presto-server" {
-label 							=	["terraform-provider-qubole", "dev-presto-180", "smallercluster"]
-presto_version 					=	"0.193"
+resource "qubole_cluster" "qubole_presto_test_cluster" {
+label 							=	["terraform-provider-qubole", "terraform-managed-presto"]
+presto_version 					=	"0.180"
 ec2_settings					=	[
 										{
 										aws_region						=	"ap-southeast-1"
@@ -41,7 +40,7 @@ node_configuration				=	[
 																			"Environment"	=	"Dev"
 																			"Project"		=	"Terraform Provider"
 																			}
-										idle_cluster_timeout_in_secs	=	2700
+										idle_cluster_timeout_in_secs	=	3600
 										node_base_cooldown_period		=	10
 										}
 									]

@@ -27,17 +27,11 @@ func Provider() *schema.Provider {
 				Required:    true,
 				Description: descriptions["api_endpoint"],
 			},
-
-			"api_version": {
-				Type:        schema.TypeString,
-				Required:    true,
-				Description: descriptions["api_version"],
-			},
 		},
 
 		//Resources Map
 		ResourcesMap: map[string]*schema.Resource{
-			"qubole_presto": resourceQubolePresto(),
+			"qubole_cluster": resourceQuboleCluster(),
 		},
 		
 		//Provider Configurer: https://www.terraform.io/docs/plugins/provider.html#configurefunc
@@ -64,7 +58,6 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 	config := Config{
 		AuthToken:   d.Get("auth_token").(string),
 		ApiEndpoint: d.Get("api_endpoint").(string),
-		ApiVersion:  d.Get("api_version").(string),
 	}
 	return config.getValidatedConfig();
 }

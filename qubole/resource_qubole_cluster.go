@@ -44,11 +44,11 @@ func resourceQuboleCluster() *schema.Resource {
 										Type:     schema.TypeBool,
 										Optional: true,
 									},
-									"Use_account_compute_creds": {
+									"use_account_compute_creds": {
 										Type:     schema.TypeBool,
 										Optional: true,
 									},
-									"Instance_tenancy": {
+									"instance_tenancy": {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
@@ -69,7 +69,7 @@ func resourceQuboleCluster() *schema.Resource {
 										Optional: true,
 									},
 									"compute_client_secret": {
-										Type:     schema.TypeBool,
+										Type:     schema.TypeString,
 										Optional: true,
 									},
 									"compute_tenant_id": {
@@ -369,7 +369,7 @@ func resourceQuboleCluster() *schema.Resource {
 								},
 							},
 						},
-						"heterogeneouse_config": {
+						"heterogeneous_config": {
 							Type:     schema.TypeList,
 							MaxItems: 1,
 							Optional: true,
@@ -605,11 +605,11 @@ func resourceQuboleCluster() *schema.Resource {
 										Optional: true,
 									},
 									"overrides": {
-										Type:     schema.TypeBool,
+										Type:     schema.TypeString,
 										Optional: true,
 									},
 									"version": {
-										Type:     schema.TypeInt,
+										Type:     schema.TypeString,
 										Optional: true,
 									},
 									"airflow_python_version": {
@@ -660,7 +660,7 @@ func resourceQuboleCluster() *schema.Resource {
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"zeppelin_interpreter_mode": {
-							Type:     schema.TypeBool,
+							Type:     schema.TypeString,
 							Optional: true,
 						},
 						"spark_s3_package_name": {
@@ -878,10 +878,12 @@ func readClusterInfoFromTf(d *schema.ResourceData) (model.ClusterInfo, bool) {
 
 			if v, ok := configs["label"]; ok {
 				labelSet := v.(*schema.Set)
-				labels := make([]*string, labelSet.Len())
+
+				labels := make([]string, labelSet.Len())
 				for i, label := range labelSet.List() {
-					labels[i] = String(label.(string))
+					labels[i] = label.(string)
 				}
+
 				cluster_info.Label = labels
 			}
 
@@ -1381,16 +1383,23 @@ func resourceQuboleClusterCreate(d *schema.ResourceData, meta interface{}) error
 		log.Printf("[INFO]response Body:", string(body))
 
 		//Parse the response back to cluster object
-		var clusterResponse model.Cluster
+		/*var clusterResponse model.Cluster
 		unmarshallingError := json.Unmarshal(body, &clusterResponse)
 		if unmarshallingError != nil {
 			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
 			return fmt.Errorf("Error in unmarshalling json during update %s", err.Error())
+		}*/
+		//Parse the response using a custom un-marshaller
+		var cluster_response *model.Cluster
+		unmarshallingError := json.Unmarshal(body, &cluster_response)
+		if unmarshallingError != nil {
+			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
+			return fmt.Errorf("Error in unmarshalling json during update %s", unmarshallingError.Error())
 		}
-		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", clusterResponse)
+		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", cluster_response)
 
 		//Set Terraform ID; typecast the received ID to string for terraform
-		d.SetId(strconv.Itoa(clusterResponse.Id))
+		d.SetId(strconv.Itoa(cluster_response.Id))
 
 	} else {
 		log.Printf("[WARN] No valid cluster definition seen.")
@@ -1435,51 +1444,51 @@ func resourceQuboleClusterRead(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("response Body:", string(body))
 
 	//Unmarshal the response to a cluster object
-	var cluster model.Cluster
-	unmarshallingError := json.Unmarshal(body, &cluster)
+	var cluster_response *model.Cluster
+	unmarshallingError := json.Unmarshal(body, &cluster_response)
 	if unmarshallingError != nil {
-		log.Printf("There was an error:", unmarshallingError.Error())
+		log.Printf("[ERR]There was an error in unmarshalling during cluster read : %#v", unmarshallingError)
+		return fmt.Errorf("Error in unmarshalling json during cluster read %#v", unmarshallingError)
 	}
-	log.Printf(">>>Pretty Printing Unmarshalled Response")
-	log.Printf("%#v", cluster)
+	log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", cluster_response)
 
 	//Now start setting d with data from the unmarshalled object
 	//Set cloud_config
-	if err := d.Set("cloud_config", flattenCloudConfig(&cluster.Cloud_config)); err != nil {
-		log.Printf("[ERR] Error setting cloud config: %s", err)
+	if err := d.Set("cloud_config", flattenCloudConfig(&cluster_response.Cloud_config)); err != nil {
+		log.Printf("[ERR] Error setting cloud config: %#v", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting cloud config: %s", err)
 	}
 	//Set cluster_info
-	if err := d.Set("cluster_info", flattenClusterInfo(&cluster.Cluster_info)); err != nil {
+	if err := d.Set("cluster_info", flattenClusterInfo(&cluster_response.Cluster_info)); err != nil {
 		log.Printf("[ERR] Error setting cluster info: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting cluster info: %s", err)
 	}
 
 	//Set engine_config
-	if err := d.Set("engine_config", flattenEngineConfig(&cluster.Engine_config)); err != nil {
+	if err := d.Set("engine_config", flattenEngineConfig(&cluster_response.Engine_config)); err != nil {
 		log.Printf("[ERR] Error setting Engine Config: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting Engine Config: %s", err)
 	}
 
 	//Set monitoring
-	if err := d.Set("monitoring", flattenMonitoring(&cluster.Monitoring)); err != nil {
+	if err := d.Set("monitoring", flattenMonitoring(&cluster_response.Monitoring)); err != nil {
 		log.Printf("[ERR] Error setting monitoring: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting Monitoring: %s", err)
 	}
 
 	//Set internal
-	if err := d.Set("internal", flattenInternal(&cluster.Internal)); err != nil {
+	if err := d.Set("internal", flattenInternal(&cluster_response.Internal)); err != nil {
 		log.Printf("[ERR] Error setting Internal: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting Internal: %s", err)
 	}
 
 	//Set rest of the simple objects
-	d.Set("state", cluster.State)
+	d.Set("state", cluster_response.State)
 
 	return nil
 }
@@ -1526,17 +1535,18 @@ func resourceQuboleClusterUpdate(d *schema.ResourceData, meta interface{}) error
 
 		log.Printf("[INFO]response Body:", string(body))
 
-		//Parse the response back to cluster object
-		var clusterResponse model.Cluster
-		unmarshallingError := json.Unmarshal(body, &clusterResponse)
+		//Unmarshal the response to a cluster object
+		var cluster_response *model.Cluster
+		unmarshallingError := json.Unmarshal(body, &cluster_response)
 		if unmarshallingError != nil {
-			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
-			return fmt.Errorf("Error in unmarshalling json during update %s", err.Error())
+			log.Printf("[ERR]There was an error in unmarshalling during cluster read : %#v", unmarshallingError)
+			return fmt.Errorf("Error in unmarshalling json during cluster read %#v", unmarshallingError)
 		}
-		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", clusterResponse)
+
+		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", cluster_response)
 
 		//Set Terraform ID; typecast the received ID to string for terraform
-		d.SetId(strconv.Itoa(clusterResponse.Id))
+		d.SetId(strconv.Itoa(cluster_response.Id))
 
 	} else {
 		log.Printf("[WARN] No valid cluster definition seen.")
@@ -1623,21 +1633,26 @@ func flattenCloudConfig(ia *model.CloudConfig) []map[string]interface{} {
 	if &ia.Provider != nil {
 		attrs["provider"] = ia.Provider
 	}
+
 	if &ia.Compute_config != nil {
 		attrs["compute_config"] = flattenComputeConfig(&ia.Compute_config)
 	}
+
 	if &ia.Location != nil {
 		attrs["location"] = flattenLocation(&ia.Location)
 	}
+
 	if &ia.Network_config != nil {
 		attrs["network_config"] = flattenNetworkConfig(&ia.Network_config)
 	}
+
 	if &ia.Storage_config != nil {
 		attrs["storage_config"] = flattenStorageConfig(&ia.Storage_config)
 	}
 
 	result = append(result, attrs)
 
+	log.Print(result)
 	return result
 }
 
@@ -1661,6 +1676,7 @@ func flattenClusterInfo(ia *model.ClusterInfo) []map[string]interface{} {
 	}
 
 	if &ia.Label != nil {
+		log.Print(ia.Label)
 		attrs["label"] = ia.Label
 	}
 
@@ -1858,7 +1874,6 @@ func flattenDiskUpscalingConfig(ia *model.DiskUpscalingConfig) []map[string]inte
 
 	return result
 }
-
 
 /*
 function to flatten Engine Config Settings
@@ -2087,7 +2102,7 @@ func flattenMonitoring(ia *model.Monitoring) []map[string]interface{} {
 		attrs["ganglia"] = ia.Ganglia
 	}
 	if &ia.Datadog != nil {
-		attrs["Datadog"] = flattenDatadog(&ia.Datadog)
+		attrs["datadog"] = flattenDatadog(&ia.Datadog)
 	}
 
 	result = append(result, attrs)
@@ -2130,7 +2145,7 @@ func flattenNetworkConfig(ia *model.NetworkConfig) []map[string]interface{} {
 		attrs["persistent_security_group_name"] = ia.Persistent_security_group_name
 	}
 	if &ia.Vnet_name != nil {
-		attrs["cnet_name"] = ia.Vnet_name
+		attrs["vnet_name"] = ia.Vnet_name
 	}
 	if &ia.Subnet_name != nil {
 		attrs["subnet_name"] = ia.Subnet_name
@@ -2281,25 +2296,25 @@ func flattenStorageConfig(ia *model.StorageConfig) []map[string]interface{} {
 	result := make([]map[string]interface{}, 0)
 
 	if &ia.Storage_access_key != nil {
-		attrs["Storage_access_key"] = ia.Storage_access_key
+		attrs["storage_access_key"] = ia.Storage_access_key
 	}
 	if &ia.Storage_account_name != nil {
-		attrs["Storage_account_name"] = ia.Storage_account_name
+		attrs["storage_account_name"] = ia.Storage_account_name
 	}
 	if &ia.Disk_storage_account_name != nil {
-		attrs["Disk_storage_account_name"] = ia.Disk_storage_account_name
+		attrs["disk_storage_account_name"] = ia.Disk_storage_account_name
 	}
 	if &ia.Disk_storage_account_resource_group_name != nil {
-		attrs["Disk_storage_account_resource_group_name"] = ia.Disk_storage_account_resource_group_name
+		attrs["disk_storage_account_resource_group_name"] = ia.Disk_storage_account_resource_group_name
 	}
 	if &ia.Managed_disk_account_type != nil {
-		attrs["Managed_disk_account_type"] = ia.Managed_disk_account_type
+		attrs["managed_disk_account_type"] = ia.Managed_disk_account_type
 	}
 	if &ia.Data_disk_count != nil {
-		attrs["Data_disk_count"] = ia.Data_disk_count
+		attrs["data_disk_count"] = ia.Data_disk_count
 	}
 	if &ia.Data_disk_size != nil {
-		attrs["Data_disk_size"] = ia.Data_disk_size
+		attrs["data_disk_size"] = ia.Data_disk_size
 	}
 	if &ia.Disk_upscaling_config != nil {
 		attrs["disk_upscaling_config"] = flattenDiskUpscalingConfig(&ia.Disk_upscaling_config)

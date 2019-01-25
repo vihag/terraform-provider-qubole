@@ -1,14 +1,16 @@
 package model
 
 import (
+	_ "encoding/json"
 	_ "fmt"
+	_ "log"
 )
 
 type ClusterInfo struct {
 	Master_instance_type         string              `json:"master_instance_type,omitempty"`
 	Slave_instance_type          string              `json:"slave_instance_type,omitempty"`
 	Node_base_cooldown_period    int                 `json:"node_base_cooldown_period,omitempty"`
-	Label                        []*string           `json:"label,omitempty"`
+	Label                        []string           `json:"label,omitempty"`
 	Min_nodes                    int                 `json:"min_nodes,omitempty"`
 	Max_nodes                    int                 `json:"max_nodes,omitempty"`
 	Idle_cluster_timeout_in_secs int                 `json:"idle_cluster_timeout_in_secs,omitempty"`
@@ -27,3 +29,30 @@ type ClusterInfo struct {
 	Custom_tags                  map[string]string   `json:"custom_tags,omitempty"`
 	Fallback_to_ondemand         bool                `json:"fallback_to_ondemand,omitempty"`
 }
+
+//Custom unmarshalling logic
+/*
+func (u *ClusterInfo) UnmarshalJSON(data []byte) error {
+	log.Printf("[ERR]using custom unmarshaller for umarshalling cluster object: %s", "ClusterInfo")
+	type Alias ClusterInfo
+	aux := &struct {
+		Datadisk Datadisk `json:"datadisk,omitempty"`
+		*Alias
+	}{
+		Alias: (*Alias)(u),
+	}
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	log.Printf("[INFO]Pretty Printing Unmarshalled Response for the rest of cluster info %#v", aux)
+	//Now concentrate on datadisk
+	var datadisk *Datadisk
+	err := json.Unmarshal(GetBytes(aux.Datadisk), &datadisk)
+	if err != nil {
+
+		log.Printf("verbose error info: %#v", err)
+		return fmt.Errorf("verbose error info: %#v", err)
+	}
+	u.Datadisk = *datadisk
+	return nil
+}*/

@@ -34,6 +34,10 @@ func resourceQuboleCluster() *schema.Resource {
 							Type:     schema.TypeString,
 							Required: true,
 						},
+						"resource_group_name": {
+							Type:     schema.TypeString,
+							Required: true,
+						},
 						"compute_config": {
 							Type:     schema.TypeList,
 							MaxItems: 1,
@@ -694,6 +698,11 @@ func readCloudConfigFromTf(d *schema.ResourceData) (model.CloudConfig, bool) {
 			//Read cloud provider aws/azure/gcp
 			if v, ok := configs["provider"]; ok {
 				cloud_config.Provider = v.(string)
+			}
+			
+			//Read cloud provider resource group for azure
+			if v, ok := configs["resource_group_name"]; ok {
+				cloud_config.Resource_group_name = v.(string)
 			}
 			//Read compute config
 			var compute_config model.ComputeConfig

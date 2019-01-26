@@ -3,10 +3,11 @@ provider "qubole" {
   api_endpoint	=	"${var.api_endpoint}"
 }
 
-resource "qubole_cluster" "qubole_terraform_spark_cluster" {
+resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 	cloud_config		=	[
 								{
-									provider 		= 	"aws"
+									provider 			= 	"azure"
+									resource_group_name	=	"qubole-apac-azure-readiness-secure-rg",
 									compute_config	=	[
 															{
 																use_account_compute_creds	=	true
@@ -14,88 +15,54 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 									]
 									location		=	[
 															{
-																aws_region				=	"ap-southeast-1"
-																aws_availability_zone	=	"Any"
+																location				=	"southeastasia"
 															}
 									]
 									network_config	=	[
 															{
-																vpc_id						=	"vpc-0e2be045e5fe137cd"
-																subnet_id					=	"subnet-05cf662ed46f9cde8"
-																bastion_node_public_dns		=	"13.229.7.25"
+																vnet_name					=	"qubole-apac-azure-readniness-secure-vnet"
+																subnet_name					=	"private-subnet-for-secure-app"
+																vnet_resource_group_name	=	"qubole-apac-azure-readiness-secure-rg"
+																bastion_node_public_dns		=	"13.76.216.161"
 																bastion_node_port			=	22
 																bastion_node_user			=	"ec2-user"
-																persistent_security_groups	=	"persistent-security-group"
+															}
+									]
+									storage_config	=	[
+															{
+																managed_disk_account_type	=	"standard_lrs"
+																data_disk_count				=	0
+																data_disk_size				=	256
 															}
 									]
 								}								
 	]
 	cluster_info		=	[
 								{
-									master_instance_type			=	"r4.xlarge"
-									slave_instance_type				=	"r4.2xlarge"
-									label 							=	["tf-qb-managed-cl", "tf-presto-cl"]
-									node_base_cooldown_period		=	2
-									min_nodes						=	2
-									max_nodes						=	5
-									idle_cluster_timeout_in_secs	=	3600
-									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
-									disallow_cluster_termination	=	false
+									master_instance_type			=	"Standard_A6"
+									label 							=	["tf-qb-managed-airflowcl"]
+									min_nodes						=	1
+									max_nodes						=	1
+									node_bootstrap					=	"hoodie-airflow-bootstrap.sh"
+									disallow_cluster_termination	=	true
 									datadisk						=	[
 																			{
-																				count		=	4,
-																				type		=	"gp2"
-																				size		=	100
-																				encryption	=	true
+																				encryption	=	false
 																			}
 									]
-									heterogeneous_config			=	[
-																			{
-																				memory	=	[
-																								{
-																									instance_type	=	"r4.2xlarge"
-																									weight			=	1.0
-																								}, 
-																								{
-																									instance_type 	=	"r4.4xlarge"
-																									weight			=	2.0
-																								}
-																				]
-																			}
-									]
-									slave_request_type				=	"spot"
-									spot_settings					=	[
-																			{
-																				spot_instance_settings	=	[
-																												{
-																													maximum_bid_price_percentage		=	70
-																													timeout_for_request					=	5
-																													maximum_spot_instance_percentage	=	40
-																												}																										
-																				]
-																			}																		
-									]
+									slave_request_type				=	"ondemand"
 								}								
 	]
 	engine_config		=	[
 								{
-									flavour			=	"spark"
-									hadoop_settings	=	[
+									flavour			=	"airflow"
+									airflow_settings	=	[
 															{
-																custom_hadoop_config		=	"mapreduce.map.memory.mb=4704\nmapreduce.reduce.java.opts=-Xmx3763m"
-																use_qubole_placement_policy	=	true
-																fairscheduler_settings		=	[
-																									{
-																										default_pool	=	"pool"
-																									}
-																]
-															}
-									]
-									spark_settings	=	[
-															{
-																custom_spark_config		=	"spark-defaults.conf:\nspark.driver.extraLibraryPath /usr/lib/hadoop2/lib/native"
-																spark_version				=	"2.3-latest"
-																enable_rubix				=	true
+																dbtap_id				=	-1
+																fernet_key				=	"Wk607UZxIATjFfvIr/r12xAUTb/CRlKrXAJwUSEl4YQ="
+																overrides				=	"core.executor=CeleryExecutor\ncore.parallelism=32"
+																version					=	"1.8.2"
+																airflow_python_version	=	"2.7"
 															}
 									]
 								}			

@@ -86,7 +86,7 @@
 		"hive_settings": {
 			"is_hs2": true,
 			"hive_version": "1.2",
-			"overrides": "",
+			"overrides": "hive.auto.convert.join=false",
 			"is_metadata_cache_enabled": true,
 			"execution_engine": "tez",
 			"hs2_thrift_port": 10003

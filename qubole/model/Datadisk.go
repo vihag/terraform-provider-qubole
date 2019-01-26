@@ -2,9 +2,9 @@ package model
 
 import (
 	"encoding/json"
+	_ "fmt"
 	"log"
 	_ "strconv"
-	_ "fmt"
 )
 
 type Datadisk struct {
@@ -38,9 +38,12 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 
 	//Now concentrate on datadisk
 
-	log.Printf("[DEBUG]reading the size array to extract the first element: %s", int(aux.Size[0].(float64)))
-	u.Size = int(aux.Size[0].(float64))
-	log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", u)
+	if len(aux.Size) > 0 {
+		log.Printf("[DEBUG]reading the size array to extract the first element: %s", int(aux.Size[0].(float64)))
+		u.Size = int(aux.Size[0].(float64))
+		log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", u)
+	}
+
 	return nil
 }
 
@@ -75,4 +78,3 @@ func FlattenDatadisk(ia *Datadisk) []map[string]interface{} {
 
 	return result
 }
-

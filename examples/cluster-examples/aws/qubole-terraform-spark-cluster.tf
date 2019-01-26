@@ -34,7 +34,7 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 								{
 									master_instance_type			=	"r4.xlarge"
 									slave_instance_type				=	"r4.2xlarge"
-									label 							=	["tf-qb-managed-prestocl"]
+									label 							=	["tf-qb-managed-spark-cl"]
 									node_base_cooldown_period		=	2
 									min_nodes						=	2
 									max_nodes						=	5
@@ -43,12 +43,29 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 									disallow_cluster_termination	=	false
 									datadisk						=	[
 																			{
-																				count		=	4,
+																				count		=	1,
 																				type		=	"gp2"
 																				size		=	100
 																				encryption	=	true
+																				upscaling_config	=	[
+																												{
+																													max_ebs_volume_count 			= 2
+																													percent_free_space_threshold 	= 25
+																													sampling_interval 				= 30
+																													sampling_window 				= 5
+																													absolute_free_space_threshold 	= 100
+																												}
+																				]
 																			}
 									]
+									env_settings					=	[
+																			{
+																				python_version	=	"3.5"
+																				r_version		=	"3.3"
+																				name			=	"ql-tf-env"
+																			}
+									
+									] 
 									heterogeneous_config			=	[
 																			{
 																				memory	=	[

@@ -36,7 +36,7 @@ func resourceQuboleCluster() *schema.Resource {
 						},
 						"resource_group_name": {
 							Type:     schema.TypeString,
-							Required: true,
+							Optional: true,
 						},
 						"compute_config": {
 							Type:     schema.TypeList,
@@ -341,7 +341,7 @@ func resourceQuboleCluster() *schema.Resource {
 										Type:     schema.TypeInt,
 										Optional: true,
 									},
-									"ebs_upscaling_config": {
+									"upscaling_config": {
 										Type:     schema.TypeList,
 										MaxItems: 1,
 										Optional: true,
@@ -974,27 +974,27 @@ func readClusterInfoFromTf(d *schema.ResourceData) (model.ClusterInfo, bool) {
 						datadisk.Size = v.(int)
 					}
 					//Read disk upscaling config
-					var ebs_upscaling_config model.EbsUpscalingConfig
-					if v, ok := configs["ebs_upscaling_config"]; ok {
+					var upscaling_config model.UpscalingConfig
+					if v, ok := configs["upscaling_config"]; ok {
 						ebsUpscalingConfigs := v.([]interface{})
 						if len(ebsUpscalingConfigs) > 0 {
 							configs := ebsUpscalingConfigs[0].(map[string]interface{})
 							if v, ok := configs["max_ebs_volume_count"]; ok {
-								ebs_upscaling_config.Max_ebs_volume_count = v.(int)
+								upscaling_config.Max_ebs_volume_count = v.(int)
 							}
 							if v, ok := configs["percent_free_space_threshold"]; ok {
-								ebs_upscaling_config.Percent_free_space_threshold = float32(v.(int))
+								upscaling_config.Percent_free_space_threshold = float32(v.(int))
 							}
 							if v, ok := configs["absolute_free_space_threshold"]; ok {
-								ebs_upscaling_config.Absolute_free_space_threshold = float32(v.(int))
+								upscaling_config.Absolute_free_space_threshold = float32(v.(int))
 							}
 							if v, ok := configs["sampling_interval"]; ok {
-								ebs_upscaling_config.Sampling_interval = v.(int)
+								upscaling_config.Sampling_interval = v.(int)
 							}
 							if v, ok := configs["sampling_window"]; ok {
-								ebs_upscaling_config.Sampling_window = v.(int)
+								upscaling_config.Sampling_window = v.(int)
 							}
-							datadisk.Ebs_upscaling_config = ebs_upscaling_config
+							datadisk.Upscaling_config = upscaling_config
 						}
 					}
 					cluster_info.Datadisk = datadisk

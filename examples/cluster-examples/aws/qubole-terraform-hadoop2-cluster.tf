@@ -34,7 +34,7 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 								{
 									master_instance_type			=	"r4.xlarge"
 									slave_instance_type				=	"r4.2xlarge"
-									label 							=	["tf-qb-managed-hivecl"]
+									label 							=	["tf-qb-managed-hive-cl"]
 									node_base_cooldown_period		=	20
 									min_nodes						=	2
 									max_nodes						=	5
@@ -47,7 +47,7 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 																				type		=	"gp2"
 																				size		=	100
 																				encryption	=	true
-																				ebs_upscaling_config	=	[
+																				upscaling_config	=	[
 																												{
 																													max_ebs_volume_count 			= 2
 																													percent_free_space_threshold 	= 25

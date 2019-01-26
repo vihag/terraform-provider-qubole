@@ -34,7 +34,7 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 								{
 									master_instance_type			=	"r4.xlarge"
 									slave_instance_type				=	"r4.2xlarge"
-									label 							=	["tf-qb-managed-prestocl"]
+									label 							=	["tf-qb-managed-presto-cl"]
 									node_base_cooldown_period		=	2
 									min_nodes						=	2
 									max_nodes						=	5

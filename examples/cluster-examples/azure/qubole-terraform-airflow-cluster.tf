@@ -3,10 +3,11 @@ provider "qubole" {
   api_endpoint	=	"${var.api_endpoint}"
 }
 
-resource "qubole_cluster" "qubole_terraform_hive_cluster" {
+resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 	cloud_config		=	[
 								{
-									provider 		= 	"aws"
+									provider 			= 	"azure"
+									resource_group_name	=	"qubole-apac-azure-readiness-secure-rg",
 									compute_config	=	[
 															{
 																use_account_compute_creds	=	true
@@ -14,41 +15,42 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 									]
 									location		=	[
 															{
-																aws_region				=	"ap-southeast-1"
-																aws_availability_zone	=	"Any"
+																location				=	"southeastasia"
 															}
 									]
 									network_config	=	[
 															{
-																vpc_id						=	"vpc-0e2be045e5fe137cd"
-																subnet_id					=	"subnet-05cf662ed46f9cde8"
-																bastion_node_public_dns		=	"13.229.7.25"
+																vnet_name					=	"qubole-apac-azure-readniness-secure-vnet"
+																subnet_name					=	"private-subnet-for-secure-app"
+																vnet_resource_group_name	=	"qubole-apac-azure-readiness-secure-rg"
+																bastion_node_public_dns		=	"13.76.216.161"
 																bastion_node_port			=	22
 																bastion_node_user			=	"ec2-user"
-																persistent_security_groups	=	"persistent-security-group"
+															}
+									]
+									storage_config	=	[
+															{
+																managed_disk_account_type	=	"standard_lrs"
+																data_disk_count				=	0
+																data_disk_size				=	256
 															}
 									]
 								}								
 	]
 	cluster_info		=	[
 								{
-									master_instance_type			=	"m1.xlarge"
+									master_instance_type			=	"Standard_A6"
 									label 							=	["tf-qb-managed-airflow-cl"]
-									min_nodes						=	1		
+									min_nodes						=	1
 									max_nodes						=	1
-									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
-									disallow_cluster_termination	=	false
+									node_bootstrap					=	"hoodie-airflow-bootstrap.sh"
+									disallow_cluster_termination	=	true
 									datadisk						=	[
 																			{
-																				encryption	=	true
+																				encryption	=	false
 																			}
 									]
 									slave_request_type				=	"ondemand"
-									custom_tags						=	{
-																			"Owner"			=	"Vihag Gupta"
-																			"Environment"	=	"Dev"
-																			"Project"		=	"Terraform Provider"
-																		}
 								}								
 	]
 	engine_config		=	[
@@ -56,8 +58,8 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 									flavour			=	"airflow"
 									airflow_settings	=	[
 															{
-																dbtap_id				=	907
-																fernet_key				=	"a2DbzaMVWidhZOVuNDJ0aKE/Nvw//AGUkTtQ1c6tI7Q="
+																dbtap_id				=	-1
+																fernet_key				=	"Wk607UZxIATjFfvIr/r12xAUTb/CRlKrXAJwUSEl4YQ="
 																overrides				=	"core.executor=CeleryExecutor\ncore.parallelism=32"
 																version					=	"1.8.2"
 																airflow_python_version	=	"2.7"

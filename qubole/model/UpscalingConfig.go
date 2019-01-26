@@ -4,7 +4,7 @@ import (
 	_ "fmt"
 )
 
-type EbsUpscalingConfig struct {
+type UpscalingConfig struct {
 	Max_ebs_volume_count          int     `json:"max_ebs_volume_count,omitempty"`
 	Percent_free_space_threshold  float32 `json:"percent_free_space_threshold,omitempty"`
 	Absolute_free_space_threshold float32 `json:"absolute_free_space_threshold,omitempty"`
@@ -15,7 +15,7 @@ type EbsUpscalingConfig struct {
 /*
 function to flatten EBS Upscaling Config
 */
-func FlattenEbsUpscalingConfig(ia *EbsUpscalingConfig) []map[string]interface{} {
+func FlattenUpscalingConfig(ia *UpscalingConfig) []map[string]interface{} {
 	attrs := map[string]interface{}{}
 	result := make([]map[string]interface{}, 0)
 

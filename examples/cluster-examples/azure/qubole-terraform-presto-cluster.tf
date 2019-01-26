@@ -41,7 +41,7 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 								{
 									master_instance_type			=	"Standard_A6"
 									slave_instance_type				=	"Standard_A7"
-									label 							=	["tf-qb-managed-prestocl"]
+									label 							=	["tf-qb-managed-presto-cl"]
 									min_nodes						=	2
 									max_nodes						=	5
 									idle_cluster_timeout_in_secs	=	3600

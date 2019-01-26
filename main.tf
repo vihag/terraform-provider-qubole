@@ -3,7 +3,7 @@ provider "qubole" {
   api_endpoint	=	"${var.api_endpoint}"
 }
 
-resource "qubole_cluster" "qubole_presto_test_cluster" {
+resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 	cloud_config		=	[
 								{
 									provider 		= 	"aws"
@@ -49,6 +49,20 @@ resource "qubole_cluster" "qubole_presto_test_cluster" {
 																				encryption	=	true
 																			}
 									]
+									heterogeneous_config			=	[
+																			{
+																				memory	=	[
+																								{
+																									instance_type	=	"r4.2xlarge"
+																									weight			=	1.0
+																								}, 
+																								{
+																									instance_type 	=	"r4.4xlarge"
+																									weight			=	2.0
+																								}
+																				]
+																			}
+									]
 									slave_request_type				=	"spot"
 									spot_settings					=	[
 																			{
@@ -65,7 +79,7 @@ resource "qubole_cluster" "qubole_presto_test_cluster" {
 	]
 	engine_config		=	[
 								{
-									flavour			=	"presto"
+									flavour			=	"spark"
 									hadoop_settings	=	[
 															{
 																custom_hadoop_config		=	"mapreduce.map.memory.mb=4704\nmapreduce.reduce.java.opts=-Xmx3763m"
@@ -77,10 +91,10 @@ resource "qubole_cluster" "qubole_presto_test_cluster" {
 																]
 															}
 									]
-									presto_settings	=	[
+									spark_settings	=	[
 															{
-																custom_presto_config		=	"config.properties:\nascm.enabled=true\nascm.bds.target-latency=10s\ncatalog/hive.properties:\nhive.parquet.use-column-names=true\nbootstrap-file-path:\ns3://vihagg.us/qubole/us/scripts/hadoop/node_bootstrap_uber_hudi_presto.sh"
-																presto_version				=	"0.193"
+																custom_spark_config		=	"spark-defaults.conf:\nspark.driver.extraLibraryPath /usr/lib/hadoop2/lib/native"
+																spark_version				=	"2.3-latest"
 																enable_rubix				=	true
 															}
 									]

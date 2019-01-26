@@ -43,3 +43,36 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 	log.Printf("[INFO]Pretty Printing Unmarshalled Response %#v", u)
 	return nil
 }
+
+/*
+function to flatten Datadisk
+*/
+func FlattenDatadisk(ia *Datadisk) []map[string]interface{} {
+	attrs := map[string]interface{}{}
+	result := make([]map[string]interface{}, 0)
+
+	if &ia.Count != nil {
+		attrs["count"] = ia.Count
+	}
+
+	if &ia.Disktype != nil {
+		attrs["type"] = ia.Disktype
+	}
+
+	if &ia.Encryption != nil {
+		attrs["encryption"] = ia.Encryption
+	}
+
+	if &ia.Size != nil {
+		attrs["size"] = ia.Size
+	}
+
+	if &ia.Ebs_upscaling_config != nil {
+		attrs["ebs_upscaling_config"] = FlattenEbsUpscalingConfig(&ia.Ebs_upscaling_config)
+	}
+
+	result = append(result, attrs)
+
+	return result
+}
+

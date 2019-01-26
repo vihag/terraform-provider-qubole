@@ -375,19 +375,21 @@ func resourceQuboleCluster() *schema.Resource {
 							Optional: true,
 							Elem: &schema.Resource{
 								Schema: map[string]*schema.Schema{
-									/*
-														Sample JSON input:
-														{
-											             [
-										                   {"instance_type": "m4.4xlarge", "weight": 1.0},
-										                   {"instance_type": "m4.2xlarge", "weight": 0.5}
-										                  ]
-										                 }
-									*/
-									//TODO better schema representation of this JSON instead of String
-									"memory": {
-										Type:     schema.TypeString,
+									"memory": &schema.Schema{
+										Type:     schema.TypeList,
 										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"instance_type": {
+													Type:     schema.TypeString,
+													Optional: true,
+												},
+												"weight": {
+													Type:     schema.TypeFloat,
+													Optional: true,
+												},
+											},
+										},
 									},
 								},
 							},
@@ -995,8 +997,22 @@ func readClusterInfoFromTf(d *schema.ResourceData) (model.ClusterInfo, bool) {
 				heterogeneousConfigs := v.([]interface{})
 				if len(heterogeneousConfigs) > 0 {
 					configs := heterogeneousConfigs[0].(map[string]interface{})
+					//level 1 of hetro config is the memory sub-object . there will be only one of these
+
 					if v, ok := configs["memory"]; ok {
-						heterogeneous_config.Memory = v.(string)
+						inst_type_array := v.([]interface{})
+						if len(inst_type_array) > 0 {
+							insts := make([]map[string]interface{}, len(inst_type_array))
+							for i, ins := range inst_type_array {
+								datamap := ins.(map[string]interface{})
+								log.Printf("[DEBUG] PRINTING DATAMAP %s", datamap)
+
+								insts[i] = datamap
+
+							}
+
+							heterogeneous_config.Memory = insts
+						}
 					}
 					cluster_info.Heterogeneous_config = heterogeneous_config
 				}
@@ -1382,13 +1398,6 @@ func resourceQuboleClusterCreate(d *schema.ResourceData, meta interface{}) error
 
 		log.Printf("[INFO]response Body:", string(body))
 
-		//Parse the response back to cluster object
-		/*var clusterResponse model.Cluster
-		unmarshallingError := json.Unmarshal(body, &clusterResponse)
-		if unmarshallingError != nil {
-			log.Printf("[ERR]There was an error:", unmarshallingError.Error())
-			return fmt.Errorf("Error in unmarshalling json during update %s", err.Error())
-		}*/
 		//Parse the response using a custom un-marshaller
 		var cluster_response *model.Cluster
 		unmarshallingError := json.Unmarshal(body, &cluster_response)
@@ -1454,34 +1463,34 @@ func resourceQuboleClusterRead(d *schema.ResourceData, meta interface{}) error {
 
 	//Now start setting d with data from the unmarshalled object
 	//Set cloud_config
-	if err := d.Set("cloud_config", flattenCloudConfig(&cluster_response.Cloud_config)); err != nil {
+	if err := d.Set("cloud_config", model.FlattenCloudConfig(&cluster_response.Cloud_config)); err != nil {
 		log.Printf("[ERR] Error setting cloud config: %#v", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting cloud config: %s", err)
 	}
 	//Set cluster_info
-	if err := d.Set("cluster_info", flattenClusterInfo(&cluster_response.Cluster_info)); err != nil {
+	if err := d.Set("cluster_info", model.FlattenClusterInfo(&cluster_response.Cluster_info)); err != nil {
 		log.Printf("[ERR] Error setting cluster info: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting cluster info: %s", err)
 	}
 
 	//Set engine_config
-	if err := d.Set("engine_config", flattenEngineConfig(&cluster_response.Engine_config)); err != nil {
+	if err := d.Set("engine_config", model.FlattenEngineConfig(&cluster_response.Engine_config)); err != nil {
 		log.Printf("[ERR] Error setting Engine Config: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting Engine Config: %s", err)
 	}
 
 	//Set monitoring
-	if err := d.Set("monitoring", flattenMonitoring(&cluster_response.Monitoring)); err != nil {
+	if err := d.Set("monitoring", model.FlattenMonitoring(&cluster_response.Monitoring)); err != nil {
 		log.Printf("[ERR] Error setting monitoring: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting Monitoring: %s", err)
 	}
 
 	//Set internal
-	if err := d.Set("internal", flattenInternal(&cluster_response.Internal)); err != nil {
+	if err := d.Set("internal", model.FlattenInternal(&cluster_response.Internal)); err != nil {
 		log.Printf("[ERR] Error setting Internal: %s", err)
 		d.SetId("")
 		return fmt.Errorf("[ERR] Error setting Internal: %s", err)
@@ -1593,733 +1602,4 @@ func resourceQuboleClusterDelete(d *schema.ResourceData, meta interface{}) error
 	//Nilling the terraform resource id explicitly
 	d.SetId("")
 	return nil
-}
-
-/*
-function to flatten airflow settings to the schema that is defined
-*/
-func flattenAirflowSettings(ia *model.AirflowSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Dbtap_id != nil {
-		attrs["dbtap_id"] = ia.Dbtap_id
-	}
-	if &ia.Fernet_key != nil {
-		attrs["fernet_key"] = ia.Fernet_key
-	}
-	if &ia.Overrides != nil {
-		attrs["overrides"] = ia.Overrides
-	}
-	if &ia.Version != nil {
-		attrs["version"] = ia.Version
-	}
-	if &ia.Airflow_python_version != nil {
-		attrs["airflow_python_version"] = ia.Airflow_python_version
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Cloud Config
-*/
-func flattenCloudConfig(ia *model.CloudConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Provider != nil {
-		attrs["provider"] = ia.Provider
-	}
-
-	if &ia.Compute_config != nil {
-		attrs["compute_config"] = flattenComputeConfig(&ia.Compute_config)
-	}
-
-	if &ia.Location != nil {
-		attrs["location"] = flattenLocation(&ia.Location)
-	}
-
-	if &ia.Network_config != nil {
-		attrs["network_config"] = flattenNetworkConfig(&ia.Network_config)
-	}
-
-	if &ia.Storage_config != nil {
-		attrs["storage_config"] = flattenStorageConfig(&ia.Storage_config)
-	}
-
-	result = append(result, attrs)
-
-	log.Print(result)
-	return result
-}
-
-/*
-function to Cluster Info
-*/
-func flattenClusterInfo(ia *model.ClusterInfo) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Master_instance_type != nil {
-		attrs["master_instance_type"] = ia.Master_instance_type
-	}
-
-	if &ia.Slave_instance_type != nil {
-		attrs["slave_instance_type"] = ia.Slave_instance_type
-	}
-
-	if &ia.Node_base_cooldown_period != nil {
-		attrs["node_base_cooldown_period"] = ia.Node_base_cooldown_period
-	}
-
-	if &ia.Label != nil {
-		log.Print(ia.Label)
-		attrs["label"] = ia.Label
-	}
-
-	if &ia.Min_nodes != nil {
-		attrs["min_nodes"] = ia.Min_nodes
-	}
-
-	if &ia.Max_nodes != nil {
-		attrs["max_nodes"] = ia.Max_nodes
-	}
-
-	if &ia.Idle_cluster_timeout_in_secs != nil {
-		attrs["idle_cluster_timeout_in_secs"] = ia.Idle_cluster_timeout_in_secs
-	}
-
-	if &ia.Cluster_name != nil {
-		attrs["cluster_name"] = ia.Cluster_name
-	}
-
-	if &ia.Node_bootstrap != nil {
-		attrs["node_bootstrap"] = ia.Node_bootstrap
-	}
-
-	if &ia.Disallow_cluster_termination != nil {
-		attrs["disallow_cluster_termination"] = ia.Disallow_cluster_termination
-	}
-
-	if &ia.Force_tunnel != nil {
-		attrs["force_tunnel"] = ia.Force_tunnel
-	}
-
-	if &ia.Customer_ssh_key != nil {
-		attrs["customer_ssh_key"] = ia.Customer_ssh_key
-	}
-
-	if &ia.Child_hs2_cluster_id != nil {
-		attrs["child_hs2_cluster_id"] = ia.Child_hs2_cluster_id
-	}
-
-	if &ia.Parent_cluster_id != nil {
-		attrs["parent_cluster_id"] = ia.Parent_cluster_id
-	}
-
-	if &ia.Env_settings != nil {
-		attrs["env_settings"] = flattenEnvSettings(&ia.Env_settings)
-	}
-
-	if &ia.Datadisk != nil {
-		attrs["datadisk"] = flattenDatadisk(&ia.Datadisk)
-	}
-
-	if &ia.Heterogeneous_config != nil {
-		attrs["heterogeneous_config"] = flattenHeterogeneousConfig(&ia.Heterogeneous_config)
-	}
-
-	if &ia.Slave_request_type != nil {
-		attrs["slave_request_type"] = ia.Slave_request_type
-	}
-
-	if &ia.Custom_tags != nil {
-		attrs["custom_tags"] = ia.Custom_tags
-	}
-
-	if &ia.Fallback_to_ondemand != nil {
-		attrs["fallback_to_ondemand"] = ia.Fallback_to_ondemand
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Compute Config
-*/
-func flattenComputeConfig(ia *model.ComputeConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Compute_validated != nil {
-		attrs["compute_validated"] = ia.Compute_validated
-	}
-
-	if &ia.Use_account_compute_creds != nil {
-		attrs["use_account_compute_creds"] = ia.Use_account_compute_creds
-	}
-
-	if &ia.Instance_tenancy != nil {
-		attrs["instance_tenancy"] = ia.Instance_tenancy
-	}
-
-	if &ia.Compute_role_arn != nil {
-		attrs["compute_role_arn"] = ia.Compute_role_arn
-	}
-
-	if &ia.Compute_external_id != nil {
-		attrs["compute_external_id"] = ia.Compute_external_id
-	}
-
-	if &ia.Role_instance_profile != nil {
-		attrs["role_instance_profile"] = ia.Role_instance_profile
-	}
-
-	if &ia.Compute_client_id != nil {
-		attrs["compute_client_id"] = ia.Compute_client_id
-	}
-
-	if &ia.Compute_client_secret != nil {
-		attrs["compute_client_secret"] = ia.Compute_client_secret
-	}
-
-	if &ia.Compute_tenant_id != nil {
-		attrs["compute_tenant_id"] = ia.Compute_tenant_id
-	}
-
-	if &ia.Compute_subscription_id != nil {
-		attrs["compute_subscription_id"] = ia.Compute_subscription_id
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Datadisk
-*/
-func flattenDatadisk(ia *model.Datadisk) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Count != nil {
-		attrs["count"] = ia.Count
-	}
-
-	if &ia.Disktype != nil {
-		attrs["type"] = ia.Disktype
-	}
-
-	if &ia.Encryption != nil {
-		attrs["encryption"] = ia.Encryption
-	}
-
-	if &ia.Size != nil {
-		attrs["size"] = ia.Size
-	}
-
-	if &ia.Ebs_upscaling_config != nil {
-		attrs["ebs_upscaling_config"] = flattenEbsUpscalingConfig(&ia.Ebs_upscaling_config)
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Datadog Settings
-*/
-func flattenDatadog(ia *model.Datadog) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Datadog_api_token != nil {
-		attrs["datadog_api_token"] = ia.Datadog_api_token
-	}
-
-	if &ia.Datadog_app_token != nil {
-		attrs["datadog_app_token"] = ia.Datadog_app_token
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to Disk Upscaling Settings
-*/
-func flattenDiskUpscalingConfig(ia *model.DiskUpscalingConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Percent_free_space_threshold != nil {
-		attrs["percent_free_space_threshold"] = ia.Percent_free_space_threshold
-	}
-	if &ia.Max_data_disk_count != nil {
-		attrs["max_data_disk_count"] = ia.Max_data_disk_count
-	}
-	if &ia.Absolute_free_space_threshold != nil {
-		attrs["absolute_free_space_threshold"] = ia.Absolute_free_space_threshold
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Engine Config Settings
-*/
-func flattenEngineConfig(ia *model.EngineConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Flavour != nil {
-		attrs["flavour"] = ia.Flavour
-	}
-	if &ia.Hadoop_settings != nil {
-		attrs["hadoop_settings"] = flattenHadoopSettings(&ia.Hadoop_settings)
-	}
-	if &ia.Presto_settings != nil {
-		attrs["presto_settings"] = flattenPrestoSettings(&ia.Presto_settings)
-	}
-	if &ia.Spark_settings != nil {
-		attrs["spark_settings"] = flattenSparkSettings(&ia.Spark_settings)
-	}
-	if &ia.Hive_settings != nil {
-		attrs["hive_settings"] = flattenHiveSettings(&ia.Hive_settings)
-	}
-	if &ia.Airflow_settings != nil {
-		attrs["airflow_settings"] = flattenAirflowSettings(&ia.Airflow_settings)
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten fair scheduler Settings
-*/
-func flattenFairSchedulerSettings(ia *model.FairSchedulerSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Default_pool != nil {
-		attrs["default_pool"] = ia.Default_pool
-	}
-	if &ia.Fairscheduler_config_xml != nil {
-		attrs["fairscheduler_config_xml"] = ia.Fairscheduler_config_xml
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten EBS Upscaling Config
-*/
-func flattenEbsUpscalingConfig(ia *model.EbsUpscalingConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Max_ebs_volume_count != nil {
-		attrs["max_ebs_volume_count"] = ia.Max_ebs_volume_count
-	}
-	if &ia.Percent_free_space_threshold != nil {
-		attrs["percent_free_space_threshold"] = ia.Percent_free_space_threshold
-	}
-	if &ia.Absolute_free_space_threshold != nil {
-		attrs["absolute_free_space_threshold"] = ia.Absolute_free_space_threshold
-	}
-	if &ia.Sampling_interval != nil {
-		attrs["sampling_interval"] = ia.Sampling_interval
-	}
-	if &ia.Sampling_window != nil {
-		attrs["sampling_window"] = ia.Sampling_window
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Env Settings
-*/
-func flattenEnvSettings(ia *model.EnvSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Python_version != nil {
-		attrs["python_version"] = ia.Python_version
-	}
-	if &ia.R_version != nil {
-		attrs["r_version"] = ia.R_version
-	}
-	if &ia.Name != nil {
-		attrs["name"] = ia.Name
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Hadoop Settings
-*/
-func flattenHadoopSettings(ia *model.HadoopSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Use_qubole_placement_policy != nil {
-		attrs["use_qubole_placement_policy"] = ia.Use_qubole_placement_policy
-	}
-	if &ia.Is_ha != nil {
-		attrs["is_ha"] = ia.Is_ha
-	}
-	if &ia.Custom_hadoop_config != nil {
-		attrs["custom_hadoop_config"] = ia.Custom_hadoop_config
-	}
-	if &ia.Fairscheduler_settings != nil {
-		attrs["fairscheduler_settings"] = flattenFairSchedulerSettings(&ia.Fairscheduler_settings)
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Heterogeneous Configuration
-*/
-func flattenHeterogeneousConfig(ia *model.HeterogeneousConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Memory != nil {
-		attrs["memory"] = ia.Memory
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Hive Settings
-*/
-func flattenHiveSettings(ia *model.HiveSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Is_hs2 != nil {
-		attrs["is_hs2"] = ia.Is_hs2
-	}
-	if &ia.Hive_version != nil {
-		attrs["hive_version"] = ia.Hive_version
-	}
-	if &ia.Is_metadata_cache_enabled != nil {
-		attrs["is_metadata_cache_enabled"] = ia.Is_metadata_cache_enabled
-	}
-	if &ia.Hs2_thrift_port != nil {
-		attrs["hs2_thrift_port"] = ia.Hs2_thrift_port
-	}
-	if &ia.Overrides != nil {
-		attrs["overrides"] = ia.Overrides
-	}
-	if &ia.Execution_engine != nil {
-		attrs["execution_engine"] = ia.Execution_engine
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Internal Config
-*/
-func flattenInternal(ia *model.Internal) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Zeppelin_interpreter_mode != nil {
-		attrs["zeppelin_interpreter_mode"] = ia.Zeppelin_interpreter_mode
-	}
-	if &ia.Spark_s3_package_name != nil {
-		attrs["spark_s3_package_name"] = ia.Spark_s3_package_name
-	}
-	if &ia.Zeppelin_s3_package_name != nil {
-		attrs["zeppelin_s3_package_name"] = ia.Zeppelin_s3_package_name
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Location Config
-*/
-func flattenLocation(ia *model.Location) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Aws_region != nil {
-		attrs["aws_region"] = ia.Aws_region
-	}
-	if &ia.Aws_availability_zone != nil {
-		attrs["aws_availability_zone"] = ia.Aws_availability_zone
-	}
-	if &ia.Location != nil {
-		attrs["location"] = ia.Location
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Monitoring Config
-*/
-func flattenMonitoring(ia *model.Monitoring) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Ganglia != nil {
-		attrs["ganglia"] = ia.Ganglia
-	}
-	if &ia.Datadog != nil {
-		attrs["datadog"] = flattenDatadog(&ia.Datadog)
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Network Config
-*/
-func flattenNetworkConfig(ia *model.NetworkConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Vpc_id != nil {
-		attrs["vpc_id"] = ia.Vpc_id
-	}
-	if &ia.Subnet_id != nil {
-		attrs["subnet_id"] = ia.Subnet_id
-	}
-	if &ia.Bastion_node_public_dns != nil {
-		attrs["bastion_node_public_dns"] = ia.Bastion_node_public_dns
-	}
-	if &ia.Bastion_node_port != nil {
-		attrs["bastion_node_port"] = ia.Bastion_node_port
-	}
-	if &ia.Bastion_node_user != nil {
-		attrs["bastion_node_user"] = ia.Bastion_node_user
-	}
-	if &ia.Master_elastic_ip != nil {
-		attrs["master_elastic_ip"] = ia.Master_elastic_ip
-	}
-	if &ia.Persistent_security_groups != nil {
-		attrs["persistent_security_groups"] = ia.Persistent_security_groups
-	}
-	if &ia.Persistent_security_group_resource_group_name != nil {
-		attrs["persistent_security_group_resource_group_name"] = ia.Persistent_security_group_resource_group_name
-	}
-	if &ia.Persistent_security_group_name != nil {
-		attrs["persistent_security_group_name"] = ia.Persistent_security_group_name
-	}
-	if &ia.Vnet_name != nil {
-		attrs["vnet_name"] = ia.Vnet_name
-	}
-	if &ia.Subnet_name != nil {
-		attrs["subnet_name"] = ia.Subnet_name
-	}
-	if &ia.Vnet_resource_group_name != nil {
-		attrs["vnet_resource_group_name"] = ia.Vnet_resource_group_name
-	}
-	if &ia.Master_static_nic_name != nil {
-		attrs["master_static_nic_name"] = ia.Master_static_nic_name
-	}
-	if &ia.Master_static_public_ip_name != nil {
-		attrs["master_static_public_ip_name"] = ia.Master_static_public_ip_name
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Presto Settings
-*/
-func flattenPrestoSettings(ia *model.PrestoSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Presto_version != nil {
-		attrs["presto_version"] = ia.Presto_version
-	}
-	if &ia.Custom_presto_config != nil {
-		attrs["custom_presto_config"] = ia.Custom_presto_config
-	}
-	if &ia.Enable_rubix != nil {
-		attrs["enable_rubix"] = ia.Enable_rubix
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Spark Settings
-*/
-func flattenSparkSettings(ia *model.SparkSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Spark_version != nil {
-		attrs["spark_version"] = ia.Spark_version
-	}
-	if &ia.Custom_spark_config != nil {
-		attrs["custom_spark_config"] = ia.Custom_spark_config
-	}
-	if &ia.Enable_rubix != nil {
-		attrs["enable_rubix"] = ia.Enable_rubix
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Spot Block Settings
-*/
-func flattenSpotBlockSettings(ia *model.SpotBlockSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Duration != nil {
-		attrs["duration"] = ia.Duration
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Spot Instance Settings
-*/
-func flattenSpotInstanceSettings(ia *model.SpotInstanceSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Maximum_bid_price_percentage != nil {
-		attrs["maximum_bid_price_percentage"] = ia.Maximum_bid_price_percentage
-	}
-	if &ia.Timeout_for_request != nil {
-		attrs["timeout_for_request"] = ia.Timeout_for_request
-	}
-	if &ia.Maximum_spot_instance_percentage != nil {
-		attrs["maximum_spot_instance_percentage"] = ia.Maximum_spot_instance_percentage
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Spot Settings
-*/
-func flattenSpotSettings(ia *model.SpotSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Spot_instance_settings != nil {
-		attrs["spot_instance_settings"] = flattenSpotInstanceSettings(&ia.Spot_instance_settings)
-	}
-	if &ia.Spot_block_settings != nil {
-		attrs["spot_block_settings"] = flattenSpotBlockSettings(&ia.Spot_block_settings)
-	}
-	if &ia.Stable_spot_instance_settings != nil {
-		attrs["stable_spot_instance_settings"] = flattenStableSpotInstanceSettings(&ia.Stable_spot_instance_settings)
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Stable Spot Instance Settings
-*/
-func flattenStableSpotInstanceSettings(ia *model.StableSpotInstanceSettings) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Maximum_bid_price_percentage != nil {
-		attrs["maximum_bid_price_percentage"] = ia.Maximum_bid_price_percentage
-	}
-	if &ia.Timeout_for_request != nil {
-		attrs["timeout_for_request"] = ia.Timeout_for_request
-	}
-
-	result = append(result, attrs)
-
-	return result
-}
-
-/*
-function to flatten Storage Config
-*/
-func flattenStorageConfig(ia *model.StorageConfig) []map[string]interface{} {
-	attrs := map[string]interface{}{}
-	result := make([]map[string]interface{}, 0)
-
-	if &ia.Storage_access_key != nil {
-		attrs["storage_access_key"] = ia.Storage_access_key
-	}
-	if &ia.Storage_account_name != nil {
-		attrs["storage_account_name"] = ia.Storage_account_name
-	}
-	if &ia.Disk_storage_account_name != nil {
-		attrs["disk_storage_account_name"] = ia.Disk_storage_account_name
-	}
-	if &ia.Disk_storage_account_resource_group_name != nil {
-		attrs["disk_storage_account_resource_group_name"] = ia.Disk_storage_account_resource_group_name
-	}
-	if &ia.Managed_disk_account_type != nil {
-		attrs["managed_disk_account_type"] = ia.Managed_disk_account_type
-	}
-	if &ia.Data_disk_count != nil {
-		attrs["data_disk_count"] = ia.Data_disk_count
-	}
-	if &ia.Data_disk_size != nil {
-		attrs["data_disk_size"] = ia.Data_disk_size
-	}
-	if &ia.Disk_upscaling_config != nil {
-		attrs["disk_upscaling_config"] = flattenDiskUpscalingConfig(&ia.Disk_upscaling_config)
-	}
-	result = append(result, attrs)
-
-	return result
 }

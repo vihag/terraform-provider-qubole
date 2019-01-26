@@ -33,3 +33,21 @@ func FlattenLocation(ia *Location) []map[string]interface{} {
 	return result
 }
 
+func ReadLocationFromTf(location *Location, locationConfig []interface{}) bool {
+
+	if len(locationConfig) > 0 {
+		configs := locationConfig[0].(map[string]interface{})
+		if v, ok := configs["aws_region"]; ok {
+			location.Aws_region = v.(string)
+		}
+		if v, ok := configs["aws_availability_zone"]; ok {
+			location.Aws_availability_zone = v.(string)
+		}
+		if v, ok := configs["location"]; ok {
+			location.Location = v.(string)
+		}
+
+	}
+
+	return true
+}

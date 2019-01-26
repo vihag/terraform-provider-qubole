@@ -29,3 +29,17 @@ func FlattenDatadog(ia *Datadog) []map[string]interface{} {
 	return result
 }
 
+func ReadDatadogFromTf(datadog *Datadog, datadogSettings []interface{}) bool {
+
+	if len(datadogSettings) > 0 {
+		configs := datadogSettings[0].(map[string]interface{})
+		if v, ok := configs["datadog_api_token"]; ok {
+			datadog.Datadog_api_token = v.(string)
+		}
+		if v, ok := configs["datadog_app_token"]; ok {
+			datadog.Datadog_app_token = v.(string)
+		}
+	}
+
+	return true
+}

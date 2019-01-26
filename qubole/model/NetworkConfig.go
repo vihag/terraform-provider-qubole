@@ -77,3 +77,54 @@ func FlattenNetworkConfig(ia *NetworkConfig) []map[string]interface{} {
 	return result
 }
 
+func ReadNetworkConfigFromTf(network_config *NetworkConfig, networkConfig []interface{}) bool {
+
+	if len(networkConfig) > 0 {
+		configs := networkConfig[0].(map[string]interface{})
+		if v, ok := configs["vpc_id"]; ok {
+			network_config.Vpc_id = v.(string)
+		}
+		if v, ok := configs["subnet_id"]; ok {
+			network_config.Subnet_id = v.(string)
+		}
+		if v, ok := configs["bastion_node_public_dns"]; ok {
+			network_config.Bastion_node_public_dns = v.(string)
+		}
+		if v, ok := configs["bastion_node_port"]; ok {
+			network_config.Bastion_node_port = v.(int)
+		}
+		if v, ok := configs["bastion_node_user"]; ok {
+			network_config.Bastion_node_user = v.(string)
+		}
+		if v, ok := configs["master_elastic_ip"]; ok {
+			network_config.Master_elastic_ip = v.(string)
+		}
+		if v, ok := configs["persistent_security_groups"]; ok {
+			network_config.Persistent_security_groups = v.(string)
+		}
+		if v, ok := configs["persistent_security_group_resource_group_name"]; ok {
+			network_config.Persistent_security_group_resource_group_name = v.(string)
+		}
+		if v, ok := configs["persistent_security_group_name"]; ok {
+			network_config.Persistent_security_group_name = v.(string)
+		}
+		if v, ok := configs["vnet_name"]; ok {
+			network_config.Vnet_name = v.(string)
+		}
+		if v, ok := configs["subnet_name"]; ok {
+			network_config.Subnet_name = v.(string)
+		}
+		if v, ok := configs["vnet_resource_group_name"]; ok {
+			network_config.Vnet_resource_group_name = v.(string)
+		}
+		if v, ok := configs["master_static_nic_name"]; ok {
+			network_config.Master_static_nic_name = v.(string)
+		}
+		if v, ok := configs["master_static_public_ip_name"]; ok {
+			network_config.Master_static_public_ip_name = v.(string)
+		}
+
+	}
+
+	return true
+}

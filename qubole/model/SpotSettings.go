@@ -31,3 +31,36 @@ func FlattenSpotSettings(ia *SpotSettings) []map[string]interface{} {
 
 	return result
 }
+
+func ReadSpotSettingsFromTf(spot_settings *SpotSettings, spotSettings []interface{}) bool {
+
+	if len(spotSettings) > 0 {
+		configs := spotSettings[0].(map[string]interface{})
+
+		//Read spot instance settings
+		var spot_instance_settings SpotInstanceSettings
+		if v, ok := configs["spot_instance_settings"]; ok {
+			spotInstanceSettings := v.([]interface{})
+			ReadSpotInstanceSettingsFromTf(&spot_instance_settings, spotInstanceSettings)
+			spot_settings.Spot_instance_settings = spot_instance_settings
+		}
+
+		//Read stable spot instance settings
+		var stable_spot_instance_settings StableSpotInstanceSettings
+		if v, ok := configs["stable_spot_instance_settings"]; ok {
+			stableSpotInstanceSettings := v.([]interface{})
+			ReadStableSpotInstanceSettingsFromTf(&stable_spot_instance_settings, stableSpotInstanceSettings)
+			spot_settings.Stable_spot_instance_settings = stable_spot_instance_settings
+		}
+
+		//Read spot block settings
+		var spot_block_settings SpotBlockSettings
+		if v, ok := configs["spot_block_settings"]; ok {
+			spotBlockSettings := v.([]interface{})
+			ReadSpotBlockSettingsFromTf(&spot_block_settings, spotBlockSettings)
+			spot_settings.Spot_block_settings = spot_block_settings
+		}
+	}
+
+	return true
+}

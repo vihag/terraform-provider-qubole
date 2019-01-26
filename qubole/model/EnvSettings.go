@@ -32,4 +32,20 @@ func FlattenEnvSettings(ia *EnvSettings) []map[string]interface{} {
 	return result
 }
 
+func ReadEnvSettingsFromTf(env_settings *EnvSettings, envSettings []interface{}) bool {
 
+	if len(envSettings) > 0 {
+		configs := envSettings[0].(map[string]interface{})
+		if v, ok := configs["python_version"]; ok {
+			env_settings.Python_version = v.(string)
+		}
+		if v, ok := configs["r_version"]; ok {
+			env_settings.R_version = v.(string)
+		}
+		if v, ok := configs["name"]; ok {
+			env_settings.Name = v.(string)
+		}
+	}
+
+	return true
+}

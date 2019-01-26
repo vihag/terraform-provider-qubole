@@ -43,3 +43,30 @@ func FlattenHiveSettings(ia *HiveSettings) []map[string]interface{} {
 
 	return result
 }
+
+func ReadHiveSettingsFromTf(hive_settings *HiveSettings, hiveSettings []interface{}) bool {
+
+	if len(hiveSettings) > 0 {
+		configs := hiveSettings[0].(map[string]interface{})
+		if v, ok := configs["is_hs2"]; ok {
+			hive_settings.Is_hs2 = v.(bool)
+		}
+		if v, ok := configs["hive_version"]; ok {
+			hive_settings.Hive_version = v.(string)
+		}
+		if v, ok := configs["is_metadata_cache_enabled"]; ok {
+			hive_settings.Is_metadata_cache_enabled = v.(bool)
+		}
+		if v, ok := configs["hs2_thrift_port"]; ok {
+			hive_settings.Hs2_thrift_port = v.(int)
+		}
+		if v, ok := configs["overrides"]; ok {
+			hive_settings.Overrides = v.(string)
+		}
+		if v, ok := configs["execution_engine"]; ok {
+			hive_settings.Execution_engine = v.(string)
+		}
+	}
+
+	return true
+}

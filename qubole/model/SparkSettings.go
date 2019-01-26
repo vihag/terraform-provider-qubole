@@ -31,3 +31,21 @@ func FlattenSparkSettings(ia *SparkSettings) []map[string]interface{} {
 
 	return result
 }
+
+func ReadSparkSettingsFromTf(spark_settings *SparkSettings, sparkSettings []interface{}) bool {
+
+	if len(sparkSettings) > 0 {
+		configs := sparkSettings[0].(map[string]interface{})
+		if v, ok := configs["spark_version"]; ok {
+			spark_settings.Spark_version = v.(string)
+		}
+		if v, ok := configs["custom_spark_config"]; ok {
+			spark_settings.Custom_spark_config = v.(string)
+		}
+		if v, ok := configs["enable_rubix"]; ok {
+			spark_settings.Enable_rubix = v.(bool)
+		}
+	}
+
+	return true
+}

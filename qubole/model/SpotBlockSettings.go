@@ -23,3 +23,15 @@ func FlattenSpotBlockSettings(ia *SpotBlockSettings) []map[string]interface{} {
 
 	return result
 }
+
+func ReadSpotBlockSettingsFromTf(spot_block_settings *SpotBlockSettings, spotBlockSettings []interface{}) bool {
+
+	if len(spotBlockSettings) > 0 {
+		configs := spotBlockSettings[0].(map[string]interface{})
+		if v, ok := configs["duration"]; ok {
+			spot_block_settings.Duration = v.(int)
+		}
+	}
+
+	return true
+}

@@ -48,16 +48,8 @@ func ReadMonitoringFromTf(d *schema.ResourceData) (Monitoring, bool) {
 			var datadog Datadog
 			if v, ok := configs["datadog"]; ok {
 				datadogSettings := v.([]interface{})
-				if len(datadogSettings) > 0 {
-					configs := datadogSettings[0].(map[string]interface{})
-					if v, ok := configs["datadog_api_token"]; ok {
-						datadog.Datadog_api_token = v.(string)
-					}
-					if v, ok := configs["datadog_app_token"]; ok {
-						datadog.Datadog_app_token = v.(string)
-					}
-					monitoring.Datadog = datadog
-				}
+				ReadDatadogFromTf(&datadog, datadogSettings)
+				monitoring.Datadog = datadog
 			}
 
 			return monitoring, true

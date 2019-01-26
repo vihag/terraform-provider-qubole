@@ -50,3 +50,40 @@ func FlattenStorageConfig(ia *StorageConfig) []map[string]interface{} {
 
 	return result
 }
+
+func ReadStorageConfigFromTf(storage_config *StorageConfig, storageConfig []interface{}) bool {
+
+	if len(storageConfig) > 0 {
+		configs := storageConfig[0].(map[string]interface{})
+		if v, ok := configs["storage_access_key"]; ok {
+			storage_config.Storage_access_key = v.(string)
+		}
+		if v, ok := configs["storage_account_name"]; ok {
+			storage_config.Storage_account_name = v.(string)
+		}
+		if v, ok := configs["disk_storage_account_name"]; ok {
+			storage_config.Disk_storage_account_name = v.(string)
+		}
+		if v, ok := configs["disk_storage_account_resource_group_name"]; ok {
+			storage_config.Disk_storage_account_resource_group_name = v.(string)
+		}
+		if v, ok := configs["managed_disk_account_type"]; ok {
+			storage_config.Managed_disk_account_type = v.(string)
+		}
+		if v, ok := configs["data_disk_count"]; ok {
+			storage_config.Data_disk_count = v.(int)
+		}
+		if v, ok := configs["data_disk_size"]; ok {
+			storage_config.Data_disk_size = v.(int)
+		}
+		//Read disk upscaling config
+		var disk_upscaling_config DiskUpscalingConfig
+		if v, ok := configs["disk_upscaling_config"]; ok {
+			diskUpscalingConfig := v.([]interface{})
+			ReadDiskUpscalingConfigFromTf(&disk_upscaling_config, diskUpscalingConfig)
+			storage_config.Disk_upscaling_config = disk_upscaling_config
+		}
+	}
+
+	return true
+}

@@ -39,3 +39,27 @@ func FlattenUpscalingConfig(ia *UpscalingConfig) []map[string]interface{} {
 
 	return result
 }
+
+func ReadUpscalingConfigFromTf(upscaling_config *UpscalingConfig, ebsUpscalingConfigs []interface{}) bool {
+
+	if len(ebsUpscalingConfigs) > 0 {
+		configs := ebsUpscalingConfigs[0].(map[string]interface{})
+		if v, ok := configs["max_ebs_volume_count"]; ok {
+			upscaling_config.Max_ebs_volume_count = v.(int)
+		}
+		if v, ok := configs["percent_free_space_threshold"]; ok {
+			upscaling_config.Percent_free_space_threshold = float32(v.(int))
+		}
+		if v, ok := configs["absolute_free_space_threshold"]; ok {
+			upscaling_config.Absolute_free_space_threshold = float32(v.(int))
+		}
+		if v, ok := configs["sampling_interval"]; ok {
+			upscaling_config.Sampling_interval = v.(int)
+		}
+		if v, ok := configs["sampling_window"]; ok {
+			upscaling_config.Sampling_window = v.(int)
+		}
+	}
+
+	return true
+}

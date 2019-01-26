@@ -31,3 +31,21 @@ func FlattenPrestoSettings(ia *PrestoSettings) []map[string]interface{} {
 
 	return result
 }
+
+func ReadPrestoSettingsFromTf(presto_settings *PrestoSettings, prestoSettings []interface{}) bool {
+
+	if len(prestoSettings) > 0 {
+		configs := prestoSettings[0].(map[string]interface{})
+		if v, ok := configs["presto_version"]; ok {
+			presto_settings.Presto_version = v.(string)
+		}
+		if v, ok := configs["custom_presto_config"]; ok {
+			presto_settings.Custom_presto_config = v.(string)
+		}
+		if v, ok := configs["enable_rubix"]; ok {
+			presto_settings.Enable_rubix = v.(bool)
+		}
+	}
+
+	return true
+}

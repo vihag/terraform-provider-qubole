@@ -32,3 +32,19 @@ func FlattenDiskUpscalingConfig(ia *DiskUpscalingConfig) []map[string]interface{
 	return result
 }
 
+func ReadDiskUpscalingConfigFromTf(disk_upscaling_config *DiskUpscalingConfig, diskUpscalingConfig []interface{}) bool {
+
+	if len(diskUpscalingConfig) > 0 {
+		configs := diskUpscalingConfig[0].(map[string]interface{})
+		if v, ok := configs["percent_free_space_threshold"]; ok {
+			disk_upscaling_config.Percent_free_space_threshold = float32(v.(int))
+		}
+		if v, ok := configs["max_data_disk_count"]; ok {
+			disk_upscaling_config.Max_data_disk_count = v.(int)
+		}
+		if v, ok := configs["absolute_free_space_threshold"]; ok {
+			disk_upscaling_config.Absolute_free_space_threshold = float32(v.(int))
+		}
+	}
+	return true
+}

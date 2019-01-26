@@ -27,3 +27,18 @@ func FlattenStableSpotInstanceSettings(ia *StableSpotInstanceSettings) []map[str
 
 	return result
 }
+
+func ReadStableSpotInstanceSettingsFromTf(stable_spot_instance_settings *StableSpotInstanceSettings, stableSpotInstanceSettings []interface{}) bool {
+
+	if len(stableSpotInstanceSettings) > 0 {
+		configs := stableSpotInstanceSettings[0].(map[string]interface{})
+		if v, ok := configs["maximum_bid_price_percentage"]; ok {
+			stable_spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
+		}
+		if v, ok := configs["timeout_for_request"]; ok {
+			stable_spot_instance_settings.Timeout_for_request = v.(int)
+		}
+	}
+
+	return true
+}

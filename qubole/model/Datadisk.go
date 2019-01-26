@@ -20,8 +20,8 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 	log.Printf("[DEBUG]using custom unmarshaller for umarshalling cluster object: %s", "Datadisk")
 	type Alias Datadisk //some alias for the actual struct
 	aux := &struct {
-		Size             []interface{}   `json:"size,omitempty"` 
-		Upscaling_config UpscalingConfig `json:"ebs_upscaling_config,omitempty"` 
+		Size             []interface{}   `json:"size,omitempty"`
+		Upscaling_config UpscalingConfig `json:"ebs_upscaling_config,omitempty"`
 		*Alias                           //rest of the actual stuff
 	}{
 		Alias: (*Alias)(u), //business as usual
@@ -40,9 +40,9 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 		log.Printf("[DEBUG]reading the size array to extract the first element: %s", int(aux.Size[0].(float64)))
 		u.Size = int(aux.Size[0].(float64))
 	}
-	
+
 	//Now concentrate on Ebs Upscaling Config
-	if &aux.Upscaling_config !=nil {
+	if &aux.Upscaling_config != nil {
 		log.Printf("[DEBUG]Translating Ebs_Upscaling_Config to Upscaling config %s", aux.Upscaling_config)
 		u.Upscaling_config = aux.Upscaling_config
 	}
@@ -80,4 +80,32 @@ func FlattenDatadisk(ia *Datadisk) []map[string]interface{} {
 	result = append(result, attrs)
 
 	return result
+}
+
+func ReadDatadiskFromTf(datadisk *Datadisk, datadiskConfig []interface{}) bool {
+
+	if len(datadiskConfig) > 0 {
+		configs := datadiskConfig[0].(map[string]interface{})
+		if v, ok := configs["count"]; ok {
+			datadisk.Count = v.(int)
+		}
+		if v, ok := configs["type"]; ok {
+			datadisk.Disktype = v.(string)
+		}
+		if v, ok := configs["encryption"]; ok {
+			datadisk.Encryption = v.(bool)
+		}
+		if v, ok := configs["size"]; ok {
+			datadisk.Size = v.(int)
+		}
+		//Read disk upscaling config
+		var upscaling_config UpscalingConfig
+		if v, ok := configs["upscaling_config"]; ok {
+			ebsUpscalingConfigs := v.([]interface{})
+			ReadUpscalingConfigFromTf(&upscaling_config, ebsUpscalingConfigs)
+			datadisk.Upscaling_config = upscaling_config
+		}
+	}
+
+	return true
 }

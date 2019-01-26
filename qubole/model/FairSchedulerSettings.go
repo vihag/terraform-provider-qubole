@@ -27,3 +27,18 @@ func FlattenFairSchedulerSettings(ia *FairSchedulerSettings) []map[string]interf
 
 	return result
 }
+
+func ReadFairSchedulerSettingsFromTf(fairscheduler_settings *FairSchedulerSettings, fairSchedulerSettings []interface{}) bool {
+
+	if len(fairSchedulerSettings) > 0 {
+		configs := fairSchedulerSettings[0].(map[string]interface{})
+		if v, ok := configs["default_pool"]; ok {
+			fairscheduler_settings.Default_pool = v.(string)
+		}
+		if v, ok := configs["fairscheduler_config_xml"]; ok {
+			fairscheduler_settings.Fairscheduler_config_xml = v.(string)
+		}
+	}
+
+	return true
+}

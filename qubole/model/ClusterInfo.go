@@ -3,8 +3,8 @@ package model
 import (
 	_ "encoding/json"
 	"fmt"
-	"log"
 	"github.com/hashicorp/terraform/helper/schema"
+	_ "log"
 )
 
 type ClusterInfo struct {
@@ -200,90 +200,22 @@ func ReadClusterInfoFromTf(d *schema.ResourceData) (ClusterInfo, bool) {
 			var env_settings EnvSettings
 			if v, ok := configs["env_settings"]; ok {
 				envSettings := v.([]interface{})
-				if len(envSettings) > 0 {
-					configs := envSettings[0].(map[string]interface{})
-					if v, ok := configs["python_version"]; ok {
-						env_settings.Python_version = v.(string)
-					}
-					if v, ok := configs["r_version"]; ok {
-						env_settings.R_version = v.(string)
-					}
-					if v, ok := configs["name"]; ok {
-						env_settings.Name = v.(string)
-					}
-					cluster_info.Env_settings = env_settings
-				}
+				ReadEnvSettingsFromTf(&env_settings, envSettings)
+				cluster_info.Env_settings = env_settings
 			}
 			//Read datadisk
 			var datadisk Datadisk
 			if v, ok := configs["datadisk"]; ok {
 				datadiskConfig := v.([]interface{})
-				if len(datadiskConfig) > 0 {
-					configs := datadiskConfig[0].(map[string]interface{})
-					if v, ok := configs["count"]; ok {
-						datadisk.Count = v.(int)
-					}
-					if v, ok := configs["type"]; ok {
-						datadisk.Disktype = v.(string)
-					}
-					if v, ok := configs["encryption"]; ok {
-						datadisk.Encryption = v.(bool)
-					}
-					if v, ok := configs["size"]; ok {
-						datadisk.Size = v.(int)
-					}
-					//Read disk upscaling config
-					var upscaling_config UpscalingConfig
-					if v, ok := configs["upscaling_config"]; ok {
-						ebsUpscalingConfigs := v.([]interface{})
-						if len(ebsUpscalingConfigs) > 0 {
-							configs := ebsUpscalingConfigs[0].(map[string]interface{})
-							if v, ok := configs["max_ebs_volume_count"]; ok {
-								upscaling_config.Max_ebs_volume_count = v.(int)
-							}
-							if v, ok := configs["percent_free_space_threshold"]; ok {
-								upscaling_config.Percent_free_space_threshold = float32(v.(int))
-							}
-							if v, ok := configs["absolute_free_space_threshold"]; ok {
-								upscaling_config.Absolute_free_space_threshold = float32(v.(int))
-							}
-							if v, ok := configs["sampling_interval"]; ok {
-								upscaling_config.Sampling_interval = v.(int)
-							}
-							if v, ok := configs["sampling_window"]; ok {
-								upscaling_config.Sampling_window = v.(int)
-							}
-							datadisk.Upscaling_config = upscaling_config
-						}
-					}
-					cluster_info.Datadisk = datadisk
-				}
+				ReadDatadiskFromTf(&datadisk, datadiskConfig)
+				cluster_info.Datadisk = datadisk
 			}
 			//Read Heterogeneous Config
 			var heterogeneous_config HeterogeneousConfig
 			if v, ok := configs["heterogeneous_config"]; ok {
 				heterogeneousConfigs := v.([]interface{})
-				if len(heterogeneousConfigs) > 0 {
-					configs := heterogeneousConfigs[0].(map[string]interface{})
-					//level 1 of hetro config is the memory sub-object . there will be only one of these
-
-					if v, ok := configs["memory"]; ok {
-						inst_type_array := v.([]interface{})
-						if len(inst_type_array) > 0 {
-							insts := make([]map[string]interface{}, len(inst_type_array))
-							for i, ins := range inst_type_array {
-								datamap := ins.(map[string]interface{})
-								log.Printf("[DEBUG] PRINTING DATAMAP %s", datamap)
-
-								insts[i] = datamap
-
-							}
-
-							heterogeneous_config.Memory = insts
-						}
-					}
-					cluster_info.Heterogeneous_config = heterogeneous_config
-				}
+				ReadHeterogeneousConfigFromTf(&heterogeneous_config, heterogeneousConfigs)
+				cluster_info.Heterogeneous_config = heterogeneous_config
 			}
 
 			if v, ok := configs["slave_request_type"]; ok {
@@ -294,59 +226,8 @@ func ReadClusterInfoFromTf(d *schema.ResourceData) (ClusterInfo, bool) {
 			var spot_settings SpotSettings
 			if v, ok := configs["spot_settings"]; ok {
 				spotSettings := v.([]interface{})
-				if len(spotSettings) > 0 {
-					configs := spotSettings[0].(map[string]interface{})
-
-					//Read spot instance settings
-					var spot_instance_settings SpotInstanceSettings
-					if v, ok := configs["spot_instance_settings"]; ok {
-						spotInstanceSettings := v.([]interface{})
-						if len(spotInstanceSettings) > 0 {
-							configs := spotInstanceSettings[0].(map[string]interface{})
-							if v, ok := configs["maximum_bid_price_percentage"]; ok {
-								spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
-							}
-							if v, ok := configs["timeout_for_request"]; ok {
-								spot_instance_settings.Timeout_for_request = v.(int)
-							}
-							if v, ok := configs["maximum_spot_instance_percentage"]; ok {
-								spot_instance_settings.Maximum_spot_instance_percentage = float32(v.(int))
-							}
-							spot_settings.Spot_instance_settings = spot_instance_settings
-						}
-					}
-
-					//Read stable spot instance settings
-					var stable_spot_instance_settings StableSpotInstanceSettings
-					if v, ok := configs["stable_spot_instance_settings"]; ok {
-						stableSpotInstanceSettings := v.([]interface{})
-						if len(stableSpotInstanceSettings) > 0 {
-							configs := stableSpotInstanceSettings[0].(map[string]interface{})
-							if v, ok := configs["maximum_bid_price_percentage"]; ok {
-								stable_spot_instance_settings.Maximum_bid_price_percentage = float32(v.(int))
-							}
-							if v, ok := configs["timeout_for_request"]; ok {
-								stable_spot_instance_settings.Timeout_for_request = v.(int)
-							}
-							spot_settings.Stable_spot_instance_settings = stable_spot_instance_settings
-						}
-					}
-
-					//Read spot block settings
-					var spot_block_settings SpotBlockSettings
-					if v, ok := configs["spot_block_settings"]; ok {
-						spotBlockSettings := v.([]interface{})
-						if len(spotBlockSettings) > 0 {
-							configs := spotBlockSettings[0].(map[string]interface{})
-							if v, ok := configs["duration"]; ok {
-								spot_block_settings.Duration = v.(int)
-							}
-							spot_settings.Spot_block_settings = spot_block_settings
-						}
-					}
-
-					cluster_info.Spot_settings = spot_settings
-				}
+				ReadSpotSettingsFromTf(&spot_settings, spotSettings)
+				cluster_info.Spot_settings = spot_settings
 			}
 
 			if v, ok := configs["custom_tags"]; ok {

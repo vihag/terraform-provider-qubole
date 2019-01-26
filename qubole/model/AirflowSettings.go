@@ -39,3 +39,27 @@ func FlattenAirflowSettings(ia *AirflowSettings) []map[string]interface{} {
 
 	return result
 }
+
+func ReadAirflowSettingsFromTf(airflow_settings *AirflowSettings, airflowSettings []interface{}) bool {
+
+	if len(airflowSettings) > 0 {
+		configs := airflowSettings[0].(map[string]interface{})
+		if v, ok := configs["dbtap_id"]; ok {
+			airflow_settings.Dbtap_id = v.(int)
+		}
+		if v, ok := configs["fernet_key"]; ok {
+			airflow_settings.Fernet_key = v.(string)
+		}
+		if v, ok := configs["overrides"]; ok {
+			airflow_settings.Overrides = v.(string)
+		}
+		if v, ok := configs["version"]; ok {
+			airflow_settings.Version = v.(string)
+		}
+		if v, ok := configs["airflow_python_version"]; ok {
+			airflow_settings.Airflow_python_version = v.(string)
+		}
+	}
+
+	return true
+}

@@ -70,3 +70,39 @@ func FlattenComputeConfig(ia *ComputeConfig) []map[string]interface{} {
 	return result
 }
 
+func ReadComputeConfigFromTf(compute_config *ComputeConfig, computeConfig []interface{}) bool {
+	if len(computeConfig) > 0 {
+		configs := computeConfig[0].(map[string]interface{})
+		if v, ok := configs["compute_validated"]; ok {
+			compute_config.Compute_validated = v.(bool)
+		}
+		if v, ok := configs["use_account_compute_creds"]; ok {
+			compute_config.Use_account_compute_creds = v.(bool)
+		}
+		if v, ok := configs["instance_tenancy"]; ok {
+			compute_config.Instance_tenancy = v.(string)
+		}
+		if v, ok := configs["role_instance_profile"]; ok {
+			compute_config.Role_instance_profile = v.(string)
+		}
+		if v, ok := configs["compute_role_arn"]; ok {
+			compute_config.Compute_role_arn = v.(string)
+		}
+		if v, ok := configs["compute_external_id"]; ok {
+			compute_config.Compute_external_id = v.(string)
+		}
+		if v, ok := configs["compute_client_id"]; ok {
+			compute_config.Compute_client_id = v.(string)
+		}
+		if v, ok := configs["compute_client_secret"]; ok {
+			compute_config.Compute_client_secret = v.(string)
+		}
+		if v, ok := configs["compute_tenant_id"]; ok {
+			compute_config.Compute_tenant_id = v.(string)
+		}
+		if v, ok := configs["compute_subscription_id"]; ok {
+			compute_config.Compute_subscription_id = v.(string)
+		}
+	}
+	return true
+}

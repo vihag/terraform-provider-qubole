@@ -2,6 +2,7 @@ package model
 
 import (
 	_ "fmt"
+	"github.com/hashicorp/terraform/helper/schema"
 )
 
 type Internal struct {
@@ -30,4 +31,32 @@ func FlattenInternal(ia *Internal) []map[string]interface{} {
 	result = append(result, attrs)
 
 	return result
+}
+
+/*
+Read Internal Information from terraform file
+*/
+func ReadInternalFromTf(d *schema.ResourceData) (Internal, bool) {
+
+	var internal Internal
+	if v, ok := d.GetOk("internal"); ok {
+		internalConfig := v.([]interface{})
+		if len(internalConfig) > 0 {
+			configs := internalConfig[0].(map[string]interface{})
+
+			if v, ok := configs["zeppelin_interpreter_mode"]; ok {
+				internal.Zeppelin_interpreter_mode = v.(string)
+			}
+			if v, ok := configs["spark_s3_package_name"]; ok {
+				internal.Spark_s3_package_name = v.(string)
+			}
+			if v, ok := configs["zeppelin_s3_package_name"]; ok {
+				internal.Zeppelin_s3_package_name = v.(string)
+			}
+
+			return internal, true
+		}
+	}
+	//the reading method needs to check for the boolean variable to see if all was okay
+	return internal, false
 }

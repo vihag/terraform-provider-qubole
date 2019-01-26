@@ -62,7 +62,6 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 																			{
 																				python_version	=	"3.5"
 																				r_version		=	"3.3"
-																				name			=	"ql-tf-env"
 																			}
 									
 									] 

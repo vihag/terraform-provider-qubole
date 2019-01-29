@@ -1,7 +1,3 @@
-provider "qubole" {
-  auth_token	=	"${var.auth_token}"
-  api_endpoint	=	"${var.api_endpoint}"
-}
 
 resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 	cloud_config		=	[

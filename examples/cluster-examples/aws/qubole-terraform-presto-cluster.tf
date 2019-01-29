@@ -1,7 +1,4 @@
-provider "qubole" {
-  auth_token	=	"${var.auth_token}"
-  api_endpoint	=	"${var.api_endpoint}"
-}
+
 
 resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 	cloud_config		=	[
@@ -35,15 +32,15 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 									master_instance_type			=	"r4.xlarge"
 									slave_instance_type				=	"r4.2xlarge"
 									label 							=	["tf-qb-managed-presto-cl"]
-									node_base_cooldown_period		=	2
+									node_base_cooldown_period		=	20
 									min_nodes						=	2
-									max_nodes						=	5
-									idle_cluster_timeout_in_secs	=	3600
+									max_nodes						=	6
+									idle_cluster_timeout_in_secs	=	7200
 									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
 									disallow_cluster_termination	=	false
 									datadisk						=	[
 																			{
-																				count		=	4,
+																				count		=	2,
 																				type		=	"gp2"
 																				size		=	100
 																				encryption	=	true

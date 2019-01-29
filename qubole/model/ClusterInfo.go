@@ -109,6 +109,10 @@ func FlattenClusterInfo(ia *ClusterInfo) []map[string]interface{} {
 	if &ia.Slave_request_type != nil {
 		attrs["slave_request_type"] = ia.Slave_request_type
 	}
+	
+	if &ia.Spot_settings != nil {
+		attrs["spot_settings"] = FlattenSpotSettings(&ia.Spot_settings)
+	}
 
 	if &ia.Custom_tags != nil {
 		attrs["custom_tags"] = ia.Custom_tags

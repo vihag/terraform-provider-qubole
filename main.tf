@@ -38,7 +38,7 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 									node_base_cooldown_period		=	10
 									min_nodes						=	2
 									max_nodes						=	6
-									idle_cluster_timeout_in_secs	=	3600
+									idle_cluster_timeout_in_secs	=	7200
 									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
 									disallow_cluster_termination	=	false
 									datadisk						=	[

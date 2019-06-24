@@ -20,7 +20,8 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 	log.Printf("[DEBUG]using custom unmarshaller for umarshalling cluster object: %s", "Datadisk")
 	type Alias Datadisk //some alias for the actual struct
 	aux := &struct {
-		Size             []interface{}   `json:"size,omitempty"`
+		//Commenting out size, as the API does not return the the Size field as an array: "size": [100, 1, "gp2"], instead we get "size": 100. Hence custom unmarshalling is not required
+		//Size             []interface{}   `json:"size,omitempty"`
 		Upscaling_config UpscalingConfig `json:"ebs_upscaling_config,omitempty"`
 		*Alias                           //rest of the actual stuff
 	}{
@@ -35,12 +36,12 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 	}
 
 	//Now concentrate on Size
-
+/*
 	if len(aux.Size) > 0 {
 		log.Printf("[DEBUG]reading the size array to extract the first element: %s", int(aux.Size[0].(float64)))
 		u.Size = int(aux.Size[0].(float64))
 	}
-
+*/
 	//Now concentrate on Ebs Upscaling Config
 	if &aux.Upscaling_config != nil {
 		log.Printf("[DEBUG]Translating Ebs_Upscaling_Config to Upscaling config %s", aux.Upscaling_config)

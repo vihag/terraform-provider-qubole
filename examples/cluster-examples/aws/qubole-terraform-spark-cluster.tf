@@ -39,8 +39,8 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 									min_nodes						=	2
 									max_nodes						=	5
 									idle_cluster_timeout_in_secs	=	3600
-									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
-									disallow_cluster_termination	=	false
+									node_bootstrap					=	"empty-bootstrap.sh"
+									disallow_cluster_termination	=	true
 									datadisk						=	[
 																			{
 																				count		=	1,
@@ -91,6 +91,11 @@ resource "qubole_cluster" "qubole_terraform_spark_cluster" {
 																				]
 																			}																		
 									]
+									custom_tags						=	{
+																			"Owner"			=	"Vihag Gupta"
+																			"Environment"	=	"Dev"
+																			"Project"		=	"Terraform Provider Spark"
+																		}
 								}								
 	]
 	engine_config		=	[

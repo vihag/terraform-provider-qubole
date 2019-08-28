@@ -19,7 +19,7 @@ resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 																vnet_name					=	"qubole-apac-azure-readniness-secure-vnet"
 																subnet_name					=	"private-subnet-for-secure-app"
 																vnet_resource_group_name	=	"qubole-apac-azure-readiness-secure-rg"
-																bastion_node_public_dns		=	"13.76.216.161"
+																bastion_node_public_dns		=	"137.116.133.46"
 																bastion_node_port			=	22
 																bastion_node_user			=	"ec2-user"
 															}
@@ -39,7 +39,7 @@ resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 									label 							=	["tf-qb-managed-airflow-cl"]
 									min_nodes						=	1
 									max_nodes						=	1
-									node_bootstrap					=	"hoodie-airflow-bootstrap.sh"
+									node_bootstrap					=	"empty-bootstrap.sh"
 									disallow_cluster_termination	=	true
 									datadisk						=	[
 																			{
@@ -47,6 +47,11 @@ resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 																			}
 									]
 									slave_request_type				=	"ondemand"
+									custom_tags						=	{
+																			"Owner"			=	"Vihag Gupta"
+																			"Environment"	=	"Dev"
+																			"Project"		=	"Terraform Provider Airflow"
+																		}
 								}								
 	]
 	engine_config		=	[

@@ -31,12 +31,12 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 								{
 									master_instance_type			=	"r4.xlarge"
 									slave_instance_type				=	"r4.2xlarge"
-									label 							=	["tf-qb-managed-presto-cl"]
-									node_base_cooldown_period		=	20
-									min_nodes						=	2
-									max_nodes						=	6
-									idle_cluster_timeout_in_secs	=	7200
-									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
+									label 							=	["tf-qb-managed-presto-cl", "engg-demo-label"]
+									node_base_cooldown_period		=	200
+									min_nodes						=	1
+									max_nodes						=	10
+									idle_cluster_timeout_in_secs	=	600
+									node_bootstrap					=	"empty-bootstrap.sh"
 									disallow_cluster_termination	=	false
 									datadisk						=	[
 																			{
@@ -58,6 +58,11 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 																				]
 																			}																		
 									]
+									custom_tags						=	{
+																			"Owner"			=	"Vihag Gupta"
+																			"Environment"	=	"Dev"
+																			"Project"		=	"Terraform Provider Presto"
+																		}
 								}								
 	]
 	engine_config		=	[

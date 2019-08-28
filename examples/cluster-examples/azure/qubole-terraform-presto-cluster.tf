@@ -23,7 +23,7 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 																vnet_name					=	"qubole-apac-azure-readniness-secure-vnet"
 																subnet_name					=	"private-subnet-for-secure-app"
 																vnet_resource_group_name	=	"qubole-apac-azure-readiness-secure-rg"
-																bastion_node_public_dns		=	"13.76.216.161"
+																bastion_node_public_dns		=	"137.116.133.46"
 																bastion_node_port			=	22
 																bastion_node_user			=	"ec2-user"
 															}
@@ -45,7 +45,7 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 									min_nodes						=	2
 									max_nodes						=	5
 									idle_cluster_timeout_in_secs	=	3600
-									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
+									node_bootstrap					=	"empty-bootstrap.sh"
 									disallow_cluster_termination	=	false
 									datadisk						=	[
 																			{
@@ -53,6 +53,11 @@ resource "qubole_cluster" "qubole_terraform_presto_cluster" {
 																			}
 									]
 									slave_request_type				=	"ondemand"
+									custom_tags						=	{
+																			"Owner"			=	"Vihag Gupta"
+																			"Environment"	=	"Dev"
+																			"Project"		=	"Terraform Provider Presto"
+																		}
 								}								
 	]
 	engine_config		=	[

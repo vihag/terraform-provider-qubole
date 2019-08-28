@@ -92,7 +92,7 @@ func ReadEngineConfigFromTf(d *schema.ResourceData) (EngineConfig, bool) {
 			var airflow_settings AirflowSettings
 			if v, ok := configs["airflow_settings"]; ok {
 				airflowSettings := v.([]interface{})
-				ReadAirflowSettingsFromTf(&airflow_settings, airflowSettings) 
+				ReadAirflowSettingsFromTf(&airflow_settings, airflowSettings)
 				engine_config.Airflow_settings = airflow_settings
 			}
 			return engine_config, true

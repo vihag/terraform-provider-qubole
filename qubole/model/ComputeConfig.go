@@ -16,6 +16,8 @@ type ComputeConfig struct {
 	Compute_client_secret   string `json:"compute_client_secret,omitempty"`
 	Compute_tenant_id       string `json:"compute_tenant_id,omitempty"`
 	Compute_subscription_id string `json:"compute_subscription_id,omitempty"`
+	//GCP elements
+	Customer_project_id string `json:"customer_project_id,omitempty"`
 }
 
 /*
@@ -63,6 +65,10 @@ func FlattenComputeConfig(ia *ComputeConfig) []map[string]interface{} {
 
 	if &ia.Compute_subscription_id != nil {
 		attrs["compute_subscription_id"] = ia.Compute_subscription_id
+	}
+
+	if &ia.Customer_project_id != nil {
+		attrs["customer_project_id"] = ia.Customer_project_id
 	}
 
 	result = append(result, attrs)

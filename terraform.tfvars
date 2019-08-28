@@ -1,2 +1,2 @@
-auth_token = ""
+auth_token = "your-qu-api-token"
 api_endpoint = "us.qubole.com"

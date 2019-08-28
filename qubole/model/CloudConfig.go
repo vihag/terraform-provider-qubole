@@ -14,6 +14,8 @@ type CloudConfig struct {
 	Network_config      NetworkConfig `json:"network_config,omitempty"`
 	//Azure elements
 	Storage_config StorageConfig `json:"storage_config,omitempty"`
+	//GCP elements
+	Cluster_composition ClusterComposition `json:"cluster_composition,omitempty"`
 }
 
 /*
@@ -45,6 +47,11 @@ func FlattenCloudConfig(ia *CloudConfig) []map[string]interface{} {
 
 	if &ia.Storage_config != nil {
 		attrs["storage_config"] = FlattenStorageConfig(&ia.Storage_config)
+	}
+
+	//GCP Elements
+	if &ia.Cluster_composition != nil {
+		attrs["cluster_composition"] = FlattenClusterComposition(&ia.Cluster_composition)
 	}
 
 	result = append(result, attrs)
@@ -99,6 +106,14 @@ func ReadCloudConfigFromTf(d *schema.ResourceData) (CloudConfig, bool) {
 				storageConfig := v.([]interface{})
 				ReadStorageConfigFromTf(&storage_config, storageConfig)
 				cloud_config.Storage_config = storage_config
+			}
+			//GCP Elements
+			//Read cluster composition
+			var cluster_composition ClusterComposition
+			if v, ok := configs["cluster_composition"]; ok {
+				clusterComposition := v.([]interface{})
+				ReadClusterCompositionFromTf(&cluster_composition, clusterComposition)
+				cloud_config.Cluster_composition = cluster_composition
 			}
 			return cloud_config, true
 		}

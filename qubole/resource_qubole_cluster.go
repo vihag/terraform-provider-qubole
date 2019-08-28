@@ -19,6 +19,11 @@ func resourceQuboleCluster() *schema.Resource {
 		Update: resourceQuboleClusterUpdate,
 		Delete: resourceQuboleClusterDelete,
 
+		//State Import
+		Importer: &schema.ResourceImporter{
+			State: resourceQuboleClusterImport,
+		},
+
 		Schema: map[string]*schema.Schema{
 			"state": &schema.Schema{
 				Type:     schema.TypeString,
@@ -84,6 +89,11 @@ func resourceQuboleCluster() *schema.Resource {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
+									//GCP Elements
+									"customer_project_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
 								},
 							},
 						},
@@ -102,6 +112,15 @@ func resourceQuboleCluster() *schema.Resource {
 										Optional: true,
 									},
 									"location": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									//GCP Elements
+									"region": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"zone": {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
@@ -170,6 +189,19 @@ func resourceQuboleCluster() *schema.Resource {
 										Type:     schema.TypeString,
 										Optional: true,
 									},
+									//GCP Elements
+									"network": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"subnet": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"master_static_ip": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
 								},
 							},
 						},
@@ -223,6 +255,84 @@ func resourceQuboleCluster() *schema.Resource {
 												},
 												"absolute_free_space_threshold": {
 													Type:     schema.TypeInt,
+													Optional: true,
+												},
+												//GCP Elements
+												"max_persistent_disk_count": {
+													Type:     schema.TypeInt,
+													Optional: true,
+												},
+											},
+										},
+									},
+									//GCP Elements
+									"customer_project_id": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"disk_type": {
+										Type:     schema.TypeString,
+										Optional: true,
+									},
+									"disk_size_in_gb": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+									"disk_count": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+								},
+							},
+						},
+						"cluster_composition": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"master": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"preemptible": {
+													Type:     schema.TypeBool,
+													Optional: true,
+												},
+											},
+										},
+									},
+									"min_nodes": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"preemptible": {
+													Type:     schema.TypeBool,
+													Optional: true,
+												},
+												"percentage": {
+													Type:     schema.TypeFloat,
+													Optional: true,
+												},
+											},
+										},
+									},
+									"autoscaling_nodes": {
+										Type:     schema.TypeList,
+										MaxItems: 1,
+										Optional: true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"preemptible": {
+													Type:     schema.TypeBool,
+													Optional: true,
+												},
+												"percentage": {
+													Type:     schema.TypeFloat,
 													Optional: true,
 												},
 											},
@@ -470,6 +580,24 @@ func resourceQuboleCluster() *schema.Resource {
 							Type:     schema.TypeBool,
 							Optional: true,
 						},
+						//GCP Elements
+						"node_volatile_cooldown_period": {
+							Type:     schema.TypeInt,
+							Optional: true,
+						},
+						"rootdisk": {
+							Type:     schema.TypeList,
+							MaxItems: 1,
+							Optional: true,
+							Elem: &schema.Resource{
+								Schema: map[string]*schema.Schema{
+									"size": {
+										Type:     schema.TypeInt,
+										Optional: true,
+									},
+								},
+							},
+						},
 					},
 				},
 			},
@@ -684,6 +812,13 @@ func resourceQuboleCluster() *schema.Resource {
 	}
 }
 
+func resourceQuboleClusterImport(
+	d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
+
+	//Add functionality to read data from API, convert to cluster def, convert to HCL
+
+	return []*schema.ResourceData{d}, nil
+}
 
 /*
 1. If the Create callback returns with or without an error without an ID set using SetId,

@@ -19,7 +19,7 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 																vnet_name					=	"qubole-apac-azure-readniness-secure-vnet"
 																subnet_name					=	"private-subnet-for-secure-app"
 																vnet_resource_group_name	=	"qubole-apac-azure-readiness-secure-rg"
-																bastion_node_public_dns		=	"13.76.216.161"
+																bastion_node_public_dns		=	"137.116.133.46"
 																bastion_node_port			=	22
 																bastion_node_user			=	"ec2-user"
 															}
@@ -31,7 +31,7 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 																data_disk_size				=	256
 																disk_upscaling_config		=	 [
 																									{
-																										percent_free_space_threshold 	=	25,
+																										percent_free_space_threshold 	=	25
 																										max_data_disk_count 			=	2
 																										absolute_free_space_threshold	=	100.0
 																									}
@@ -48,7 +48,7 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 									min_nodes						=	2
 									max_nodes						=	5
 									idle_cluster_timeout_in_secs	=	3600
-									node_bootstrap					=	"hoodie-hive-bootstrap.sh"
+									node_bootstrap					=	"empty-bootstrap.sh"
 									disallow_cluster_termination	=	false
 									datadisk						=	[
 																			{
@@ -74,6 +74,11 @@ resource "qubole_cluster" "qubole_terraform_hive_cluster" {
 																				]
 																			}
 									]
+									custom_tags						=	{
+																			"Owner"			=	"Vihag Gupta"
+																			"Environment"	=	"Dev"
+																			"Project"		=	"Terraform Provider Hive"
+																		}
 								}								
 	]
 	engine_config		=	[

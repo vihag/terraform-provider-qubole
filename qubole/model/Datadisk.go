@@ -36,12 +36,12 @@ func (u *Datadisk) UnmarshalJSON(data []byte) error {
 	}
 
 	//Now concentrate on Size
-/*
-	if len(aux.Size) > 0 {
-		log.Printf("[DEBUG]reading the size array to extract the first element: %s", int(aux.Size[0].(float64)))
-		u.Size = int(aux.Size[0].(float64))
-	}
-*/
+	/*
+		if len(aux.Size) > 0 {
+			log.Printf("[DEBUG]reading the size array to extract the first element: %s", int(aux.Size[0].(float64)))
+			u.Size = int(aux.Size[0].(float64))
+		}
+	*/
 	//Now concentrate on Ebs Upscaling Config
 	if &aux.Upscaling_config != nil {
 		log.Printf("[DEBUG]Translating Ebs_Upscaling_Config to Upscaling config %s", aux.Upscaling_config)

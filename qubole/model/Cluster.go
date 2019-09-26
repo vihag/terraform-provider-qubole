@@ -1,30 +1,70 @@
 package model
 
 import (
+	_ "bytes"
+	_ "encoding/gob"
+	_ "encoding/json"
 	_ "fmt"
+	"github.com/hashicorp/terraform/helper/schema"
+	"log"
+	_ "strconv"
 )
 
 type Cluster struct {
-	Id                           int               `json:"id,omitempty"`
-	State                        string            `json:"state,omitempty"`
-	Force_tunnel                 bool              `json:"force_tunnel,omitempty"`
-	Tunnel_server_ip             string            `json:"tunnel_server_ip,omitempty"`
-	Label                        []*string         `json:"label,omitempty"`
-	Presto_version               string            `json:"presto_version,omitempty"`
-	Spark_version                string            `json:"spark_version,omitempty"`
-	Zeppelin_interpreter_mode    string            `json:"zeppelin_interpreter_mode,omitempty"`
-	Ec2_settings                 Ec2Settings       `json:"ec2_settings,omitempty"`
-	Node_configuration           NodeConfiguration `json:"node_configuration,omitempty"`
-	Hadoop_settings              HadoopSettings    `json:"hadoop_settings,omitempty"`
-	Security_settings            SecuritySettings  `json:"security_settings,omitempty"`
-	Presto_settings              PrestoSettings    `json:"presto_settings,omitempty"`
-	Spark_settings               SparkSettings     `json:"spark_settings,omitempty"`
-	Datadog_settings             DatadogSettings   `json:"datadog_settings,omitempty"`
-	Disallow_cluster_termination bool              `json:"disallow_cluster_termination,omitempty"`
-	Enable_ganglia_monitoring    bool              `json:"enable_ganglia_monitoring,omitempty"`
-	Node_bootstrap_file          string            `json:"node_bootstrap_file,omitempty"`
-	Idle_cluster_timeout         int               `json:"idle_cluster_timeout,omitempty"`
-	Spark_s3_package_name        string            `json:"spark_s3_package_name,omitempty"`
-	Zeppelin_s3_package_name     string            `json:"zeppelin_s3_package_name,omitempty"`
-	Engine_config                EngineConfig      `json:"engine_config,omitempty"`
+	Id            int          `json:"id,omitempty"`
+	State         string       `json:"state,omitempty"`
+	Cloud_config  CloudConfig  `json:"cloud_config,omitempty"`
+	Cluster_info  ClusterInfo  `json:"cluster_info,omitempty"`
+	Engine_config EngineConfig `json:"engine_config,omitempty"`
+	Monitoring    Monitoring   `json:"monitoring,omitempty"`
+	Internal      Internal     `json:"internal,omitempty"`
+}
+
+/*
+Read cluster information from terraform file
+*/
+func ReadClusterFromTf(d *schema.ResourceData) (Cluster, bool) {
+
+	//Create the representative json object here
+	var cluster Cluster
+
+	//create nested datas structures
+	//1. Cloud Config
+	if cloud_config, ok := ReadCloudConfigFromTf(d); ok {
+		cluster.Cloud_config = cloud_config
+	} else {
+		log.Printf("[WARN] No cloud_config seen.")
+	}
+
+	//2. Cluster Info
+	if cluster_info, ok := ReadClusterInfoFromTf(d); ok {
+		cluster.Cluster_info = cluster_info
+	} else {
+		log.Printf("[WARN] No cluster_info seen.")
+	}
+
+	//3. Engine Config
+	if engine_config, ok := ReadEngineConfigFromTf(d); ok {
+		cluster.Engine_config = engine_config
+	} else {
+		log.Printf("[WARN] No engine_config seen.")
+	}
+
+	//4. Monitoring
+	if monitoring, ok := ReadMonitoringFromTf(d); ok {
+		cluster.Monitoring = monitoring
+	} else {
+		log.Printf("[WARN] No monitoring seen.")
+	}
+
+	//5. Internal
+	if internal, ok := ReadInternalFromTf(d); ok {
+		cluster.Internal = internal
+	} else {
+		log.Printf("[WARN] No internal seen.")
+	}
+
+	//Finally, the cluster
+	return cluster, true
+
 }

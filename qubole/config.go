@@ -18,10 +18,10 @@ func (c *Config) getValidatedConfig() (interface{}, error) {
 		return nil, errEndpoint
 	}
 
-	fmt.Println("Using api endpoint version: %s for endpoint %s", "v1.3", c.ApiEndpoint)
+	fmt.Println("Using api endpoint version: %s for endpoint %s", "v2", c.ApiEndpoint)
 
 	//Ok, so we have a correct version and endpoint, all is well
-	c.ConnectionString = "https://" + c.ApiEndpoint + "/api/" + "v1.3" + "/clusters/"
+	c.ConnectionString = "https://" + c.ApiEndpoint + "/api/" + "v2" + "/clusters/"
 
 	return c, nil
 
@@ -39,6 +39,8 @@ func (c *Config) ValidateEndpoint() error {
 	case "eu-central-1.qubole.com":
 	case "wellness.qubole.com":
 	case "oraclecloud.qubole.com":
+	case "azure.qubole.com":
+	case "gcp.qubole.com":
 		return nil
 	default:
 		return fmt.Errorf("Not a valid api endpoint: %s", c.ApiEndpoint)

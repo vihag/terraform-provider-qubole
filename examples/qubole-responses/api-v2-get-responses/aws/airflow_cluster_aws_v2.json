@@ -1,0 +1,76 @@
+{
+	"state": "DOWN",
+	"id": 16973,
+	"cloud_config": {
+		"provider": "aws",
+		"compute_config": {
+			"compute_validated": true,
+			"use_account_compute_creds": false,
+			"instance_tenancy": null,
+			"compute_role_arn": "arn:aws:iam::923350425713:role/vihagg-playground",
+			"compute_external_id": "GEZDKMTCMFUGMY3H",
+			"role_instance_profile": null
+		},
+		"location": {
+			"aws_region": "ap-southeast-1",
+			"aws_availability_zone": "Any"
+		},
+		"network_config": {
+			"vpc_id": "vpc-0e2be045e5fe137cd",
+			"subnet_id": "subnet-05cf662ed46f9cde8",
+			"bastion_node_public_dns": "13.76.216.161",
+			"bastion_node_port": 22,
+			"bastion_node_user": "ec2-user",
+			"master_elastic_ip": null
+		},
+		"storage_config": null
+	},
+	"cluster_info": {
+		"master_instance_type": "m1.xlarge",
+		"slave_instance_type": "",
+		"node_base_cooldown_period": null,
+		"label": ["airlfow-v2"],
+		"min_nodes": 1,
+		"max_nodes": 1,
+		"custom_tags": {
+			"mytagkey": "mytagvalue"
+		},
+		"idle_cluster_timeout_in_secs": null,
+		"cluster_name": "qbol_acc1252_cl16973",
+		"node_bootstrap": "node_bootstrap.sh",
+		"disallow_cluster_termination": true,
+		"force_tunnel": true,
+		"customer_ssh_key": null,
+		"child_hs2_cluster_id": null,
+		"parent_cluster_id": null,
+		"env_settings": {},
+		"datadisk": {
+			"encryption": true
+		},
+		"slave_request_type": "ondemand",
+		"spot_settings": {}
+	},
+	"engine_config": {
+		"flavour": "airflow",
+		"airflow_settings": {
+			"dbtap_id": 907,
+			"fernet_key": "a2DbzaMVWidhZOVuNDJ0aKE/Nvw//AGUkTtQ1c6tI7Q=",
+			"overrides": "core.executor=CeleryExecutor\ncore.parallelism=32",
+			"version": "1.8.2",
+			"airflow_python_version": "2.7"
+		}
+	},
+	"monitoring": {
+		"ganglia": true,
+		"datadog": {
+			"datadog_api_token": null,
+			"datadog_app_token": null
+		}
+	},
+	"errors": [],
+	"internal": {
+		"zeppelin_interpreter_mode": "legacy",
+		"spark_s3_package_name": null,
+		"zeppelin_s3_package_name": null
+	}
+}

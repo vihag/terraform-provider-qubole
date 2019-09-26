@@ -20,6 +20,10 @@ type NetworkConfig struct {
 	Vnet_resource_group_name                      string `json:"vnet_resource_group_name,omitempty"`
 	Master_static_nic_name                        string `json:"master_static_nic_name,omitempty"`
 	Master_static_public_ip_name                  string `json:"master_static_public_ip_name,omitempty"`
+	//GCP Elements
+	Network          string `json:"network,omitempty"`
+	Subnet           string `json:"subnet,omitempty"`
+	Master_static_ip string `json:"master_static_ip,omitempty"`
 }
 
 /*
@@ -72,6 +76,17 @@ func FlattenNetworkConfig(ia *NetworkConfig) []map[string]interface{} {
 		attrs["master_static_public_ip_name"] = ia.Master_static_public_ip_name
 	}
 
+	//GCP Elements
+	if &ia.Network != nil {
+		attrs["network"] = ia.Network
+	}
+	if &ia.Subnet != nil {
+		attrs["subnet"] = ia.Subnet
+	}
+	if &ia.Master_static_ip != nil {
+		attrs["master_static_ip"] = ia.Master_static_ip
+	}
+
 	result = append(result, attrs)
 
 	return result
@@ -122,6 +137,17 @@ func ReadNetworkConfigFromTf(network_config *NetworkConfig, networkConfig []inte
 		}
 		if v, ok := configs["master_static_public_ip_name"]; ok {
 			network_config.Master_static_public_ip_name = v.(string)
+		}
+
+		//GCP Elements
+		if v, ok := configs["network"]; ok {
+			network_config.Network = v.(string)
+		}
+		if v, ok := configs["Subnet"]; ok {
+			network_config.Subnet = v.(string)
+		}
+		if v, ok := configs["master_static_ip"]; ok {
+			network_config.Master_static_ip = v.(string)
 		}
 
 	}

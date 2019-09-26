@@ -40,6 +40,7 @@ func (c *Config) ValidateEndpoint() error {
 	case "wellness.qubole.com":
 	case "oraclecloud.qubole.com":
 	case "azure.qubole.com":
+	case "gcp.qubole.com":
 		return nil
 	default:
 		return fmt.Errorf("Not a valid api endpoint: %s", c.ApiEndpoint)

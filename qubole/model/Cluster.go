@@ -1,13 +1,13 @@
 package model
 
 import (
+	_ "bytes"
+	_ "encoding/gob"
 	_ "encoding/json"
 	_ "fmt"
+	"github.com/hashicorp/terraform/helper/schema"
 	"log"
 	_ "strconv"
-	_ "encoding/gob"
-    _ "bytes"
-    "github.com/hashicorp/terraform/helper/schema"
 )
 
 type Cluster struct {
@@ -68,5 +68,3 @@ func ReadClusterFromTf(d *schema.ResourceData) (Cluster, bool) {
 	return cluster, true
 
 }
-
-

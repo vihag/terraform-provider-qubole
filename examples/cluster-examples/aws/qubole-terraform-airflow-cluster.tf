@@ -33,7 +33,7 @@ resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 									label 							=	["tf-qb-managed-airflow-cl"]
 									min_nodes						=	1		
 									max_nodes						=	1
-									node_bootstrap					=	"hoodie-presto-bootstrap.sh"
+									node_bootstrap					=	"empty-bootstrap.sh"
 									disallow_cluster_termination	=	false
 									datadisk						=	[
 																			{
@@ -44,7 +44,7 @@ resource "qubole_cluster" "qubole_terraform_airflow_cluster" {
 									custom_tags						=	{
 																			"Owner"			=	"Vihag Gupta"
 																			"Environment"	=	"Dev"
-																			"Project"		=	"Terraform Provider"
+																			"Project"		=	"Terraform Provider Airflow"
 																		}
 								}								
 	]

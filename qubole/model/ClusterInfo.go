@@ -27,8 +27,12 @@ type ClusterInfo struct {
 	Heterogeneous_config         HeterogeneousConfig `json:"heterogeneous_config,omitempty"`
 	Slave_request_type           string              `json:"slave_request_type,omitempty"`
 	Spot_settings                SpotSettings        `json:"spot_settings,omitempty"`
-	Custom_tags                  map[string]string   `json:"custom_tags,omitempty"`
-	Fallback_to_ondemand         bool                `json:"fallback_to_ondemand,omitempty"`
+	Custom_tags          map[string]string `json:"custom_tags,omitempty"`
+	Fallback_to_ondemand bool              `json:"fallback_to_ondemand,omitempty"`
+
+	//GCP Elements
+	Node_volatile_cooldown_period int      `json:"node_volatile_cooldown_period,omitempty"`
+	Rootdisk                      Rootdisk `json:"rootdisk,omitempty"`
 }
 
 /*
@@ -109,7 +113,7 @@ func FlattenClusterInfo(ia *ClusterInfo) []map[string]interface{} {
 	if &ia.Slave_request_type != nil {
 		attrs["slave_request_type"] = ia.Slave_request_type
 	}
-	
+
 	if &ia.Spot_settings != nil {
 		attrs["spot_settings"] = FlattenSpotSettings(&ia.Spot_settings)
 	}
@@ -120,6 +124,15 @@ func FlattenClusterInfo(ia *ClusterInfo) []map[string]interface{} {
 
 	if &ia.Fallback_to_ondemand != nil {
 		attrs["fallback_to_ondemand"] = ia.Fallback_to_ondemand
+	}
+
+	//GCP Elements
+	if &ia.Node_volatile_cooldown_period != nil {
+		attrs["node_volatile_cooldown_period"] = ia.Node_volatile_cooldown_period
+	}
+
+	if &ia.Rootdisk != nil {
+		attrs["rootdisk"] = FlattenRootdisk(&ia.Rootdisk)
 	}
 
 	result = append(result, attrs)
@@ -248,6 +261,19 @@ func ReadClusterInfoFromTf(d *schema.ResourceData) (ClusterInfo, bool) {
 
 			if v, ok := configs["fallback_to_ondemand"]; ok {
 				cluster_info.Fallback_to_ondemand = v.(bool)
+			}
+
+			//GCP elements
+			if v, ok := configs["node_volatile_cooldown_period"]; ok {
+				cluster_info.Node_volatile_cooldown_period = v.(int)
+			}
+
+			//Read Rootdisk settings
+			var rootdisk_settings Rootdisk
+			if v, ok := configs["rootdisk"]; ok {
+				rootDiskSettings := v.([]interface{})
+				ReadRootdiskFromTf(&rootdisk_settings, rootDiskSettings)
+				cluster_info.Rootdisk = rootdisk_settings
 			}
 
 			return cluster_info, true

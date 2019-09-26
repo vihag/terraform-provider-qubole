@@ -46,6 +46,7 @@ func ReadHeterogeneousConfigFromTf(heterogeneous_config *HeterogeneousConfig, he
 				heterogeneous_config.Memory = insts
 			}
 		}
+
 	}
 
 	return true
